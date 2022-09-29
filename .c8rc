@@ -1,0 +1,11 @@
+{
+  "all": true,
+  "reporter": ["html", "lcov", "text"],
+  "include": [
+    "lib/**/*.js",
+    "bungie.js"
+  ],
+  "exclude": [
+    "**/*.spec.js"
+  ]
+}

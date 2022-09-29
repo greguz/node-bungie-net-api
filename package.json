@@ -14,7 +14,7 @@
     }
   },
   "files": [
-    "!**/*.spec.mjs",
+    "!**/*.spec.js",
     "lib",
     "bungie.d.ts",
     "bungie.js"
@@ -22,7 +22,7 @@
   "scripts": {
     "build": "node build.js",
     "lint": "standard",
-    "prepublishOnly": "npm run lint && npm run build && npm test",
+    "prepare": "npm run lint && npm run build && npm test",
     "test": "c8 ava"
   },
   "keywords": [
@@ -35,7 +35,7 @@
     "authorize",
     "oauth"
   ],
-  "author": "Giacomo Gregoletto",
+  "author": "Giacomo Gregoletto <gregolettogiacomo@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "got": "^12.5.0"

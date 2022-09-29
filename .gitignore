@@ -1,4 +1,5 @@
 .*
+!.c8rc
 !.gitignore
 coverage
 node_modules
