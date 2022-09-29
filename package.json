@@ -1,0 +1,49 @@
+{
+  "name": "bungie.net",
+  "version": "0.0.0",
+  "description": "Yet another Bungie.NET API client for Node.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./bungie.js",
+      "types": "./bungie.d.ts"
+    },
+    "./enum": {
+      "import": "./lib/enum.js",
+      "types": "./lib/enum.d.ts"
+    }
+  },
+  "files": [
+    "!**/*.spec.mjs",
+    "lib",
+    "bungie.d.ts",
+    "bungie.js"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "lint": "standard",
+    "prepublishOnly": "npm run lint && npm run build && npm test",
+    "test": "c8 ava"
+  },
+  "keywords": [
+    "bungie.net",
+    "bungie",
+    "destiny",
+    "api",
+    "platform",
+    "auth",
+    "authorize",
+    "oauth"
+  ],
+  "author": "Giacomo Gregoletto",
+  "license": "MIT",
+  "dependencies": {
+    "got": "^12.5.0"
+  },
+  "devDependencies": {
+    "ava": "^5.0.1",
+    "c8": "^7.12.0",
+    "nock": "^13.2.9",
+    "standard": "^17.0.0"
+  }
+}

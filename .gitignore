@@ -1,0 +1,9 @@
+.*
+!.gitignore
+coverage
+node_modules
+package-lock.json
+yarn.lock
+
+# this file is generated
+lib/enum.d.ts
