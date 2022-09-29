@@ -1,6 +1,6 @@
 {
   "name": "bungie.net",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Yet another Bungie.NET API client for Node.js",
   "type": "module",
   "exports": {
