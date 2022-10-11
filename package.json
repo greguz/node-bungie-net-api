@@ -2,10 +2,13 @@
   "name": "bungie.net",
   "version": "0.1.0",
   "description": "Yet another Bungie.NET API client for Node.js",
+  "main": "./bungie.cjs",
+  "types": "./bungie.d.ts",
   "type": "module",
   "exports": {
     ".": {
       "import": "./bungie.js",
+      "require": "./bungie.cjs",
       "types": "./bungie.d.ts"
     },
     "./enum": {
@@ -16,13 +19,15 @@
   "files": [
     "!**/*.spec.js",
     "lib",
+    "bungie.cjs",
     "bungie.d.ts",
     "bungie.js"
   ],
   "scripts": {
+    "build": "rollup -c",
     "lint": "standard",
     "prepare": "node build.js",
-    "prepublishOnly": "npm run lint && npm test",
+    "prepublishOnly": "npm run lint && npm run build && npm test",
     "test": "c8 ava"
   },
   "keywords": [
@@ -38,12 +43,13 @@
   "author": "Giacomo Gregoletto <gregolettogiacomo@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "got": "^12.5.0"
+    "got": "^11.8.5"
   },
   "devDependencies": {
     "ava": "^5.0.1",
     "c8": "^7.12.0",
     "nock": "^13.2.9",
+    "rollup": "^3.0.0",
     "standard": "^17.0.0"
   }
 }

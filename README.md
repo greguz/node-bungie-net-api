@@ -9,13 +9,6 @@ Yet another Bungie.NET API client for Node.js
 - **Automatic token refresh**
 - **TypeScript support**
 
-## ESM
-
-This project is written with native [ESM](https://nodejs.org/api/esm.html).
-
-If you are using old Node.js versions, or simply `require()` and `exports`, this project will not for you out of the box.
-You can still use tools like [Babel](https://babeljs.io/) to convert this project to other formats.
-
 ## Install
 
 ```
@@ -25,7 +18,7 @@ npm install bungie.net
 ## Example
 
 ```javascript
-import { BungieApi } from 'bungie.net'
+import { BungieApi, ComponentType } from 'bungie.net'
 
 const api = new BungieApi({
   apiKey: 'myapikey',
@@ -33,19 +26,46 @@ const api = new BungieApi({
   clientSecret: 'myclientsecret'
 })
 
-const manifest = await api.getManifest()
+async function foo () {
+  const manifest = await api.getManifest()
 
-// redirect the user to this url...
-const url = api.getAuthorizationUrl('MySecretState')
+  // redirect the user to this url...
+  const url = api.getAuthorizationUrl('MySecretState')
 
-// wait for callback with the authorization code and your state...
-const code = 'CallbackRequestQuerystringCode'
+  // wait for callback with the authorization code and your state...
+  const code = 'CallbackRequestQuerystringCode'
 
-const membershipId = await api.authorize(code)
+  await api.authorize(code)
 
-console.log(api.accessToken.raw) // raw token value
-console.log(api.accessToken.expires) // expiration date (ms)
-console.log(api.accessToken.expired) // false
+  console.log(api.accessToken.raw) // raw token value
+  console.log(api.accessToken.expires) // expiration date (ms)
+  console.log(api.accessToken.expired) // false
 
-const isPrivate = !!api.refreshToken // true is app is private
+  if (api.refreshToken) {
+    // if the app is private and everything is configured correctly,
+    // you'll get an access token from the authorization request
+    console.log(api.accessToken.raw)
+    console.log(api.accessToken.expires)
+    console.log(api.accessToken.expired)
+  }
+
+  // having an access token, you can request protected resources
+  const memberships = await api.getMembershipsForCurrentUser()
+
+  const membershipType = memberships.destinyMemberships[0].membershipType
+  const membershipId = memberships.destinyMemberships[0].membershipId
+
+  // get characters from the current authorized profile
+  const characters = await api.getProfile(
+    membershipType,
+    membershipId,
+    [
+      ComponentType.Characters // enum
+    ]
+  )
+
+  console.log({ characters })
+}
+
+foo().catch(err => console.error(err))
 ```

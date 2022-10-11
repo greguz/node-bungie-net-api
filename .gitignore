@@ -6,5 +6,6 @@ node_modules
 package-lock.json
 yarn.lock
 
-# this file is generated
+# those files are generated
+bungie.cjs
 lib/enum.d.ts
