@@ -1,8 +1,8 @@
-import type { Got } from "got";
+import type { Got, Options as GotOptions } from "got";
 
 export * from "./lib/enum.d.js";
 
-export interface BungieApiOptions extends CredentialsOptions {
+export interface BungieApiOptions {
   /**
    * Required Bungie.NET [App](https://www.bungie.net/en/Application) key.
    */
@@ -21,17 +21,14 @@ export interface BungieApiOptions extends CredentialsOptions {
    * App's client secret.
    */
   clientSecret?: string;
-}
-
-export interface CredentialsOptions {
   /**
    * Load a User's refresh token.
    */
-  refreshToken?: string | BungieToken;
+  refreshToken?: Token;
   /**
    * Load a User's access token.
    */
-  accessToken?: string | BungieToken;
+  accessToken?: Token;
 }
 
 export declare class BungieApi {
@@ -39,7 +36,7 @@ export declare class BungieApi {
    * Internal [Got.js](https://github.com/sindresorhus/got) instance used to communicate to Bungie.NET servers.
    * This instance carries the current authorization status internally.
    */
-  get got(): Got;
+  readonly got: Got;
   /**
    * Configured Bungie.NET server URL.
    */
@@ -57,13 +54,26 @@ export declare class BungieApi {
    */
   readonly clientSecret: string | undefined;
   /**
-   * Current refresh token.
+   * Returns true when a valid access token is set.
    */
-  readonly refreshToken: BungieToken | undefined;
+  get authorized(): boolean
   /**
-   * Current access token.
+   * Get the current access token.
    */
-  readonly accessToken: BungieToken | undefined;
+  get accessToken(): BungieToken | undefined;
+  /**
+   * Set an access token.
+   */
+  set accessToken(token: Token | undefined);
+  /**
+   * Get the current refresh token.
+   */
+  get refreshToken(): BungieToken | undefined;
+  /**
+   * Set a refresh token.
+   * This will also reset the current access token.
+   */
+  set refreshToken(token: Token | undefined);
   /**
    * @constructor
    */
@@ -81,73 +91,62 @@ export declare class BungieApi {
    */
   getAuthorizationUrl(state: string, altUrl?: string): string;
   /**
-   * Load or reset some User's credentials.
-   */
-  setCredentials(options?: CredentialsOptions): void;
-  /**
-   * Load a refresh token, and optionally an access token.
-   */
-  setRefreshToken(
-    refreshToken: string | BungieToken,
-    accessToken?: string | BungieToken
-  ): void;
-  /**
-   * Load an access token.
-   */
-  setAccessToken(accessToken: string | BungieToken): void;
-  /**
    * Refresh manually the current access token.
    */
   refreshAccessToken(): Promise<void>;
   /**
    * Make a Platform (API) request.
    */
-  requestPlatform(options: object): Promise<unknown>;
+  requestPlatform<T = any>(options: GotOptions): Promise<T>;
   /**
    * Get current Manifest.
    */
-  getManifest(): Promise<unknown>;
+  getManifest(): Promise<any>;
   /**
    * Get current memberships for the currently authorized user.
    * Needs authorization.
    */
-  getMembershipsForCurrentUser(): Promise<unknown>;
+  getMembershipsForCurrentUser(): Promise<any>;
   /**
    * Get profile info for the currently authorized user.
    * Needs authorization.
    */
   getProfile(
     membershipType: number,
-    membershipId: string,
+    membershipId: number | string,
     components: number[]
-  ): Promise<unknown>;
+  ): Promise<any>;
   /**
    * Needs authorization.
    */
   getVendor(
     membershipType: number,
-    membershipId: string,
-    characterId: string,
-    vendorHash: string,
+    membershipId: number | string,
+    characterId: number | string,
+    vendorHash: number | string,
     components: number[]
-  ): Promise<unknown>;
+  ): Promise<any>;
   /**
    * Needs authorization.
    */
   getVendors(
     membershipType: number,
-    membershipId: string,
-    characterId: string,
-    vendorHash: string,
+    membershipId: number | string,
+    characterId: number | string,
     components: number[]
-  ): Promise<unknown>;
+  ): Promise<any>;
 }
+
+/**
+ * Valid token value types.
+ */
+export type Token = string | BungieToken | BungieTokenJson;
 
 export declare class BungieToken {
   /**
    * Creates a new token from different sources.
    */
-  static from(token: any, expiresInSeconds?: number): BungieToken;
+  static from(token: Token): BungieToken;
   /**
    * Raw token value.
    */
@@ -171,13 +170,23 @@ export declare class BungieToken {
   /**
    * Returns a custom JSON representation of this token.
    */
-  toJSON(): unknown;
+  toJSON(): BungieTokenJson;
   /**
    * Returns the raw token value.
    */
   valueOf(): string;
 }
 
+/**
+ * JSON representation of an instance of a BungieToken.
+ */
+export interface BungieTokenJson {
+  $token: unknown;
+}
+
+/**
+ * Bungie.NET related custom error representation.
+ */
 export declare class BungieError extends Error {
   /**
    * Custom error code for Bungie.NET-related errors.

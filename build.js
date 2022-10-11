@@ -9,7 +9,7 @@ function createEnumDeclaration (enumName) {
   const enumKeys = Object.keys(enumObj)
   let text = `export declare const ${enumName}: {${EOL}`
   for (const enumKey of enumKeys) {
-    text += `  ${enumKey}: ${enumObj[enumKey]},${EOL}`
+    text += `  ${enumKey}: ${enumObj[enumKey]};${EOL}`
   }
   return text + `}${EOL}`
 }

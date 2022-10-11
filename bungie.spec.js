@@ -12,6 +12,12 @@ test('BungieApi oauth', async t => {
     url: 'https://www.zombo.com/'
   })
 
+  t.is(api.apiKey, 'myapikey')
+  t.is(api.clientId, 'myclientid')
+  t.is(api.clientSecret, 'myclientsecret')
+  t.is(api.url, 'https://www.zombo.com/')
+  t.false(api.authorized)
+
   const scope = nock(api.url)
     .get('/oauth/authorize?client_id=myclientid&response_type=code&state=mystate')
     .reply(204)
@@ -24,8 +30,8 @@ test('BungieApi oauth', async t => {
   scope
     .post('/platform/app/oauth/token', 'grant_type=authorization_code&code=mycode')
     .basicAuth({
-      user: api.clientId || 'nope',
-      pass: api.clientSecret || 'nope'
+      user: api.clientId,
+      pass: api.clientSecret
     })
     .reply(200, {
       access_token: '2YotnFZFEjr1zCsicMWpAA',
@@ -44,4 +50,5 @@ test('BungieApi oauth', async t => {
 
   t.truthy(api.accessToken)
   t.truthy(api.refreshToken)
+  t.true(api.authorized)
 })

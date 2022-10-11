@@ -20,9 +20,9 @@
     "bungie.js"
   ],
   "scripts": {
-    "build": "node build.js",
     "lint": "standard",
-    "prepare": "npm run lint && npm run build && npm test",
+    "prepare": "node build.js",
+    "prepublishOnly": "npm run lint && npm test",
     "test": "c8 ava"
   },
   "keywords": [
