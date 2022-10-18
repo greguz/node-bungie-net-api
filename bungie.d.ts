@@ -56,24 +56,15 @@ export declare class BungieApi {
   /**
    * Returns true when a valid access token is set.
    */
-  get authorized(): boolean
+  get authorized(): boolean;
   /**
    * Get the current access token.
    */
-  get accessToken(): BungieToken | undefined;
-  /**
-   * Set an access token.
-   */
-  set accessToken(token: Token | undefined);
+  readonly accessToken: BungieToken | undefined;
   /**
    * Get the current refresh token.
    */
-  get refreshToken(): BungieToken | undefined;
-  /**
-   * Set a refresh token.
-   * This will also reset the current access token.
-   */
-  set refreshToken(token: Token | undefined);
+  readonly refreshToken: BungieToken | undefined;
   /**
    * @constructor
    */
@@ -90,14 +81,6 @@ export declare class BungieApi {
    * You need to redirect the user to this URL.
    */
   getAuthorizationUrl(state: string, altUrl?: string): string;
-  /**
-   * Refresh manually the current access token.
-   */
-  refreshAccessToken(): Promise<void>;
-  /**
-   * Make a Platform (API) request.
-   */
-  requestPlatform<T = any>(options: GotOptions): Promise<T>;
   /**
    * Get current Manifest.
    */
@@ -135,6 +118,23 @@ export declare class BungieApi {
     characterId: number | string,
     components: number[]
   ): Promise<any>;
+  /**
+   * Make a Platform (API) request.
+   */
+  requestPlatform<T = any>(options: GotOptions): Promise<T>;
+  /**
+   * Remove all tokens.
+   */
+  resetCredentials(): void;
+  /**
+   * Load a new access token.
+   */
+  setAccessToken(accessToken: Token): void;
+  /**
+   * Load a new refresh token and optionally an access token.
+   * The access token will be automatically generated if the refresh token is valid.
+   */
+  setRefreshToken(refreshToken: Token, accessToken?: Token): void;
 }
 
 /**

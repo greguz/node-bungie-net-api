@@ -43,10 +43,10 @@ async function foo () {
 
   if (api.refreshToken) {
     // if the app is private and everything is configured correctly,
-    // you'll get an access token from the authorization request
-    console.log(api.accessToken.raw)
-    console.log(api.accessToken.expires)
-    console.log(api.accessToken.expired)
+    // you'll also get a refresh token from the authorization request
+    console.log(api.refreshToken.raw)
+    console.log(api.refreshToken.expires)
+    console.log(api.refreshToken.expired)
   }
 
   // having an access token, you can request protected resources

@@ -49,6 +49,10 @@ test('BungieApi oauth', async t => {
   t.is(membershipId, '4352344')
 
   t.truthy(api.accessToken)
+  t.is(api.accessToken.raw, '2YotnFZFEjr1zCsicMWpAA')
+
   t.truthy(api.refreshToken)
+  t.is(api.refreshToken.raw, 'tGzv3JOkF0XG5Qx2TlKWIA')
+
   t.true(api.authorized)
 })
