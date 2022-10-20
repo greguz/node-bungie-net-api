@@ -35,10 +35,10 @@ async function foo () {
   // This request does not require user authorization
   const manifest = await api.destiny2.getDestinyManifest()
 
-  // redirect the user to this url...
+  // Redirect the user to this url...
   const url = api.getAuthorizationUrl('MySecretState')
 
-  // wait for callback with the authorization code and your state...
+  // Wait for callback with the authorization code and your state...
   const code = 'CallbackRequestQuerystringCode'
 
   await api.authorize(code)
@@ -48,20 +48,20 @@ async function foo () {
   console.log(api.accessToken.expired) // false
 
   if (api.refreshToken) {
-    // if the app is private and everything is configured correctly,
+    // If the app is private and everything is configured correctly,
     // you'll also get a refresh token from the authorization request
     console.log(api.refreshToken.raw)
     console.log(api.refreshToken.expires)
     console.log(api.refreshToken.expired)
   }
 
-  // having an access token, you can request protected resources
+  // Having an access token, you can request protected resources
   const memberships = await api.user.getMembershipDataForCurrentUser()
 
   const membershipType = memberships.destinyMemberships[0].membershipType
   const membershipId = memberships.destinyMemberships[0].membershipId
 
-  // get characters from the current authorized profile
+  // Get characters from the current authorized profile
   const characters = await api.destiny2.getProfile(
     membershipType,
     membershipId,
@@ -72,7 +72,20 @@ async function foo () {
     }
   )
 
-  console.log({ characters })
+  // Grab first characted data
+  const characterId = Object.keys(characters.characters.data)[0]
+  const characterData = characters.characters.data[characterId]
+
+  // Banshee
+  const vendorHash = '672118013'
+
+  // Get vendor data
+  const vendorData = await api.destiny2.getVendor(membershipType, membershipId, characterId, vendorHash, {
+    components: [
+      DestinyComponentType.VendorSales,
+      DestinyComponentType.ItemPerks
+    ]
+  })
 }
 
 foo().catch(err => console.error(err))
