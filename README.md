@@ -8,6 +8,11 @@ Yet another Bungie.NET API client for Node.js
 - **Support both Private and Public Apps**
 - **Automatic token refresh**
 - **TypeScript support**
+- **Full API surface**: all API are dynamically generated using the official [OpenAPI](https://github.com/Bungie-net/api) specs file.
+
+## OpenAPI
+
+v2.16.0
 
 ## Install
 
@@ -18,7 +23,7 @@ npm install bungie.net
 ## Example
 
 ```javascript
-import { BungieApi, ComponentType } from 'bungie.net'
+import { BungieApi, DestinyComponentType } from 'bungie.net'
 
 const api = new BungieApi({
   apiKey: 'myapikey',
@@ -27,7 +32,8 @@ const api = new BungieApi({
 })
 
 async function foo () {
-  const manifest = await api.getManifest()
+  // This request does not require user authorization
+  const manifest = await api.destiny2.getDestinyManifest()
 
   // redirect the user to this url...
   const url = api.getAuthorizationUrl('MySecretState')
@@ -50,18 +56,20 @@ async function foo () {
   }
 
   // having an access token, you can request protected resources
-  const memberships = await api.getMembershipsForCurrentUser()
+  const memberships = await api.user.getMembershipDataForCurrentUser()
 
   const membershipType = memberships.destinyMemberships[0].membershipType
   const membershipId = memberships.destinyMemberships[0].membershipId
 
   // get characters from the current authorized profile
-  const characters = await api.getProfile(
+  const characters = await api.destiny2.getProfile(
     membershipType,
     membershipId,
-    [
-      ComponentType.Characters // enum
-    ]
+    {
+      components: [
+        DestinyComponentType.Characters // enum
+      ]
+    }
   )
 
   console.log({ characters })

@@ -1,0 +1,41 @@
+const _name = Symbol.for('bungie-enum')
+
+export function validateEnum (value, obj) {
+  if (!(_name in Object(obj))) {
+    throw new Error('Expected enum object')
+  }
+  if (Array.isArray(value)) {
+    return value.map(item => validateEnum(item, obj))
+  }
+  if (typeof value === 'string') {
+    value = parseInt(value)
+  }
+  if (!Object.values(obj).includes(value)) {
+    throw new Error(`Invalid ${obj[_name]} enum value: ${value}`)
+  }
+  return value
+}
+
+{{#each enums}}
+
+/**
+{{#if this.description}}
+ * {{this.description}}
+{{/if}}
+ * @see https://bungie-net.github.io/#/components/schemas/{{this.name}}
+ */
+export const {{this.identifier}} = {
+{{#each this.items}}
+{{#if this.description}}
+  /**
+   * {{this.description}}
+   */
+{{/if}}
+  {{this.key}}: {{this.value}},
+{{/each}}
+  /**
+   * Original enum name extracted from OpenAPI spec file.
+   */
+  [_name]: '{{this.name}}'
+}
+{{/each}}

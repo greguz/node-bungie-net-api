@@ -1,0 +1,41 @@
+import * as enums from '../enum.js'
+const { validateEnum } = enums
+
+export class {{name}} {
+  constructor (api) {
+    this._api = api
+  }
+{{#each methods}}
+
+  /**
+{{#if this.swagger.description}}
+   * {{{this.swagger.description}}}
+{{/if}}
+   * @see https://bungie-net.github.io/#{{this.swagger.operationId}}
+   *
+{{#each this.arguments}}
+   * @param {*} {{this.identifier}} {{{this.description}}}
+{{/each}}
+   * @returns {Promise}
+   */
+  {{this.name}} ({{{_arguments this.arguments}}}) {
+{{#each this.arguments}}
+{{#if this.enum}}
+    validateEnum({{this.identifier}}, enums.{{this.enum}})
+{{else}}
+    // TODO: check {{this.identifier}}
+{{/if}}
+{{/each}}
+    return this._api.requestPlatform({
+{{#if this.hasSearchParams}}
+      searchParams,
+{{/if}}
+{{#if this.hasBody}}
+      json: body,
+{{/if}}
+      method: '{{this.request.method}}',
+      url: {{{_url this}}}
+    })
+  }
+{{/each}}
+}

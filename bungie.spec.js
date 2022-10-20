@@ -12,6 +12,18 @@ test('BungieApi oauth', async t => {
     url: 'https://www.zombo.com/'
   })
 
+  t.truthy(api.app)
+  t.truthy(api.communityContent)
+  t.truthy(api.content)
+  t.truthy(api.destiny2)
+  t.truthy(api.fireteam)
+  t.truthy(api.forum)
+  t.truthy(api.groupV2)
+  t.truthy(api.social)
+  t.truthy(api.tokens)
+  t.truthy(api.trending)
+  t.truthy(api.user)
+
   t.is(api.apiKey, 'myapikey')
   t.is(api.clientId, 'myclientid')
   t.is(api.clientSecret, 'myclientsecret')

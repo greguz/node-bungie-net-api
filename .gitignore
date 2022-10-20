@@ -1,6 +1,7 @@
 .*
 !.c8rc
 !.gitignore
+!.gitkeep
 coverage
 node_modules
 package-lock.json
@@ -9,3 +10,6 @@ yarn.lock
 # those files are generated
 bungie.cjs
 lib/enum.d.ts
+lib/enum.js
+lib/components/*.d.ts
+lib/components/*.js

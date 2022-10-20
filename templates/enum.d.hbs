@@ -1,0 +1,19 @@
+{{#each enums}}
+
+/**
+{{#if this.description}}
+ * {{this.description}}
+{{/if}}
+ * @see https://bungie-net.github.io/#/components/schemas/{{this.name}}
+ */
+export declare const {{this.identifier}}: {
+{{#each this.items}}
+{{#if this.description}}
+  /**
+   * {{this.description}}
+   */
+{{/if}}
+  {{this.key}}: {{this.value}};
+{{/each}}
+}
+{{/each}}
