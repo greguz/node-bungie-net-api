@@ -1,0 +1,41 @@
+import * as enums from '../enums.js'
+const { validateEnum } = enums
+
+export class <%- identifier %> {
+  constructor (api) {
+    this._api = api
+  }
+<%_ for (const method of methods) { _%>
+
+  /**
+  <%_ if (method.description) { _%>
+   * <%- method.description %>
+  <%_ } _%>
+   * @see https://bungie-net.github.io/#<%- method.swagger.operationId %>
+   *
+  <%_ for (const arg of method.arguments) { _%>
+   * @param {*} <%- arg.identifier %> <%- arg.description %>
+  <%_ } _%>
+   * @returns {Promise}
+   */
+  <%- method.identifier %> (<%- method.arguments.map(item => item._js).join(', ') %>) {
+  <%_ for (const arg of method.arguments) { _%>
+    <%_ if (arg.enum) { _%>
+    validateEnum(<%- arg.identifier %>, enums.<%- arg.enum %>)
+    <%_ } else { _%>
+    // TODO: check <%- arg.identifier %>
+    <%_ } _%>
+  <%_ } _%>
+    return this._api.requestPlatform({
+  <%_ if (method.flags.searchParams) { _%>
+      searchParams,
+  <%_ } _%>
+  <%_ if (method.flags.body) { _%>
+      json: body,
+  <%_ } _%>
+      method: '<%- method.request.method %>',
+      url: <%- method._url %>
+    })
+  }
+<%_ } _%>
+}

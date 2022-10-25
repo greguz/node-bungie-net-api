@@ -1,0 +1,19 @@
+<%_ for (const obj of enums) { _%>
+
+/**
+  <%_ if (obj.description) { _%>
+ * <%- obj.description %>
+  <%_ } _%>
+ * @see https://bungie-net.github.io/#/components/schemas/<%- obj.name %>
+ */
+export declare const <%- obj.identifier %>: {
+  <%_ for (const item of obj.items) { _%>
+    <%_ if (item.description) { _%>
+  /**
+   * <%- item.description %>
+   */
+    <%_ } _%>
+  <%- item.key %>: <%- item.value %>;
+  <%_ } _%>
+}
+<%_ } _%>

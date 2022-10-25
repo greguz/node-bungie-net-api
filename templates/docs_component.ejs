@@ -1,0 +1,18 @@
+# <%- tag %>
+<%_ for (const method of methods) { _%>
+
+## <%- method.identifier %>(<%- method.arguments.map(arg => arg._md).join(', ') %>)
+  <%_ if (method.description) { _%>
+
+<%- method.description %>
+  <%_ } _%>
+
+  <%_ for (const arg of method.arguments) { _%>
+- `<%- arg._md %>` `<*>` <%- arg.description %>
+  <%_ } _%>
+- Returns: `<Promise>`
+
+URL: `<%- method.request.method %> <%- method.request.path %>`
+
+Source: [<%- method.swagger.operationId %>](https://bungie-net.github.io/#<%- method.swagger.operationId %>)
+<% } %>

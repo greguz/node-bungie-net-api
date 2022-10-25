@@ -1,67 +1,19 @@
 import camelCase from 'camelcase'
-import Handlebars from 'handlebars'
+import ejs from 'ejs'
 import { readFileSync, writeFileSync } from 'node:fs'
 
 /**
- * Compile the URL string template with all arguments.
+ * Reserved identifiers for supporting class exports.
  */
-Handlebars.registerHelper('_url', method => {
-  const url = method.arguments.reduce(
-    (acc, item) => injectUrlArgument(acc, item.identifier),
-    method.request.path
-  )
-  return '`Platform' + url + '`'
-})
+const reservedIdentifiers = [
+  'BungieToken',
+  'BungieError',
+  'BungiePlatformError',
+  'BungieApi'
+]
 
 /**
- * Inject string template variable inside a Swagger URL path.
- */
-function injectUrlArgument (path, identifier) {
-  return path.replace(new RegExp(`\\{${identifier}\\}`), '${' + identifier + '}')
-}
-
-/**
- * Compile variables declaration for a class method.
- */
-Handlebars.registerHelper('_arguments', items => {
-  return items.map(item => compileMethodArgument(item.identifier)).join(', ')
-})
-
-/**
- * Compile the method's argument declaration (and its initialization).
- */
-function compileMethodArgument (identifier) {
-  let code = check(identifier)
-  if (identifier === 'searchParams' || identifier === 'body') {
-    code += ' = {}'
-  }
-  return code
-}
-
-/**
- * Compile variables declaration for a class method.
- */
-Handlebars.registerHelper('_typedArguments', items => {
-  return items.map(compileTypedArgument).join(', ')
-})
-
-/**
- *
- */
-function compileTypedArgument (item) {
-  let code = item.identifier
-  if (item.identifier === 'searchParams' || item.identifier === 'body') {
-    code += '?: object'
-  } else if (item.enum) {
-    code += ': number'
-  } else {
-    code += ': number | string'
-  }
-  return code
-}
-
-/**
- * Check if the value is a valid safe identifier for raw JavaScript code (without escaping).
+ * Check if the value is a valid (safe) identifier for raw JavaScript code (without escaping).
  */
 function check (value) {
   if (typeof value !== 'string') {
@@ -70,7 +22,22 @@ function check (value) {
   if (!/^[a-z][a-z0-9]*$/i.test(value)) {
     throw new TypeError(`Invalid identifier name: ${value}`)
   }
+  if (reservedIdentifiers.includes(value)) {
+    throw new Error(`Reserved identifier: ${value}`)
+  }
   return value
+}
+
+/**
+ * Cast in PascalCase a string.
+ */
+function pascalCase (text) {
+  text = camelCase(text)
+  if (text.length <= 0) {
+    return text
+  } else {
+    return text[0].toUpperCase() + text.substring(1)
+  }
 }
 
 /**
@@ -83,32 +50,25 @@ function stripCRLF (value) {
 }
 
 /**
- * Compile a HBS template, and write the compilation result in a file.
+ * Read, compile, and write an EJS template.
  */
 function compile (sourceFile, targetFile, context = {}) {
-  const fn = Handlebars.compile(
-    readFileSync(sourceFile, 'utf8')
+  writeFileSync(
+    targetFile,
+    ejs.render(
+      readFileSync(sourceFile, 'utf8'),
+      context
+    )
   )
-  writeFileSync(targetFile, fn(context))
 }
 
 /**
  * Extract the resulting class name from OpenAPI tags array.
  */
-function getClassName (tags) {
-  if (!Array.isArray(tags)) {
-    throw new TypeError(`Expected tags array: ${tags}`)
+function getSwaggerTag (tags) {
+  if (Array.isArray(tags) && tags.length === 1) {
+    return tags[0].trim()
   }
-  if (tags.length !== 1 || tags[0] === '') {
-    // Just skip those cases
-    return null
-  }
-  const [value] = tags
-  check(value)
-  if (!/^[A-Z]/.test(value)) {
-    throw new Error(`Invalid class identifier: ${value}`)
-  }
-  return value
 }
 
 /**
@@ -160,14 +120,20 @@ const swagger = parseJsonFile('./swagger.json')
 
 const context = {
   enums: [],
-  components: {}
+  components: []
 }
 
-function pushMethod (className, options) {
-  if (!context.components[className]) {
-    context.components[className] = []
+function pushMethod (tag, options) {
+  let obj = context.components.find(item => item.tag === tag)
+  if (!obj) {
+    obj = {
+      tag,
+      identifier: check(pascalCase(tag)),
+      methods: []
+    }
+    context.components.push(obj)
   }
-  context.components[className].push(options)
+  obj.methods.push(options)
 }
 
 function ensureEnum (identifier) {
@@ -179,58 +145,81 @@ function ensureEnum (identifier) {
   return identifier
 }
 
+/**
+ * Inject string template variable inside a Swagger URL path.
+ */
+function injectUrlArgument (path, identifier) {
+  return path.replace(new RegExp(`\\{${identifier}\\}`), '${' + identifier + '}')
+}
+
 function parseSwaggerRoute (path, method, options) {
-  const className = getClassName(options.tags)
-  if (!className) {
+  const tag = getSwaggerTag(options.tags)
+  if (!tag) {
     return
   }
 
-  const pathParams = Array.from(getPathParameters(path)).map(
+  // sort params by URL position
+  const sortedParams = Array.from(getPathParameters(path)).map(
     paramName => options.parameters.find(
       item => item.in === 'path' && item.name === paramName
     )
   )
 
-  const methodArguments = pathParams.map(item => ({
+  const args = sortedParams.map(item => ({
     identifier: check(item.name),
-    type: item.schema.type,
+    // type: item.schema.type,
     enum: ensureEnum(extractEnumIdentifier(item.schema)),
-    description: stripCRLF(item.description)
+    description: stripCRLF(item.description),
+    _js: item.name,
+    _md: item.name,
+    _ts: `${item.name}: number | string`
   }))
 
   const hasSearchParams = options.parameters.some(
     item => item.in === 'query'
   )
   if (hasSearchParams) {
-    methodArguments.push({
+    args.push({
       identifier: 'searchParams',
       description: 'Request querystring parameters object.',
-      type: 'object'
+      _js: 'searchParams = {}',
+      _md: '[searchParams]',
+      _ts: 'searchParams?: object'
     })
   }
 
   const hasBody = method === 'POST'
   if (hasBody) {
-    methodArguments.push({
+    args.push({
       identifier: 'body',
       description: 'Request body object.',
-      type: 'object'
+      _js: 'body = {}',
+      _md: '[body]',
+      _ts: 'body?: object'
     })
   }
 
-  pushMethod(className, {
-    name: camelCase(options.operationId.substring(className.length)),
-    arguments: methodArguments,
+  const url = args.reduce(
+    (acc, arg) => injectUrlArgument(acc, arg.identifier),
+    path
+  )
+
+  pushMethod(tag, {
+    identifier: check(camelCase(options.operationId.substring(tag.length))),
+    arguments: args,
+    description: stripCRLF(options.description),
     request: {
       method,
       path
     },
     swagger: {
-      description: stripCRLF(options.description),
       operationId: options.operationId
     },
-    hasSearchParams,
-    hasBody
+    flags: {
+      body: hasBody,
+      searchParams: hasSearchParams
+    },
+    _url: '`Platform' + url + '`'
   })
 }
 
@@ -261,15 +250,13 @@ for (const path of Object.keys(swagger.paths)) {
 }
 
 // Compilation time!
-compile('templates/enum.hbs', './lib/enum.js', context)
-compile('templates/enum.d.hbs', './lib/enum.d.ts', context)
-for (const key of Object.keys(context.components)) {
-  const classContext = {
-    name: key,
-    methods: context.components[key]
-  }
-  compile('templates/component.hbs', `lib/components/${key}.js`, classContext)
-  compile('templates/component.d.hbs', `lib/components/${key}.d.ts`, classContext)
+compile('templates/docs_enums.ejs', 'docs/Enums.md', context)
+compile('templates/enums.ejs', './lib/enums.js', context)
+compile('templates/enums.d.ejs', './lib/enums.d.ts', context)
+for (const item of context.components) {
+  compile('templates/docs_component.ejs', `docs/${item.identifier}.md`, item)
+  compile('templates/component.ejs', `lib/components/${item.identifier}.js`, item)
+  compile('templates/component.d.ejs', `lib/components/${item.identifier}.d.ts`, item)
 }
 
 console.log('Code generation completed')

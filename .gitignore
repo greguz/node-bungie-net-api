@@ -9,7 +9,7 @@ yarn.lock
 
 # those files are generated
 bungie.cjs
-lib/enum.d.ts
-lib/enum.js
+lib/enums.d.ts
+lib/enums.js
 lib/components/*.d.ts
 lib/components/*.js

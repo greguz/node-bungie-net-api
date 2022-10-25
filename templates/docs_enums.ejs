@@ -1,0 +1,18 @@
+# Enums
+<%_ for (const obj of enums) { _%>
+
+## <%- obj.identifier %>
+  <%_ if (obj.description) { _%>
+
+<%- obj.description %>
+  <%_ } _%>
+
+Source: [<%- obj.name %>](https://bungie-net.github.io/#/components/schemas/<%- obj.name %>)
+
+  <%_ for (const item of obj.items) { _%>
+- **<%- item.key %>**: <%- item.value %>
+    <%_ if (item.description) { _%>
+  > <%- item.description %>
+    <%_ } _%>
+  <%_ } _%>
+<%_ } _%>

@@ -67,7 +67,7 @@ async function foo () {
     membershipId,
     {
       components: [
-        DestinyComponentType.Characters // enum
+        DestinyComponentType.Characters
       ]
     }
   )
@@ -80,12 +80,18 @@ async function foo () {
   const vendorHash = '672118013'
 
   // Get vendor data
-  const vendorData = await api.destiny2.getVendor(membershipType, membershipId, characterId, vendorHash, {
-    components: [
-      DestinyComponentType.VendorSales,
-      DestinyComponentType.ItemPerks
-    ]
-  })
+  const vendorData = await api.destiny2.getVendor(
+    membershipType,
+    membershipId,
+    characterId,
+    vendorHash,
+    {
+      components: [
+        DestinyComponentType.VendorSales,
+        DestinyComponentType.ItemPerks
+      ]
+    }
+  )
 }
 
 foo().catch(err => console.error(err))

@@ -15,27 +15,26 @@ export function validateEnum (value, obj) {
   }
   return value
 }
-
-{{#each enums}}
+<%_ for (const obj of enums) { _%>
 
 /**
-{{#if this.description}}
- * {{this.description}}
-{{/if}}
- * @see https://bungie-net.github.io/#/components/schemas/{{this.name}}
+  <%_ if (obj.description) { _%>
+ * <%- obj.description %>
+  <%_ } _%>
+ * @see https://bungie-net.github.io/#/components/schemas/<%- obj.name %>
  */
-export const {{this.identifier}} = {
-{{#each this.items}}
-{{#if this.description}}
+export const <%- obj.identifier %> = {
+  <%_ for (const item of obj.items) { _%>
+    <%_ if (item.description) { _%>
   /**
-   * {{this.description}}
+   * <%- item.description %>
    */
-{{/if}}
-  {{this.key}}: {{this.value}},
-{{/each}}
+    <%_ } _%>
+  <%- item.key %>: <%- item.value %>,
+  <%_ } _%>
   /**
    * Original enum name extracted from OpenAPI spec file.
    */
-  [_name]: '{{this.name}}'
+  [_name]: '<%- obj.name %>'
 }
-{{/each}}
+<%_ } _%>
