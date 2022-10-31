@@ -9,10 +9,10 @@ export declare class <%- identifier %> {
    * @see https://bungie-net.github.io/#<%- method.swagger.operationId %>
    *
    <%_ for (const arg of method.arguments) { _%>
-   * @param {*} <%- arg.identifier %> <%- arg.description %>
+   * @param <%- compileJSDocArgumentType(arg) %> <%- compileJSDocArgument(arg) %> <%- arg.description %>
    <%_ } _%>
    * @returns {Promise}
    */
-  <%- method.identifier %> (<%- method.arguments.map(item => item._ts).join(', ') %>): Promise<any>
+  <%- method.identifier %> (<%- method.arguments.map(compileTypeScriptArgument).join(', ') %>): Promise<any>
 <%_ } _%>
 }

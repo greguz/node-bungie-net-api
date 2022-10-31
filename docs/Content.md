@@ -1,89 +1,101 @@
 # Content
 
-## getContentType(type)
+These methods can be accessed from `content` property of a `BungieApi` instance.
+
+```javascript
+import { BungieApi } from 'bungie.net'
+
+// Create the root API instance
+const api = new BungieApi(options)
+
+// Access the method
+await api.content.getContentType(type)
+```
+
+## `getContentType(type)`
 
 Gets an object describing a particular variant of content.
 
-- `type` `<*>` 
+- `type` `<string>` | `<number>` 
 - Returns: `<Promise>`
 
-URL: `GET /Content/GetContentType/{type}/`
+URL: `GET /Platform/Content/GetContentType/{type}/`
 
 Source: [Content.GetContentType](https://bungie-net.github.io/#Content.GetContentType)
 
-## getContentById(id, locale, [searchParams])
+## `getContentById(id, locale, [searchParams])`
 
 Returns a content item referenced by id
 
-- `id` `<*>` 
-- `locale` `<*>` 
-- `[searchParams]` `<*>` Request querystring parameters object.
+- `id` `<string>` | `<number>` 
+- `locale` `<string>` | `<number>` 
+- `[searchParams]` `<Object>` Request querystring parameters object.
 - Returns: `<Promise>`
 
-URL: `GET /Content/GetContentById/{id}/{locale}/`
+URL: `GET /Platform/Content/GetContentById/{id}/{locale}/`
 
 Source: [Content.GetContentById](https://bungie-net.github.io/#Content.GetContentById)
 
-## getContentByTagAndType(tag, type, locale, [searchParams])
+## `getContentByTagAndType(tag, type, locale, [searchParams])`
 
 Returns the newest item that matches a given tag and Content Type.
 
-- `tag` `<*>` 
-- `type` `<*>` 
-- `locale` `<*>` 
-- `[searchParams]` `<*>` Request querystring parameters object.
+- `tag` `<string>` | `<number>` 
+- `type` `<string>` | `<number>` 
+- `locale` `<string>` | `<number>` 
+- `[searchParams]` `<Object>` Request querystring parameters object.
 - Returns: `<Promise>`
 
-URL: `GET /Content/GetContentByTagAndType/{tag}/{type}/{locale}/`
+URL: `GET /Platform/Content/GetContentByTagAndType/{tag}/{type}/{locale}/`
 
 Source: [Content.GetContentByTagAndType](https://bungie-net.github.io/#Content.GetContentByTagAndType)
 
-## searchContentWithText(locale, [searchParams])
+## `searchContentWithText(locale, [searchParams])`
 
 Gets content based on querystring information passed in. Provides basic search and text search capabilities.
 
-- `locale` `<*>` 
-- `[searchParams]` `<*>` Request querystring parameters object.
+- `locale` `<string>` | `<number>` 
+- `[searchParams]` `<Object>` Request querystring parameters object.
 - Returns: `<Promise>`
 
-URL: `GET /Content/Search/{locale}/`
+URL: `GET /Platform/Content/Search/{locale}/`
 
 Source: [Content.SearchContentWithText](https://bungie-net.github.io/#Content.SearchContentWithText)
 
-## searchContentByTagAndType(tag, type, locale, [searchParams])
+## `searchContentByTagAndType(tag, type, locale, [searchParams])`
 
 Searches for Content Items that match the given Tag and Content Type.
 
-- `tag` `<*>` 
-- `type` `<*>` 
-- `locale` `<*>` 
-- `[searchParams]` `<*>` Request querystring parameters object.
+- `tag` `<string>` | `<number>` 
+- `type` `<string>` | `<number>` 
+- `locale` `<string>` | `<number>` 
+- `[searchParams]` `<Object>` Request querystring parameters object.
 - Returns: `<Promise>`
 
-URL: `GET /Content/SearchContentByTagAndType/{tag}/{type}/{locale}/`
+URL: `GET /Platform/Content/SearchContentByTagAndType/{tag}/{type}/{locale}/`
 
 Source: [Content.SearchContentByTagAndType](https://bungie-net.github.io/#Content.SearchContentByTagAndType)
 
-## searchHelpArticles(searchtext, size)
+## `searchHelpArticles(searchtext, size)`
 
 Search for Help Articles.
 
-- `searchtext` `<*>` 
-- `size` `<*>` 
+- `searchtext` `<string>` | `<number>` 
+- `size` `<string>` | `<number>` 
 - Returns: `<Promise>`
 
-URL: `GET /Content/SearchHelpArticles/{searchtext}/{size}/`
+URL: `GET /Platform/Content/SearchHelpArticles/{searchtext}/{size}/`
 
 Source: [Content.SearchHelpArticles](https://bungie-net.github.io/#Content.SearchHelpArticles)
 
-## rssNewsArticles(pageToken)
+## `rssNewsArticles(pageToken)`
 
 Returns a JSON string response that is the RSS feed for news articles.
 
-- `pageToken` `<*>` Zero-based pagination token for paging through result sets.
+- `pageToken` `<string>` | `<number>` Zero-based pagination token for paging through result sets.
 - Returns: `<Promise>`
 
-URL: `GET /Content/Rss/NewsArticles/{pageToken}/`
+URL: `GET /Platform/Content/Rss/NewsArticles/{pageToken}/`
 
 Source: [Content.RssNewsArticles](https://bungie-net.github.io/#Content.RssNewsArticles)
 

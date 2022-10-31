@@ -1,8 +1,6 @@
 # Enums
 
-## ApplicationScopes
-
-Source: [Applications.ApplicationScopes](https://bungie-net.github.io/#/components/schemas/Applications.ApplicationScopes)
+## `ApplicationScopes`
 
 - **ReadBasicUserProfile**: 1
   > Read basic user profile information such as the user's handle, avatar icon, etc.
@@ -35,9 +33,9 @@ Source: [Applications.ApplicationScopes](https://bungie-net.github.io/#/componen
 - **UserPiiRead**: 16384
   > Allows an app to query sensitive user PII, most notably email information.
 
-## ApplicationStatus
+Source: [Applications.ApplicationScopes](https://bungie-net.github.io/#/components/schemas/Applications.ApplicationScopes)
 
-Source: [Applications.ApplicationStatus](https://bungie-net.github.io/#/components/schemas/Applications.ApplicationStatus)
+## `ApplicationStatus`
 
 - **None**: 0
   > No value assigned
@@ -50,19 +48,19 @@ Source: [Applications.ApplicationStatus](https://bungie-net.github.io/#/componen
 - **Blocked**: 4
   > Application has been blocked by Bungie. It cannot be transitioned out of this state by the owner. Authorizations are terminated when an application is in this state.
 
-## DeveloperRole
+Source: [Applications.ApplicationStatus](https://bungie-net.github.io/#/components/schemas/Applications.ApplicationStatus)
 
-Source: [Applications.DeveloperRole](https://bungie-net.github.io/#/components/schemas/Applications.DeveloperRole)
+## `DeveloperRole`
 
 - **None**: 0
 - **Owner**: 1
 - **TeamMember**: 2
 
-## BungieMembershipType
+Source: [Applications.DeveloperRole](https://bungie-net.github.io/#/components/schemas/Applications.DeveloperRole)
+
+## `BungieMembershipType`
 
 The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.
-
-Source: [BungieMembershipType](https://bungie-net.github.io/#/components/schemas/BungieMembershipType)
 
 - **None**: 0
 - **TigerXbox**: 1
@@ -76,9 +74,9 @@ Source: [BungieMembershipType](https://bungie-net.github.io/#/components/schemas
 - **All**: -1
   > "All" is only valid for searching capabilities: you need to pass the actual matching BungieMembershipType for any query where you pass a known membershipId.
 
-## IgnoreStatus
+Source: [BungieMembershipType](https://bungie-net.github.io/#/components/schemas/BungieMembershipType)
 
-Source: [Ignores.IgnoreStatus](https://bungie-net.github.io/#/components/schemas/Ignores.IgnoreStatus)
+## `IgnoreStatus`
 
 - **NotIgnored**: 0
 - **IgnoredUser**: 1
@@ -88,11 +86,11 @@ Source: [Ignores.IgnoreStatus](https://bungie-net.github.io/#/components/schemas
 - **IgnoredTag**: 16
 - **IgnoredGlobal**: 32
 
-## BungieCredentialType
+Source: [Ignores.IgnoreStatus](https://bungie-net.github.io/#/components/schemas/Ignores.IgnoreStatus)
+
+## `BungieCredentialType`
 
 The types of credentials the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.CredentialType.
-
-Source: [BungieCredentialType](https://bungie-net.github.io/#/components/schemas/BungieCredentialType)
 
 - **None**: 0
 - **Xuid**: 1
@@ -109,9 +107,9 @@ Source: [BungieCredentialType](https://bungie-net.github.io/#/components/schemas
 - **TwitchId**: 18
 - **EgsId**: 20
 
-## ContentPropertyDataTypeEnum
+Source: [BungieCredentialType](https://bungie-net.github.io/#/components/schemas/BungieCredentialType)
 
-Source: [Content.Models.ContentPropertyDataTypeEnum](https://bungie-net.github.io/#/components/schemas/Content.Models.ContentPropertyDataTypeEnum)
+## `ContentPropertyDataTypeEnum`
 
 - **None**: 0
 - **Plaintext**: 1
@@ -129,9 +127,9 @@ Source: [Content.Models.ContentPropertyDataTypeEnum](https://bungie-net.github.i
 - **DestinyContent**: 13
 - **Color**: 14
 
-## ForumTopicsCategoryFiltersEnum
+Source: [Content.Models.ContentPropertyDataTypeEnum](https://bungie-net.github.io/#/components/schemas/Content.Models.ContentPropertyDataTypeEnum)
 
-Source: [Forum.ForumTopicsCategoryFiltersEnum](https://bungie-net.github.io/#/components/schemas/Forum.ForumTopicsCategoryFiltersEnum)
+## `ForumTopicsCategoryFiltersEnum`
 
 - **None**: 0
 - **Links**: 1
@@ -143,9 +141,9 @@ Source: [Forum.ForumTopicsCategoryFiltersEnum](https://bungie-net.github.io/#/co
 - **BungieOfficial**: 64
 - **Polls**: 128
 
-## ForumTopicsQuickDateEnum
+Source: [Forum.ForumTopicsCategoryFiltersEnum](https://bungie-net.github.io/#/components/schemas/Forum.ForumTopicsCategoryFiltersEnum)
 
-Source: [Forum.ForumTopicsQuickDateEnum](https://bungie-net.github.io/#/components/schemas/Forum.ForumTopicsQuickDateEnum)
+## `ForumTopicsQuickDateEnum`
 
 - **All**: 0
 - **LastYear**: 1
@@ -153,9 +151,9 @@ Source: [Forum.ForumTopicsQuickDateEnum](https://bungie-net.github.io/#/componen
 - **LastWeek**: 3
 - **LastDay**: 4
 
-## ForumTopicsSortEnum
+Source: [Forum.ForumTopicsQuickDateEnum](https://bungie-net.github.io/#/components/schemas/Forum.ForumTopicsQuickDateEnum)
 
-Source: [Forum.ForumTopicsSortEnum](https://bungie-net.github.io/#/components/schemas/Forum.ForumTopicsSortEnum)
+## `ForumTopicsSortEnum`
 
 - **Default**: 0
 - **LastReplied**: 1
@@ -166,18 +164,18 @@ Source: [Forum.ForumTopicsSortEnum](https://bungie-net.github.io/#/components/sc
 - **HighestRated**: 6
 - **MostUpvoted**: 7
 
-## ForumMediaType
+Source: [Forum.ForumTopicsSortEnum](https://bungie-net.github.io/#/components/schemas/Forum.ForumTopicsSortEnum)
 
-Source: [Forum.ForumMediaType](https://bungie-net.github.io/#/components/schemas/Forum.ForumMediaType)
+## `ForumMediaType`
 
 - **None**: 0
 - **Image**: 1
 - **Video**: 2
 - **Youtube**: 3
 
-## ForumPostPopularity
+Source: [Forum.ForumMediaType](https://bungie-net.github.io/#/components/schemas/Forum.ForumMediaType)
 
-Source: [Forum.ForumPostPopularity](https://bungie-net.github.io/#/components/schemas/Forum.ForumPostPopularity)
+## `ForumPostPopularity`
 
 - **Empty**: 0
 - **Default**: 1
@@ -186,9 +184,9 @@ Source: [Forum.ForumPostPopularity](https://bungie-net.github.io/#/components/sc
 - **HeatingUp**: 4
 - **Hot**: 5
 
-## ForumPostCategoryEnums
+Source: [Forum.ForumPostPopularity](https://bungie-net.github.io/#/components/schemas/Forum.ForumPostPopularity)
 
-Source: [Forums.ForumPostCategoryEnums](https://bungie-net.github.io/#/components/schemas/Forums.ForumPostCategoryEnums)
+## `ForumPostCategoryEnums`
 
 - **None**: 0
 - **TextOnly**: 1
@@ -203,9 +201,9 @@ Source: [Forums.ForumPostCategoryEnums](https://bungie-net.github.io/#/component
 - **NinjaOfficial**: 512
 - **Recruitment**: 1024
 
-## ForumFlagsEnum
+Source: [Forums.ForumPostCategoryEnums](https://bungie-net.github.io/#/components/schemas/Forums.ForumPostCategoryEnums)
 
-Source: [Forums.ForumFlagsEnum](https://bungie-net.github.io/#/components/schemas/Forums.ForumFlagsEnum)
+## `ForumFlagsEnum`
 
 - **None**: 0
 - **BungieStaffPost**: 1
@@ -217,47 +215,47 @@ Source: [Forums.ForumFlagsEnum](https://bungie-net.github.io/#/components/schema
 - **QuestionAnsweredByNinja**: 64
 - **CommunityContent**: 128
 
-## GroupType
+Source: [Forums.ForumFlagsEnum](https://bungie-net.github.io/#/components/schemas/Forums.ForumFlagsEnum)
 
-Source: [GroupsV2.GroupType](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupType)
+## `GroupType`
 
 - **General**: 0
 - **Clan**: 1
 
-## ChatSecuritySetting
+Source: [GroupsV2.GroupType](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupType)
 
-Source: [GroupsV2.ChatSecuritySetting](https://bungie-net.github.io/#/components/schemas/GroupsV2.ChatSecuritySetting)
+## `ChatSecuritySetting`
 
 - **Group**: 0
 - **Admins**: 1
 
-## GroupHomepage
+Source: [GroupsV2.ChatSecuritySetting](https://bungie-net.github.io/#/components/schemas/GroupsV2.ChatSecuritySetting)
 
-Source: [GroupsV2.GroupHomepage](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupHomepage)
+## `GroupHomepage`
 
 - **Wall**: 0
 - **Forum**: 1
 - **AllianceForum**: 2
 
-## MembershipOption
+Source: [GroupsV2.GroupHomepage](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupHomepage)
 
-Source: [GroupsV2.MembershipOption](https://bungie-net.github.io/#/components/schemas/GroupsV2.MembershipOption)
+## `MembershipOption`
 
 - **Reviewed**: 0
 - **Open**: 1
 - **Closed**: 2
 
-## GroupPostPublicity
+Source: [GroupsV2.MembershipOption](https://bungie-net.github.io/#/components/schemas/GroupsV2.MembershipOption)
 
-Source: [GroupsV2.GroupPostPublicity](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupPostPublicity)
+## `GroupPostPublicity`
 
 - **Public**: 0
 - **Alliance**: 1
 - **Private**: 2
 
-## Capabilities
+Source: [GroupsV2.GroupPostPublicity](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupPostPublicity)
 
-Source: [GroupsV2.Capabilities](https://bungie-net.github.io/#/components/schemas/GroupsV2.Capabilities)
+## `Capabilities`
 
 - **None**: 0
 - **Leaderboards**: 1
@@ -268,21 +266,21 @@ Source: [GroupsV2.Capabilities](https://bungie-net.github.io/#/components/schema
 - **Tags**: 32
 - **Alliances**: 64
 
-## HostGuidedGamesPermissionLevel
+Source: [GroupsV2.Capabilities](https://bungie-net.github.io/#/components/schemas/GroupsV2.Capabilities)
+
+## `HostGuidedGamesPermissionLevel`
 
 Used for setting the guided game permission level override (admins and founders can always host guided games).
-
-Source: [GroupsV2.HostGuidedGamesPermissionLevel](https://bungie-net.github.io/#/components/schemas/GroupsV2.HostGuidedGamesPermissionLevel)
 
 - **None**: 0
 - **Beginner**: 1
 - **Member**: 2
 
-## RuntimeGroupMemberType
+Source: [GroupsV2.HostGuidedGamesPermissionLevel](https://bungie-net.github.io/#/components/schemas/GroupsV2.HostGuidedGamesPermissionLevel)
+
+## `RuntimeGroupMemberType`
 
 The member levels used by all V2 Groups API. Individual group types use their own mappings in their native storage (general uses BnetDbGroupMemberType and D2 clans use ClanMemberLevel), but they are all translated to this in the runtime api. These runtime values should NEVER be stored anywhere, so the values can be changed as necessary.
-
-Source: [GroupsV2.RuntimeGroupMemberType](https://bungie-net.github.io/#/components/schemas/GroupsV2.RuntimeGroupMemberType)
 
 - **None**: 0
 - **Beginner**: 1
@@ -291,11 +289,11 @@ Source: [GroupsV2.RuntimeGroupMemberType](https://bungie-net.github.io/#/compone
 - **ActingFounder**: 4
 - **Founder**: 5
 
-## DestinyProgressionRewardItemState
+Source: [GroupsV2.RuntimeGroupMemberType](https://bungie-net.github.io/#/components/schemas/GroupsV2.RuntimeGroupMemberType)
+
+## `DestinyProgressionRewardItemState`
 
 Represents the different states a progression reward item can be in.
-
-Source: [Destiny.DestinyProgressionRewardItemState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyProgressionRewardItemState)
 
 - **None**: 0
 - **Invisible**: 1
@@ -307,11 +305,11 @@ Source: [Destiny.DestinyProgressionRewardItemState](https://bungie-net.github.io
 - **ClaimAllowed**: 8
   > If this is set, the reward is allowed to be claimed by this Character. An item can be earned but still can't be claimed in certain circumstances, like if it's only allowed for certain subclasses. It also might not be able to be claimed if you already claimed it!
 
-## DestinyProgressionScope
+Source: [Destiny.DestinyProgressionRewardItemState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyProgressionRewardItemState)
+
+## `DestinyProgressionScope`
 
 There are many Progressions in Destiny (think Character Level, or Reputation). These are the various "Scopes" of Progressions, which affect many things: * Where/if they are stored * How they are calculated * Where they can be used in other game logic
-
-Source: [Destiny.DestinyProgressionScope](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyProgressionScope)
 
 - **Account**: 0
 - **Character**: 1
@@ -323,40 +321,40 @@ Source: [Destiny.DestinyProgressionScope](https://bungie-net.github.io/#/compone
 - **MappedStat**: 7
 - **MappedUnlockValue**: 8
 
-## DestinyProgressionStepDisplayEffect
+Source: [Destiny.DestinyProgressionScope](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyProgressionScope)
+
+## `DestinyProgressionStepDisplayEffect`
 
 If progression is earned, this determines whether the progression shows visual effects on the character or its item - or neither.
-
-Source: [Destiny.DestinyProgressionStepDisplayEffect](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyProgressionStepDisplayEffect)
 
 - **None**: 0
 - **Character**: 1
 - **Item**: 2
 
-## SocketTypeActionType
+Source: [Destiny.DestinyProgressionStepDisplayEffect](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyProgressionStepDisplayEffect)
+
+## `SocketTypeActionType`
 
 Indicates the type of actions that can be performed
-
-Source: [Destiny.SocketTypeActionType](https://bungie-net.github.io/#/components/schemas/Destiny.SocketTypeActionType)
 
 - **InsertPlug**: 0
 - **InfuseItem**: 1
 - **ReinitializeSocket**: 2
 
-## DestinySocketVisibility
+Source: [Destiny.SocketTypeActionType](https://bungie-net.github.io/#/components/schemas/Destiny.SocketTypeActionType)
 
-Source: [Destiny.DestinySocketVisibility](https://bungie-net.github.io/#/components/schemas/Destiny.DestinySocketVisibility)
+## `DestinySocketVisibility`
 
 - **Visible**: 0
 - **Hidden**: 1
 - **HiddenWhenEmpty**: 2
 - **HiddenIfNoPlugsAvailable**: 3
 
-## DestinySocketCategoryStyle
+Source: [Destiny.DestinySocketVisibility](https://bungie-net.github.io/#/components/schemas/Destiny.DestinySocketVisibility)
+
+## `DestinySocketCategoryStyle`
 
 Represents the possible and known UI styles used by the game for rendering Socket Categories.
-
-Source: [Destiny.DestinySocketCategoryStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinySocketCategoryStyle)
 
 - **Unknown**: 0
 - **Reusable**: 1
@@ -368,9 +366,9 @@ Source: [Destiny.DestinySocketCategoryStyle](https://bungie-net.github.io/#/comp
 - **Abilities**: 7
 - **Supers**: 8
 
-## TierType
+Source: [Destiny.DestinySocketCategoryStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinySocketCategoryStyle)
 
-Source: [Destiny.TierType](https://bungie-net.github.io/#/components/schemas/Destiny.TierType)
+## `TierType`
 
 - **Unknown**: 0
 - **Currency**: 1
@@ -380,16 +378,16 @@ Source: [Destiny.TierType](https://bungie-net.github.io/#/components/schemas/Des
 - **Superior**: 5
 - **Exotic**: 6
 
-## BucketScope
+Source: [Destiny.TierType](https://bungie-net.github.io/#/components/schemas/Destiny.TierType)
 
-Source: [Destiny.BucketScope](https://bungie-net.github.io/#/components/schemas/Destiny.BucketScope)
+## `BucketScope`
 
 - **Character**: 0
 - **Account**: 1
 
-## BucketCategory
+Source: [Destiny.BucketScope](https://bungie-net.github.io/#/components/schemas/Destiny.BucketScope)
 
-Source: [Destiny.BucketCategory](https://bungie-net.github.io/#/components/schemas/Destiny.BucketCategory)
+## `BucketCategory`
 
 - **Invisible**: 0
 - **Item**: 1
@@ -397,9 +395,9 @@ Source: [Destiny.BucketCategory](https://bungie-net.github.io/#/components/schem
 - **Equippable**: 3
 - **Ignored**: 4
 
-## ItemLocation
+Source: [Destiny.BucketCategory](https://bungie-net.github.io/#/components/schemas/Destiny.BucketCategory)
 
-Source: [Destiny.ItemLocation](https://bungie-net.github.io/#/components/schemas/Destiny.ItemLocation)
+## `ItemLocation`
 
 - **Unknown**: 0
 - **Inventory**: 1
@@ -407,37 +405,37 @@ Source: [Destiny.ItemLocation](https://bungie-net.github.io/#/components/schemas
 - **Vendor**: 3
 - **Postmaster**: 4
 
-## DestinyStatAggregationType
+Source: [Destiny.ItemLocation](https://bungie-net.github.io/#/components/schemas/Destiny.ItemLocation)
+
+## `DestinyStatAggregationType`
 
 When a Stat (DestinyStatDefinition) is aggregated, this is the rules used for determining the level and formula used for aggregation. * CharacterAverage = apply a weighted average using the related DestinyStatGroupDefinition on the DestinyInventoryItemDefinition across the character's equipped items. See both of those definitions for details. * Character = don't aggregate: the stat should be located and used directly on the character. * Item = don't aggregate: the stat should be located and used directly on the item.
-
-Source: [Destiny.DestinyStatAggregationType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyStatAggregationType)
 
 - **CharacterAverage**: 0
 - **Character**: 1
 - **Item**: 2
 
-## DestinyStatCategory
+Source: [Destiny.DestinyStatAggregationType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyStatAggregationType)
+
+## `DestinyStatCategory`
 
 At last, stats have categories. Use this for whatever purpose you might wish.
-
-Source: [Destiny.DestinyStatCategory](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyStatCategory)
 
 - **Gameplay**: 0
 - **Weapon**: 1
 - **Defense**: 2
 - **Primary**: 3
 
-## EquippingItemBlockAttributes
+Source: [Destiny.DestinyStatCategory](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyStatCategory)
 
-Source: [Destiny.EquippingItemBlockAttributes](https://bungie-net.github.io/#/components/schemas/Destiny.EquippingItemBlockAttributes)
+## `EquippingItemBlockAttributes`
 
 - **None**: 0
 - **EquipOnAcquire**: 1
 
-## DestinyAmmunitionType
+Source: [Destiny.EquippingItemBlockAttributes](https://bungie-net.github.io/#/components/schemas/Destiny.EquippingItemBlockAttributes)
 
-Source: [Destiny.DestinyAmmunitionType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyAmmunitionType)
+## `DestinyAmmunitionType`
 
 - **None**: 0
 - **Primary**: 1
@@ -445,28 +443,28 @@ Source: [Destiny.DestinyAmmunitionType](https://bungie-net.github.io/#/component
 - **Heavy**: 3
 - **Unknown**: 4
 
-## DestinyClass
+Source: [Destiny.DestinyAmmunitionType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyAmmunitionType)
 
-Source: [Destiny.DestinyClass](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyClass)
+## `DestinyClass`
 
 - **Titan**: 0
 - **Hunter**: 1
 - **Warlock**: 2
 - **Unknown**: 3
 
-## DestinyGender
+Source: [Destiny.DestinyClass](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyClass)
 
-Source: [Destiny.DestinyGender](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyGender)
+## `DestinyGender`
 
 - **Male**: 0
 - **Female**: 1
 - **Unknown**: 2
 
-## DestinyVendorProgressionType
+Source: [Destiny.DestinyGender](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyGender)
+
+## `DestinyVendorProgressionType`
 
 Describes the type of progression that a vendor has.
-
-Source: [Destiny.DestinyVendorProgressionType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorProgressionType)
 
 - **Default**: 0
   > The original rank progression from token redemption.
@@ -475,40 +473,40 @@ Source: [Destiny.DestinyVendorProgressionType](https://bungie-net.github.io/#/co
 - **NoSeasonalRefresh**: 2
   > A vendor progression with no seasonal refresh. For example: Xur in the Eternity destination for the 30th Anniversary.
 
-## VendorDisplayCategorySortOrder
+Source: [Destiny.DestinyVendorProgressionType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorProgressionType)
+
+## `VendorDisplayCategorySortOrder`
 
 Display categories can have custom sort orders. These are the possible options.
-
-Source: [Destiny.VendorDisplayCategorySortOrder](https://bungie-net.github.io/#/components/schemas/Destiny.VendorDisplayCategorySortOrder)
 
 - **Default**: 0
 - **SortByTier**: 1
 
-## DestinyVendorInteractionRewardSelection
+Source: [Destiny.VendorDisplayCategorySortOrder](https://bungie-net.github.io/#/components/schemas/Destiny.VendorDisplayCategorySortOrder)
+
+## `DestinyVendorInteractionRewardSelection`
 
 When a Vendor Interaction provides rewards, they'll either let you choose one or let you have all of them. This determines which it will be.
-
-Source: [Destiny.DestinyVendorInteractionRewardSelection](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorInteractionRewardSelection)
 
 - **None**: 0
 - **One**: 1
 - **All**: 2
 
-## DestinyVendorReplyType
+Source: [Destiny.DestinyVendorInteractionRewardSelection](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorInteractionRewardSelection)
+
+## `DestinyVendorReplyType`
 
 This determines the type of reply that a Vendor will have during an Interaction.
-
-Source: [Destiny.DestinyVendorReplyType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorReplyType)
 
 - **Accept**: 0
 - **Decline**: 1
 - **Complete**: 2
 
-## VendorInteractionType
+Source: [Destiny.DestinyVendorReplyType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorReplyType)
+
+## `VendorInteractionType`
 
 An enumeration of the known UI interactions for Vendors.
-
-Source: [Destiny.VendorInteractionType](https://bungie-net.github.io/#/components/schemas/Destiny.VendorInteractionType)
 
 - **Unknown**: 0
 - **Undefined**: 1
@@ -532,31 +530,31 @@ Source: [Destiny.VendorInteractionType](https://bungie-net.github.io/#/component
 - **Start**: 10
   > Also seem inconsistent. I also don't know what these are offhand.
 
-## DestinyItemSortType
+Source: [Destiny.VendorInteractionType](https://bungie-net.github.io/#/components/schemas/Destiny.VendorInteractionType)
+
+## `DestinyItemSortType`
 
 Determines how items are sorted in an inventory bucket.
-
-Source: [Destiny.DestinyItemSortType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyItemSortType)
 
 - **ItemId**: 0
 - **Timestamp**: 1
 - **StackSize**: 2
 
-## DestinyVendorItemRefundPolicy
+Source: [Destiny.DestinyItemSortType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyItemSortType)
+
+## `DestinyVendorItemRefundPolicy`
 
 The action that happens when the user attempts to refund an item.
-
-Source: [Destiny.DestinyVendorItemRefundPolicy](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorItemRefundPolicy)
 
 - **NotRefundable**: 0
 - **DeletesItem**: 1
 - **RevokesLicense**: 2
 
-## DestinyGatingScope
+Source: [Destiny.DestinyVendorItemRefundPolicy](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorItemRefundPolicy)
+
+## `DestinyGatingScope`
 
 This enumeration represents the most restrictive type of gating that is being performed by an entity. This is useful as a shortcut to avoid a lot of lookups when determining whether the gating on an Entity applies to everyone equally, or to their specific Profile or Character states. None = There is no gating on this item. Global = The gating on this item is based entirely on global game state. It will be gated the same for everyone. Clan = The gating on this item is at the Clan level. For instance, if you're gated by Clan level this will be the case. Profile = The gating includes Profile-specific checks, but not on the Profile's characters. An example of this might be when you acquire an Emblem: the Emblem will be available in your Kiosk for all characters in your Profile from that point onward. Character = The gating includes Character-specific checks, including character level restrictions. An example of this might be an item that you can't purchase from a Vendor until you reach a specific Character Level. Item = The gating includes item-specific checks. For BNet, this generally implies that we'll show this data only on a character level or deeper. AssumedWorstCase = The unlocks and checks being used for this calculation are of an unknown type and are used for unknown purposes. For instance, if some great person decided that an unlock value should be globally scoped, but then the game changes it using character-specific data in a way that BNet doesn't know about. Because of the open-ended potential for this to occur, many unlock checks for "globally" scoped unlock data may be assumed as the worst case unless it has been specifically whitelisted as otherwise. That sucks, but them's the breaks.
-
-Source: [Destiny.DestinyGatingScope](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyGatingScope)
 
 - **None**: 0
 - **Global**: 1
@@ -566,11 +564,11 @@ Source: [Destiny.DestinyGatingScope](https://bungie-net.github.io/#/components/s
 - **Item**: 5
 - **AssumedWorstCase**: 6
 
-## ActivityGraphNodeHighlightType
+Source: [Destiny.DestinyGatingScope](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyGatingScope)
+
+## `ActivityGraphNodeHighlightType`
 
 The various known UI styles in which an item can be highlighted. It'll be up to you to determine what you want to show based on this highlighting, BNet doesn't have any assets that correspond to these states. And yeah, RiseOfIron and Comet have their own special highlight states. Don't ask me, I can't imagine they're still used.
-
-Source: [Destiny.ActivityGraphNodeHighlightType](https://bungie-net.github.io/#/components/schemas/Destiny.ActivityGraphNodeHighlightType)
 
 - **None**: 0
 - **Normal**: 1
@@ -578,11 +576,11 @@ Source: [Destiny.ActivityGraphNodeHighlightType](https://bungie-net.github.io/#/
 - **Comet**: 3
 - **RiseOfIron**: 4
 
-## DestinyUnlockValueUIStyle
+Source: [Destiny.ActivityGraphNodeHighlightType](https://bungie-net.github.io/#/components/schemas/Destiny.ActivityGraphNodeHighlightType)
+
+## `DestinyUnlockValueUIStyle`
 
 If you're showing an unlock value in the UI, this is the format in which it should be shown. You'll have to build your own algorithms on the client side to determine how best to render these options.
-
-Source: [Destiny.DestinyUnlockValueUIStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyUnlockValueUIStyle)
 
 - **Automatic**: 0
   > Generally, Automatic means "Just show the number"
@@ -615,19 +613,19 @@ Source: [Destiny.DestinyUnlockValueUIStyle](https://bungie-net.github.io/#/compo
 - **LevelAndReward**: 14
   > Show the value as a level and a reward.
 
-## DestinyObjectiveGrantStyle
+Source: [Destiny.DestinyUnlockValueUIStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyUnlockValueUIStyle)
+
+## `DestinyObjectiveGrantStyle`
 
 Some Objectives provide perks, generally as part of providing some kind of interesting modifier for a Challenge or Quest. This indicates when the Perk is granted.
-
-Source: [Destiny.DestinyObjectiveGrantStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyObjectiveGrantStyle)
 
 - **WhenIncomplete**: 0
 - **WhenComplete**: 1
 - **Always**: 2
 
-## DamageType
+Source: [Destiny.DestinyObjectiveGrantStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyObjectiveGrantStyle)
 
-Source: [Destiny.DamageType](https://bungie-net.github.io/#/components/schemas/Destiny.DamageType)
+## `DamageType`
 
 - **None**: 0
 - **Kinetic**: 1
@@ -637,9 +635,9 @@ Source: [Destiny.DamageType](https://bungie-net.github.io/#/components/schemas/D
 - **Raid**: 5
 - **Stasis**: 6
 
-## DestinyTalentNodeStepWeaponPerformances
+Source: [Destiny.DamageType](https://bungie-net.github.io/#/components/schemas/Destiny.DamageType)
 
-Source: [Destiny.Definitions.DestinyTalentNodeStepWeaponPerformances](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepWeaponPerformances)
+## `DestinyTalentNodeStepWeaponPerformances`
 
 - **None**: 0
 - **RateOfFire**: 1
@@ -657,9 +655,9 @@ Source: [Destiny.Definitions.DestinyTalentNodeStepWeaponPerformances](https://bu
 - **ChargeTime**: 4096
 - **All**: 8191
 
-## DestinyTalentNodeStepImpactEffects
+Source: [Destiny.Definitions.DestinyTalentNodeStepWeaponPerformances](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepWeaponPerformances)
 
-Source: [Destiny.Definitions.DestinyTalentNodeStepImpactEffects](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepImpactEffects)
+## `DestinyTalentNodeStepImpactEffects`
 
 - **None**: 0
 - **ArmorPiercing**: 1
@@ -670,9 +668,9 @@ Source: [Destiny.Definitions.DestinyTalentNodeStepImpactEffects](https://bungie-
 - **HighlightTarget**: 32
 - **All**: 63
 
-## DestinyTalentNodeStepGuardianAttributes
+Source: [Destiny.Definitions.DestinyTalentNodeStepImpactEffects](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepImpactEffects)
 
-Source: [Destiny.Definitions.DestinyTalentNodeStepGuardianAttributes](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepGuardianAttributes)
+## `DestinyTalentNodeStepGuardianAttributes`
 
 - **None**: 0
 - **Stats**: 1
@@ -685,9 +683,9 @@ Source: [Destiny.Definitions.DestinyTalentNodeStepGuardianAttributes](https://bu
 - **Reputations**: 128
 - **All**: 255
 
-## DestinyTalentNodeStepLightAbilities
+Source: [Destiny.Definitions.DestinyTalentNodeStepGuardianAttributes](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepGuardianAttributes)
 
-Source: [Destiny.Definitions.DestinyTalentNodeStepLightAbilities](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepLightAbilities)
+## `DestinyTalentNodeStepLightAbilities`
 
 - **None**: 0
 - **Grenades**: 1
@@ -698,9 +696,9 @@ Source: [Destiny.Definitions.DestinyTalentNodeStepLightAbilities](https://bungie
 - **SuperMods**: 32
 - **All**: 63
 
-## DestinyTalentNodeStepDamageTypes
+Source: [Destiny.Definitions.DestinyTalentNodeStepLightAbilities](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepLightAbilities)
 
-Source: [Destiny.Definitions.DestinyTalentNodeStepDamageTypes](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepDamageTypes)
+## `DestinyTalentNodeStepDamageTypes`
 
 - **None**: 0
 - **Kinetic**: 1
@@ -709,11 +707,11 @@ Source: [Destiny.Definitions.DestinyTalentNodeStepDamageTypes](https://bungie-ne
 - **Void**: 8
 - **All**: 15
 
-## DestinyObjectiveUiStyle
+Source: [Destiny.Definitions.DestinyTalentNodeStepDamageTypes](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepDamageTypes)
+
+## `DestinyObjectiveUiStyle`
 
 If the objective has a known UI label, this enumeration will represent it.
-
-Source: [Destiny.DestinyObjectiveUiStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyObjectiveUiStyle)
 
 - **None**: 0
 - **Highlighted**: 1
@@ -723,9 +721,9 @@ Source: [Destiny.DestinyObjectiveUiStyle](https://bungie-net.github.io/#/compone
 - **CraftingMementos**: 5
 - **CraftingMementoTitle**: 6
 
-## DestinyActivityNavPointType
+Source: [Destiny.DestinyObjectiveUiStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyObjectiveUiStyle)
 
-Source: [Destiny.DestinyActivityNavPointType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyActivityNavPointType)
+## `DestinyActivityNavPointType`
 
 - **Inactive**: 0
 - **PrimaryObjective**: 1
@@ -745,11 +743,11 @@ Source: [Destiny.DestinyActivityNavPointType](https://bungie-net.github.io/#/com
 - **AutomationHint**: 15
 - **TrackedQuest**: 16
 
-## DestinyActivityModeType
+Source: [Destiny.DestinyActivityNavPointType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyActivityNavPointType)
+
+## `DestinyActivityModeType`
 
 For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!
-
-Source: [Destiny.HistoricalStats.Definitions.DestinyActivityModeType](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType)
 
 - **None**: 0
 - **Story**: 2
@@ -836,11 +834,11 @@ Source: [Destiny.HistoricalStats.Definitions.DestinyActivityModeType](https://bu
 - **ZoneControl**: 89
 - **IronBannerRift**: 90
 
-## DestinyActivityModeCategory
+Source: [Destiny.HistoricalStats.Definitions.DestinyActivityModeType](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType)
+
+## `DestinyActivityModeCategory`
 
 Activity Modes are grouped into a few possible broad categories.
-
-Source: [Destiny.DestinyActivityModeCategory](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyActivityModeCategory)
 
 - **None**: 0
   > Activities that are neither PVP nor PVE, such as social activities.
@@ -851,11 +849,11 @@ Source: [Destiny.DestinyActivityModeCategory](https://bungie-net.github.io/#/com
 - **PvECompetitive**: 3
   > PVE competitive activities, where you shoot whoever you want whenever you want. Or run around collecting small glowing triangles.
 
-## DestinyItemSubType
+Source: [Destiny.DestinyActivityModeCategory](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyActivityModeCategory)
+
+## `DestinyItemSubType`
 
 This Enumeration further classifies items by more specific categorizations than DestinyItemType. The "Sub-Type" is where we classify and categorize items one step further in specificity: "Auto Rifle" instead of just "Weapon" for example, or "Vanguard Bounty" instead of merely "Bounty". These sub-types are provided for historical compatibility with Destiny 1, but an ideal alternative is to use DestinyItemCategoryDefinitions and the DestinyItemDefinition.itemCategories property instead. Item Categories allow for arbitrary hierarchies of specificity, and for items to belong to multiple categories across multiple hierarchies simultaneously. For this enum, we pick a single type as a "best guess" fit. NOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.
-
-Source: [Destiny.DestinyItemSubType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyItemSubType)
 
 - **None**: 0
 - **Crucible**: 1
@@ -893,11 +891,11 @@ Source: [Destiny.DestinyItemSubType](https://bungie-net.github.io/#/components/s
 - **DummyRepeatableBounty**: 32
 - **Glaive**: 33
 
-## DestinyGraphNodeState
+Source: [Destiny.DestinyItemSubType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyItemSubType)
+
+## `DestinyGraphNodeState`
 
 Represents a potential state of an Activity Graph node.
-
-Source: [Destiny.DestinyGraphNodeState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyGraphNodeState)
 
 - **Hidden**: 0
 - **Visible**: 1
@@ -905,11 +903,11 @@ Source: [Destiny.DestinyGraphNodeState](https://bungie-net.github.io/#/component
 - **Incomplete**: 3
 - **Completed**: 4
 
-## DestinyRewardSourceCategory
+Source: [Destiny.DestinyGraphNodeState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyGraphNodeState)
+
+## `DestinyRewardSourceCategory`
 
 BNet's custom categorization of reward sources. We took a look at the existing ways that items could be spawned, and tried to make high-level categorizations of them. This needs to be re-evaluated for Destiny 2.
-
-Source: [Destiny.Definitions.DestinyRewardSourceCategory](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyRewardSourceCategory)
 
 - **None**: 0
   > The source doesn't fit well into any of the other types.
@@ -920,9 +918,9 @@ Source: [Destiny.Definitions.DestinyRewardSourceCategory](https://bungie-net.git
 - **Aggregate**: 3
   > This source is a custom aggregation of items that can be earned in many ways, but that share some other property in common that is useful to share. For instance, in Destiny 1 we would make "Reward Sources" for every game expansion: that way, you could search reward sources to see what items became available with any given Expansion.
 
-## DestinyPresentationNodeType
+Source: [Destiny.Definitions.DestinyRewardSourceCategory](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.DestinyRewardSourceCategory)
 
-Source: [Destiny.DestinyPresentationNodeType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyPresentationNodeType)
+## `DestinyPresentationNodeType`
 
 - **Default**: 0
 - **Category**: 1
@@ -931,20 +929,20 @@ Source: [Destiny.DestinyPresentationNodeType](https://bungie-net.github.io/#/com
 - **Metric**: 4
 - **Craftable**: 5
 
-## DestinyScope
+Source: [Destiny.DestinyPresentationNodeType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyPresentationNodeType)
+
+## `DestinyScope`
 
 There's a lot of places where we need to know scope on more than just a profile or character level. For everything else, there's this more generic sense of scope.
-
-Source: [Destiny.DestinyScope](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyScope)
 
 - **Profile**: 0
 - **Character**: 1
 
-## DestinyPresentationDisplayStyle
+Source: [Destiny.DestinyScope](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyScope)
+
+## `DestinyPresentationDisplayStyle`
 
 A hint for how the presentation node should be displayed when shown in a list. How you use this is your UI is up to you.
-
-Source: [Destiny.DestinyPresentationDisplayStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyPresentationDisplayStyle)
 
 - **Category**: 0
   > Display the item as a category, through which sub-items are filtered.
@@ -953,9 +951,9 @@ Source: [Destiny.DestinyPresentationDisplayStyle](https://bungie-net.github.io/#
 - **Collectible**: 3
 - **Record**: 4
 
-## DestinyRecordValueStyle
+Source: [Destiny.DestinyPresentationDisplayStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyPresentationDisplayStyle)
 
-Source: [Destiny.DestinyRecordValueStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyRecordValueStyle)
+## `DestinyRecordValueStyle`
 
 - **Integer**: 0
 - **Percentage**: 1
@@ -963,9 +961,9 @@ Source: [Destiny.DestinyRecordValueStyle](https://bungie-net.github.io/#/compone
 - **Boolean**: 3
 - **Decimal**: 4
 
-## DestinyRecordToastStyle
+Source: [Destiny.DestinyRecordValueStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyRecordValueStyle)
 
-Source: [Destiny.DestinyRecordToastStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyRecordToastStyle)
+## `DestinyRecordToastStyle`
 
 - **None**: 0
 - **Record**: 1
@@ -977,11 +975,11 @@ Source: [Destiny.DestinyRecordToastStyle](https://bungie-net.github.io/#/compone
 - **GildedTitleComplete**: 7
 - **CraftingRecipeUnlocked**: 8
 
-## DestinyPresentationScreenStyle
+Source: [Destiny.DestinyRecordToastStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyRecordToastStyle)
+
+## `DestinyPresentationScreenStyle`
 
 A hint for what screen should be shown when this presentation node is clicked into. How you use this is your UI is up to you.
-
-Source: [Destiny.DestinyPresentationScreenStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyPresentationScreenStyle)
 
 - **Default**: 0
   > Use the "default" view for the presentation nodes.
@@ -990,30 +988,30 @@ Source: [Destiny.DestinyPresentationScreenStyle](https://bungie-net.github.io/#/
 - **Badge**: 2
   > Show sub-items as Badges. (I know, I know. We don't need no stinkin' badges har har har)
 
-## PlugUiStyles
+Source: [Destiny.DestinyPresentationScreenStyle](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyPresentationScreenStyle)
+
+## `PlugUiStyles`
 
 If the plug has a specific custom style, this enumeration will represent that style/those styles.
-
-Source: [Destiny.PlugUiStyles](https://bungie-net.github.io/#/components/schemas/Destiny.PlugUiStyles)
 
 - **None**: 0
 - **Masterwork**: 1
 
-## PlugAvailabilityMode
+Source: [Destiny.PlugUiStyles](https://bungie-net.github.io/#/components/schemas/Destiny.PlugUiStyles)
+
+## `PlugAvailabilityMode`
 
 This enum determines whether the plug is available to be inserted. - Normal means that all existing rules for plug insertion apply. - UnavailableIfSocketContainsMatchingPlugCategory means that the plug is only available if the socket does NOT match the plug category. - AvailableIfSocketContainsMatchingPlugCategory means that the plug is only available if the socket DOES match the plug category. For category matching, use the plug's "plugCategoryIdentifier" property, comparing it to
-
-Source: [Destiny.PlugAvailabilityMode](https://bungie-net.github.io/#/components/schemas/Destiny.PlugAvailabilityMode)
 
 - **Normal**: 0
 - **UnavailableIfSocketContainsMatchingPlugCategory**: 1
 - **AvailableIfSocketContainsMatchingPlugCategory**: 2
 
-## DestinyEnergyType
+Source: [Destiny.PlugAvailabilityMode](https://bungie-net.github.io/#/components/schemas/Destiny.PlugAvailabilityMode)
+
+## `DestinyEnergyType`
 
 Represents the socket energy types for Armor 2.0, Ghosts 2.0, and Stasis subclasses.
-
-Source: [Destiny.DestinyEnergyType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyEnergyType)
 
 - **Any**: 0
 - **Arc**: 1
@@ -1023,11 +1021,11 @@ Source: [Destiny.DestinyEnergyType](https://bungie-net.github.io/#/components/sc
 - **Subclass**: 5
 - **Stasis**: 6
 
-## SocketPlugSources
+Source: [Destiny.DestinyEnergyType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyEnergyType)
+
+## `SocketPlugSources`
 
 Indicates how a socket is populated, and where you should look for valid plug data.  This is a flags enumeration/bitmask field, as you may have to look in multiple sources across multiple components for valid plugs.  For instance, a socket could have plugs that are sourced from its own definition, as well as plugs that are sourced from Character-scoped AND profile-scoped Plug Sets. Only by combining plug data for every indicated source will you be able to know all of the plugs available for a socket.
-
-Source: [Destiny.SocketPlugSources](https://bungie-net.github.io/#/components/schemas/Destiny.SocketPlugSources)
 
 - **None**: 0
   > If there's no way we can detect to insert new plugs.
@@ -1040,21 +1038,21 @@ Source: [Destiny.SocketPlugSources](https://bungie-net.github.io/#/components/sc
 - **CharacterPlugSet**: 8
   > Use the CharacterPlugSets (DestinyProfileResponse.characterPlugSets) component data to determine which plugs are valid for this socket.
 
-## ItemPerkVisibility
+Source: [Destiny.SocketPlugSources](https://bungie-net.github.io/#/components/schemas/Destiny.SocketPlugSources)
+
+## `ItemPerkVisibility`
 
 Indicates how a perk should be shown, or if it should be, in the game UI. Maybe useful for those of you trying to filter out internal-use-only perks (or for those of you trying to figure out what they do!)
-
-Source: [Destiny.ItemPerkVisibility](https://bungie-net.github.io/#/components/schemas/Destiny.ItemPerkVisibility)
 
 - **Visible**: 0
 - **Disabled**: 1
 - **Hidden**: 2
 
-## SpecialItemType
+Source: [Destiny.ItemPerkVisibility](https://bungie-net.github.io/#/components/schemas/Destiny.ItemPerkVisibility)
+
+## `SpecialItemType`
 
 As you run into items that need to be classified for Milestone purposes in ways that we cannot infer via direct data, add a new classification here and use a string constant to represent it in the local item config file. NOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.
-
-Source: [Destiny.SpecialItemType](https://bungie-net.github.io/#/components/schemas/Destiny.SpecialItemType)
 
 - **None**: 0
 - **SpecialCurrency**: 1
@@ -1066,11 +1064,11 @@ Source: [Destiny.SpecialItemType](https://bungie-net.github.io/#/components/sche
 - **MissionReward**: 27
 - **Currency**: 29
 
-## DestinyItemType
+Source: [Destiny.SpecialItemType](https://bungie-net.github.io/#/components/schemas/Destiny.SpecialItemType)
+
+## `DestinyItemType`
 
 An enumeration that indicates the high-level "type" of the item, attempting to iron out the context specific differences for specific instances of an entity. For instance, though a weapon may be of various weapon "Types", in DestinyItemType they are all classified as "Weapon". This allows for better filtering on a higher level of abstraction for the concept of types.  This enum is provided for historical compatibility with Destiny 1, but an ideal alternative is to use DestinyItemCategoryDefinitions and the DestinyItemDefinition.itemCategories property instead. Item Categories allow for arbitrary hierarchies of specificity, and for items to belong to multiple categories across multiple hierarchies simultaneously. For this enum, we pick a single type as a "best guess" fit.  NOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.  I keep updating these because they're so damn convenient. I guess I shouldn't fight it.
-
-Source: [Destiny.DestinyItemType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyItemType)
 
 - **None**: 0
 - **Currency**: 1
@@ -1101,68 +1099,68 @@ Source: [Destiny.DestinyItemType](https://bungie-net.github.io/#/components/sche
 - **Finisher**: 29
 - **Pattern**: 30
 
-## DestinyBreakerType
+Source: [Destiny.DestinyItemType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyItemType)
+
+## `DestinyBreakerType`
 
 A plug can optionally have a "Breaker Type": a special ability that can affect units in unique ways. Activating this plug can grant one of these types.
-
-Source: [Destiny.DestinyBreakerType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyBreakerType)
 
 - **None**: 0
 - **ShieldPiercing**: 1
 - **Disruption**: 2
 - **Stagger**: 3
 
-## DestinyProgressionRewardItemAcquisitionBehavior
+Source: [Destiny.DestinyBreakerType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyBreakerType)
+
+## `DestinyProgressionRewardItemAcquisitionBehavior`
 
 Represents the different kinds of acquisition behavior for progression reward items.
-
-Source: [Destiny.DestinyProgressionRewardItemAcquisitionBehavior](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyProgressionRewardItemAcquisitionBehavior)
 
 - **Instant**: 0
 - **PlayerClaimRequired**: 1
 
-## GroupAllianceStatus
+Source: [Destiny.DestinyProgressionRewardItemAcquisitionBehavior](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyProgressionRewardItemAcquisitionBehavior)
 
-Source: [GroupsV2.GroupAllianceStatus](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupAllianceStatus)
+## `GroupAllianceStatus`
 
 - **Unallied**: 0
 - **Parent**: 1
 - **Child**: 2
 
-## GroupPotentialMemberStatus
+Source: [GroupsV2.GroupAllianceStatus](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupAllianceStatus)
 
-Source: [GroupsV2.GroupPotentialMemberStatus](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupPotentialMemberStatus)
+## `GroupPotentialMemberStatus`
 
 - **None**: 0
 - **Applicant**: 1
 - **Invitee**: 2
 
-## ForumRecruitmentIntensityLabel
+Source: [GroupsV2.GroupPotentialMemberStatus](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupPotentialMemberStatus)
 
-Source: [Forum.ForumRecruitmentIntensityLabel](https://bungie-net.github.io/#/components/schemas/Forum.ForumRecruitmentIntensityLabel)
+## `ForumRecruitmentIntensityLabel`
 
 - **None**: 0
 - **Casual**: 1
 - **Professional**: 2
 
-## ForumRecruitmentToneLabel
+Source: [Forum.ForumRecruitmentIntensityLabel](https://bungie-net.github.io/#/components/schemas/Forum.ForumRecruitmentIntensityLabel)
 
-Source: [Forum.ForumRecruitmentToneLabel](https://bungie-net.github.io/#/components/schemas/Forum.ForumRecruitmentToneLabel)
+## `ForumRecruitmentToneLabel`
 
 - **None**: 0
 - **FamilyFriendly**: 1
 - **Rowdy**: 2
 
-## ForumPostSortEnum
+Source: [Forum.ForumRecruitmentToneLabel](https://bungie-net.github.io/#/components/schemas/Forum.ForumRecruitmentToneLabel)
 
-Source: [Forum.ForumPostSortEnum](https://bungie-net.github.io/#/components/schemas/Forum.ForumPostSortEnum)
+## `ForumPostSortEnum`
 
 - **Default**: 0
 - **OldestFirst**: 1
 
-## GroupDateRange
+Source: [Forum.ForumPostSortEnum](https://bungie-net.github.io/#/components/schemas/Forum.ForumPostSortEnum)
 
-Source: [GroupsV2.GroupDateRange](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupDateRange)
+## `GroupDateRange`
 
 - **All**: 0
 - **PastDay**: 1
@@ -1170,27 +1168,27 @@ Source: [GroupsV2.GroupDateRange](https://bungie-net.github.io/#/components/sche
 - **PastMonth**: 3
 - **PastYear**: 4
 
-## GroupSortBy
+Source: [GroupsV2.GroupDateRange](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupDateRange)
 
-Source: [GroupsV2.GroupSortBy](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupSortBy)
+## `GroupSortBy`
 
 - **Name**: 0
 - **Date**: 1
 - **Popularity**: 2
 - **Id**: 3
 
-## GroupMemberCountFilter
+Source: [GroupsV2.GroupSortBy](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupSortBy)
 
-Source: [GroupsV2.GroupMemberCountFilter](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupMemberCountFilter)
+## `GroupMemberCountFilter`
 
 - **All**: 0
 - **OneToTen**: 1
 - **ElevenToOneHundred**: 2
 - **GreaterThanOneHundred**: 3
 
-## IgnoreLength
+Source: [GroupsV2.GroupMemberCountFilter](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupMemberCountFilter)
 
-Source: [Ignores.IgnoreLength](https://bungie-net.github.io/#/components/schemas/Ignores.IgnoreLength)
+## `IgnoreLength`
 
 - **None**: 0
 - **Week**: 1
@@ -1205,18 +1203,18 @@ Source: [Ignores.IgnoreLength](https://bungie-net.github.io/#/components/schemas
 - **Hour**: 10
 - **ThirtyDays**: 11
 
-## GroupApplicationResolveState
+Source: [Ignores.IgnoreLength](https://bungie-net.github.io/#/components/schemas/Ignores.IgnoreLength)
 
-Source: [GroupsV2.GroupApplicationResolveState](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupApplicationResolveState)
+## `GroupApplicationResolveState`
 
 - **Unresolved**: 0
 - **Accepted**: 1
 - **Denied**: 2
 - **Rescinded**: 3
 
-## PlatformErrorCodes
+Source: [GroupsV2.GroupApplicationResolveState](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupApplicationResolveState)
 
-Source: [Exceptions.PlatformErrorCodes](https://bungie-net.github.io/#/components/schemas/Exceptions.PlatformErrorCodes)
+## `PlatformErrorCodes`
 
 - **None**: 0
 - **Success**: 1
@@ -2058,36 +2056,36 @@ Source: [Exceptions.PlatformErrorCodes](https://bungie-net.github.io/#/component
 - **ErrorEgsJwtMalformedHeader**: 4008
 - **ErrorEgsJwtMalformedPayload**: 4009
 
-## GroupsForMemberFilter
+Source: [Exceptions.PlatformErrorCodes](https://bungie-net.github.io/#/components/schemas/Exceptions.PlatformErrorCodes)
 
-Source: [GroupsV2.GroupsForMemberFilter](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupsForMemberFilter)
+## `GroupsForMemberFilter`
 
 - **All**: 0
 - **Founded**: 1
 - **NonFounded**: 2
 
-## DropStateEnum
+Source: [GroupsV2.GroupsForMemberFilter](https://bungie-net.github.io/#/components/schemas/GroupsV2.GroupsForMemberFilter)
 
-Source: [Streaming.DropStateEnum](https://bungie-net.github.io/#/components/schemas/Streaming.DropStateEnum)
+## `DropStateEnum`
 
 - **Claimed**: 0
 - **Applied**: 1
 - **Fulfilled**: 2
 
-## ItemBindStatus
+Source: [Streaming.DropStateEnum](https://bungie-net.github.io/#/components/schemas/Streaming.DropStateEnum)
 
-Source: [Destiny.ItemBindStatus](https://bungie-net.github.io/#/components/schemas/Destiny.ItemBindStatus)
+## `ItemBindStatus`
 
 - **NotBound**: 0
 - **BoundToCharacter**: 1
 - **BoundToAccount**: 2
 - **BoundToGuild**: 3
 
-## TransferStatuses
+Source: [Destiny.ItemBindStatus](https://bungie-net.github.io/#/components/schemas/Destiny.ItemBindStatus)
+
+## `TransferStatuses`
 
 Whether you can transfer an item, and why not if you can't.
-
-Source: [Destiny.TransferStatuses](https://bungie-net.github.io/#/components/schemas/Destiny.TransferStatuses)
 
 - **CanTransfer**: 0
   > The item can be transferred.
@@ -2098,11 +2096,11 @@ Source: [Destiny.TransferStatuses](https://bungie-net.github.io/#/components/sch
 - **NoRoomInDestination**: 4
   > You could transfer the item, but the place you're trying to put it has run out of room! Check your remaining Vault and/or character space.
 
-## ItemState
+Source: [Destiny.TransferStatuses](https://bungie-net.github.io/#/components/schemas/Destiny.TransferStatuses)
+
+## `ItemState`
 
 A flags enumeration/bitmask where each bit represents a different possible state that the item can be in that may effect how the item is displayed to the user and what actions can be performed against it.
-
-Source: [Destiny.ItemState](https://bungie-net.github.io/#/components/schemas/Destiny.ItemState)
 
 - **None**: 0
 - **Locked**: 1
@@ -2116,11 +2114,11 @@ Source: [Destiny.ItemState](https://bungie-net.github.io/#/components/schemas/De
 - **HighlightedObjective**: 16
   > If this bit is set, the item has a 'highlighted' objective. You may want to represent this with an orange-red icon border color.
 
-## DestinyGameVersions
+Source: [Destiny.ItemState](https://bungie-net.github.io/#/components/schemas/Destiny.ItemState)
+
+## `DestinyGameVersions`
 
 A flags enumeration/bitmask indicating the versions of the game that a given user has purchased.
-
-Source: [Destiny.DestinyGameVersions](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyGameVersions)
 
 - **None**: 0
 - **Destiny2**: 1
@@ -2133,11 +2131,11 @@ Source: [Destiny.DestinyGameVersions](https://bungie-net.github.io/#/components/
 - **Anniversary30th**: 128
 - **TheWitchQueen**: 256
 
-## DestinyComponentType
+Source: [Destiny.DestinyGameVersions](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyGameVersions)
+
+## `DestinyComponentType`
 
 Represents the possible components that can be returned from Destiny "Get" calls such as GetProfile, GetCharacter, GetVendor etc... When making one of these requests, you will pass one or more of these components as a comma separated list in the "?components=" querystring parameter. For instance, if you want baseline Profile data, Character Data, and character progressions, you would pass "?components=Profiles,Characters,CharacterProgressions" You may use either the numerical or string values.
-
-Source: [Destiny.DestinyComponentType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyComponentType)
 
 - **None**: 0
 - **Profiles**: 100
@@ -2211,21 +2209,21 @@ Source: [Destiny.DestinyComponentType](https://bungie-net.github.io/#/components
 - **Craftables**: 1300
   > Returns summary status information about all "Craftables" aka crafting recipe items.
 
-## ComponentPrivacySetting
+Source: [Destiny.DestinyComponentType](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyComponentType)
+
+## `ComponentPrivacySetting`
 
 A set of flags for reason(s) why the component populated in the way that it did. Inspect the individual flags for the reasons.
-
-Source: [Components.ComponentPrivacySetting](https://bungie-net.github.io/#/components/schemas/Components.ComponentPrivacySetting)
 
 - **None**: 0
 - **Public**: 1
 - **Private**: 2
 
-## DestinyPresentationNodeState
+Source: [Components.ComponentPrivacySetting](https://bungie-net.github.io/#/components/schemas/Components.ComponentPrivacySetting)
+
+## `DestinyPresentationNodeState`
 
 I know this doesn't look like a Flags Enumeration/bitmask right now, but I assure you it is. This is the possible states that a Presentation Node can be in, and it is almost certain that its potential states will increase in the future. So don't treat it like a straight up enumeration.
-
-Source: [Destiny.DestinyPresentationNodeState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyPresentationNodeState)
 
 - **None**: 0
 - **Invisible**: 1
@@ -2233,11 +2231,11 @@ Source: [Destiny.DestinyPresentationNodeState](https://bungie-net.github.io/#/co
 - **Obscured**: 2
   > Turns out Presentation Nodes can also be obscured. If they are, this is set.
 
-## DestinyRecordState
+Source: [Destiny.DestinyPresentationNodeState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyPresentationNodeState)
+
+## `DestinyRecordState`
 
 A Flags enumeration/bitmask where each bit represents a possible state that a Record/Triumph can be in.
-
-Source: [Destiny.DestinyRecordState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyRecordState)
 
 - **None**: 0
   > If there are no flags set, the record is in a state where it *could* be redeemed, but it has not been yet.
@@ -2256,11 +2254,11 @@ Source: [Destiny.DestinyRecordState](https://bungie-net.github.io/#/components/s
 - **CanEquipTitle**: 64
   > If this is set, the record has a title (check DestinyRecordDefinition for title info) and you can equip it.
 
-## DestinyCollectibleState
+Source: [Destiny.DestinyRecordState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyRecordState)
+
+## `DestinyCollectibleState`
 
 A Flags Enumeration/bitmask where each bit represents a different state that the Collectible can be in. A collectible can be in any number of these states, and you can choose to use or ignore any or all of them when making your own UI that shows Collectible info. Our displays are going to honor them, but we're also the kind of people who only pretend to inhale before quickly passing it to the left. So, you know, do what you got to do. (All joking aside, please note the caveat I mention around the Invisible flag: there are cases where it is in the best interest of your users to honor these flags even if you're a "show all the data" person. Collector-oriented compulsion is a very unfortunate and real thing, and I would hate to instill that compulsion in others through showing them items that they cannot earn. Please consider this when you are making your own apps/sites.)
-
-Source: [Destiny.DestinyCollectibleState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyCollectibleState)
 
 - **None**: 0
 - **NotAcquired**: 1
@@ -2278,11 +2276,11 @@ Source: [Destiny.DestinyCollectibleState](https://bungie-net.github.io/#/compone
 - **PurchaseDisabled**: 64
   > If this flag is set, the ability to pull this item out of your collection has been disabled.
 
-## DestinyPartyMemberStates
+Source: [Destiny.DestinyCollectibleState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyCollectibleState)
+
+## `DestinyPartyMemberStates`
 
 A flags enumeration that represents a Fireteam Member's status.
-
-Source: [Destiny.DestinyPartyMemberStates](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyPartyMemberStates)
 
 - **None**: 0
 - **FireteamMember**: 1
@@ -2294,11 +2292,11 @@ Source: [Destiny.DestinyPartyMemberStates](https://bungie-net.github.io/#/compon
 - **PartyLeader**: 8
   > This person is the party leader.
 
-## DestinyGamePrivacySetting
+Source: [Destiny.DestinyPartyMemberStates](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyPartyMemberStates)
+
+## `DestinyGamePrivacySetting`
 
 A player can choose to restrict requests to join their Fireteam to specific states. These are the possible states a user can choose.
-
-Source: [Destiny.DestinyGamePrivacySetting](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyGamePrivacySetting)
 
 - **Open**: 0
 - **ClanAndFriendsOnly**: 1
@@ -2306,11 +2304,11 @@ Source: [Destiny.DestinyGamePrivacySetting](https://bungie-net.github.io/#/compo
 - **InvitationOnly**: 3
 - **Closed**: 4
 
-## DestinyJoinClosedReasons
+Source: [Destiny.DestinyGamePrivacySetting](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyGamePrivacySetting)
+
+## `DestinyJoinClosedReasons`
 
 A Flags enumeration representing the reasons why a person can't join this user's fireteam.
-
-Source: [Destiny.DestinyJoinClosedReasons](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyJoinClosedReasons)
 
 - **None**: 0
 - **InMatchmaking**: 1
@@ -2326,20 +2324,20 @@ Source: [Destiny.DestinyJoinClosedReasons](https://bungie-net.github.io/#/compon
 - **Offline**: 32768
   > The user appears to be offline.
 
-## DestinyRace
+Source: [Destiny.DestinyJoinClosedReasons](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyJoinClosedReasons)
 
-Source: [Destiny.DestinyRace](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyRace)
+## `DestinyRace`
 
 - **Human**: 0
 - **Awoken**: 1
 - **Exo**: 2
 - **Unknown**: 3
 
-## DestinyMilestoneDisplayPreference
+Source: [Destiny.DestinyRace](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyRace)
+
+## `DestinyMilestoneDisplayPreference`
 
 A hint for the UI as to what display information ought to be shown. Defaults to showing the static MilestoneDefinition's display properties.  If for some reason the indicated property is not populated, fall back to the MilestoneDefinition.displayProperties.
-
-Source: [Destiny.Definitions.Milestones.DestinyMilestoneDisplayPreference](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.Milestones.DestinyMilestoneDisplayPreference)
 
 - **MilestoneDefinition**: 0
   > Indicates you should show DestinyMilestoneDefinition.displayProperties for this Milestone.
@@ -2348,11 +2346,11 @@ Source: [Destiny.Definitions.Milestones.DestinyMilestoneDisplayPreference](https
 - **CurrentActivityChallenges**: 2
   > Indicates you should show the displayProperties for any currently active Activities and their Challenges in DestinyMilestone.activities.
 
-## DestinyMilestoneType
+Source: [Destiny.Definitions.Milestones.DestinyMilestoneDisplayPreference](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.Milestones.DestinyMilestoneDisplayPreference)
+
+## `DestinyMilestoneType`
 
 The type of milestone. Milestones can be Tutorials, one-time/triggered/non-repeating but not necessarily tutorials, or Repeating Milestones.
-
-Source: [Destiny.Definitions.Milestones.DestinyMilestoneType](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.Milestones.DestinyMilestoneType)
 
 - **Unknown**: 0
 - **Tutorial**: 1
@@ -2366,11 +2364,11 @@ Source: [Destiny.Definitions.Milestones.DestinyMilestoneType](https://bungie-net
 - **Special**: 5
   > Special indicates that the event is not on a daily/weekly cadence, but does occur more than once. For instance, Iron Banner in Destiny 1 or the Dawning were examples of what could be termed "Special" events.
 
-## DestinyActivityDifficultyTier
+Source: [Destiny.Definitions.Milestones.DestinyMilestoneType](https://bungie-net.github.io/#/components/schemas/Destiny.Definitions.Milestones.DestinyMilestoneType)
+
+## `DestinyActivityDifficultyTier`
 
 An enumeration representing the potential difficulty levels of an activity. Their names are... more qualitative than quantitative.
-
-Source: [Destiny.DestinyActivityDifficultyTier](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyActivityDifficultyTier)
 
 - **Trivial**: 0
 - **Easy**: 1
@@ -2381,11 +2379,11 @@ Source: [Destiny.DestinyActivityDifficultyTier](https://bungie-net.github.io/#/c
 - **AlmostImpossible**: 6
 - **Impossible**: 7
 
-## EquipFailureReason
+Source: [Destiny.DestinyActivityDifficultyTier](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyActivityDifficultyTier)
+
+## `EquipFailureReason`
 
 The reasons why an item cannot be equipped, if any. Many flags can be set, or "None" if
-
-Source: [Destiny.EquipFailureReason](https://bungie-net.github.io/#/components/schemas/Destiny.EquipFailureReason)
 
 - **None**: 0
   > The item is/was able to be equipped.
@@ -2400,9 +2398,9 @@ Source: [Destiny.EquipFailureReason](https://bungie-net.github.io/#/components/s
 - **ItemNotOnCharacter**: 16
   > This item can't be equipped on the character requested, because it must be in that character's inventory first. Transfer the item to the character you want to equip it before you attempt to equip it.
 
-## DestinyTalentNodeState
+Source: [Destiny.EquipFailureReason](https://bungie-net.github.io/#/components/schemas/Destiny.EquipFailureReason)
 
-Source: [Destiny.DestinyTalentNodeState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyTalentNodeState)
+## `DestinyTalentNodeState`
 
 - **Invalid**: 0
 - **CanUpgrade**: 1
@@ -2419,18 +2417,18 @@ Source: [Destiny.DestinyTalentNodeState](https://bungie-net.github.io/#/componen
 - **CreationOnly**: 12
 - **Hidden**: 13
 
-## DestinyVendorFilter
+Source: [Destiny.DestinyTalentNodeState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyTalentNodeState)
+
+## `DestinyVendorFilter`
 
 Indicates the type of filter to apply to Vendor results.
-
-Source: [Destiny.DestinyVendorFilter](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorFilter)
 
 - **None**: 0
 - **ApiPurchasable**: 1
 
-## VendorItemStatus
+Source: [Destiny.DestinyVendorFilter](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorFilter)
 
-Source: [Destiny.VendorItemStatus](https://bungie-net.github.io/#/components/schemas/Destiny.VendorItemStatus)
+## `VendorItemStatus`
 
 - **Success**: 0
 - **NoInventorySpace**: 1
@@ -2448,11 +2446,11 @@ Source: [Destiny.VendorItemStatus](https://bungie-net.github.io/#/components/sch
 - **AlreadyOwned**: 4096
 - **DisplayOnly**: 8192
 
-## DestinyVendorItemState
+Source: [Destiny.VendorItemStatus](https://bungie-net.github.io/#/components/schemas/Destiny.VendorItemStatus)
+
+## `DestinyVendorItemState`
 
 The possible states of Destiny Profile Records. IMPORTANT: Any given item can theoretically have many of these states simultaneously: as a result, this was altered to be a flags enumeration/bitmask for v3.2.0.
-
-Source: [Destiny.DestinyVendorItemState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorItemState)
 
 - **None**: 0
   > There are no augments on the item.
@@ -2495,20 +2493,20 @@ Source: [Destiny.DestinyVendorItemState](https://bungie-net.github.io/#/componen
 - **Locked**: 262144
   > This indicates that the sale item is locked.
 
-## DestinySocketArrayType
+Source: [Destiny.DestinyVendorItemState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorItemState)
+
+## `DestinySocketArrayType`
 
 If you look in the DestinyInventoryItemDefinition's "sockets" property, you'll see that there are two types of sockets: intrinsic, and "socketEntry." Unfortunately, because Intrinsic sockets are a whole separate array, it is no longer sufficient to know the index into that array to know which socket we're talking about. You have to know whether it's in the default "socketEntries" or if it's in the "intrinsic" list.
-
-Source: [Destiny.Requests.Actions.DestinySocketArrayType](https://bungie-net.github.io/#/components/schemas/Destiny.Requests.Actions.DestinySocketArrayType)
 
 - **Default**: 0
 - **Intrinsic**: 1
 
-## DestinyStatsGroupType
+Source: [Destiny.Requests.Actions.DestinySocketArrayType](https://bungie-net.github.io/#/components/schemas/Destiny.Requests.Actions.DestinySocketArrayType)
+
+## `DestinyStatsGroupType`
 
 If the enum value is > 100, it is a "special" group that cannot be queried for directly (special cases apply to when they are returned, and are not relevant in general cases)
-
-Source: [Destiny.HistoricalStats.Definitions.DestinyStatsGroupType](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType)
 
 - **None**: 0
 - **General**: 1
@@ -2524,9 +2522,9 @@ Source: [Destiny.HistoricalStats.Definitions.DestinyStatsGroupType](https://bung
   > These are only consumed and returned by GetUniqueWeaponHistory
 - **Internal**: 104
 
-## DestinyStatsCategoryType
+Source: [Destiny.HistoricalStats.Definitions.DestinyStatsGroupType](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType)
 
-Source: [Destiny.HistoricalStats.Definitions.DestinyStatsCategoryType](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyStatsCategoryType)
+## `DestinyStatsCategoryType`
 
 - **None**: 0
 - **Kills**: 1
@@ -2545,9 +2543,9 @@ Source: [Destiny.HistoricalStats.Definitions.DestinyStatsCategoryType](https://b
 - **MedalMultiKills**: 14
 - **MedalAbilities**: 15
 
-## UnitType
+Source: [Destiny.HistoricalStats.Definitions.DestinyStatsCategoryType](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyStatsCategoryType)
 
-Source: [Destiny.HistoricalStats.Definitions.UnitType](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.UnitType)
+## `UnitType`
 
 - **None**: 0
 - **Count**: 1
@@ -2577,9 +2575,9 @@ Source: [Destiny.HistoricalStats.Definitions.UnitType](https://bungie-net.github
 - **CompletionReason**: 13
   > The value is a enumeration of the Completion Reason type.
 
-## DestinyStatsMergeMethod
+Source: [Destiny.HistoricalStats.Definitions.UnitType](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.UnitType)
 
-Source: [Destiny.HistoricalStats.Definitions.DestinyStatsMergeMethod](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyStatsMergeMethod)
+## `DestinyStatsMergeMethod`
 
 - **Add**: 0
   > When collapsing multiple instances of the stat together, add the values.
@@ -2588,34 +2586,34 @@ Source: [Destiny.HistoricalStats.Definitions.DestinyStatsMergeMethod](https://bu
 - **Max**: 2
   > When collapsing multiple instances of the stat together, take the higher value.
 
-## PeriodType
+Source: [Destiny.HistoricalStats.Definitions.DestinyStatsMergeMethod](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyStatsMergeMethod)
 
-Source: [Destiny.HistoricalStats.Definitions.PeriodType](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.PeriodType)
+## `PeriodType`
 
 - **None**: 0
 - **Daily**: 1
 - **AllTime**: 2
 - **Activity**: 3
 
-## AwaType
+Source: [Destiny.HistoricalStats.Definitions.PeriodType](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.PeriodType)
 
-Source: [Destiny.Advanced.AwaType](https://bungie-net.github.io/#/components/schemas/Destiny.Advanced.AwaType)
+## `AwaType`
 
 - **None**: 0
 - **InsertPlugs**: 1
   > Insert plugs into sockets.
 
-## AwaUserSelection
+Source: [Destiny.Advanced.AwaType](https://bungie-net.github.io/#/components/schemas/Destiny.Advanced.AwaType)
 
-Source: [Destiny.Advanced.AwaUserSelection](https://bungie-net.github.io/#/components/schemas/Destiny.Advanced.AwaUserSelection)
+## `AwaUserSelection`
 
 - **None**: 0
 - **Rejected**: 1
 - **Approved**: 2
 
-## AwaResponseReason
+Source: [Destiny.Advanced.AwaUserSelection](https://bungie-net.github.io/#/components/schemas/Destiny.Advanced.AwaUserSelection)
 
-Source: [Destiny.Advanced.AwaResponseReason](https://bungie-net.github.io/#/components/schemas/Destiny.Advanced.AwaResponseReason)
+## `AwaResponseReason`
 
 - **None**: 0
 - **Answered**: 1
@@ -2625,19 +2623,19 @@ Source: [Destiny.Advanced.AwaResponseReason](https://bungie-net.github.io/#/comp
 - **Replaced**: 3
   > This request was replaced by another request.
 
-## CommunityContentSortMode
+Source: [Destiny.Advanced.AwaResponseReason](https://bungie-net.github.io/#/components/schemas/Destiny.Advanced.AwaResponseReason)
 
-Source: [Forum.CommunityContentSortMode](https://bungie-net.github.io/#/components/schemas/Forum.CommunityContentSortMode)
+## `CommunityContentSortMode`
 
 - **Trending**: 0
 - **Latest**: 1
 - **HighestRated**: 2
 
-## TrendingEntryType
+Source: [Forum.CommunityContentSortMode](https://bungie-net.github.io/#/components/schemas/Forum.CommunityContentSortMode)
+
+## `TrendingEntryType`
 
 The known entity types that you can have returned from Trending.
-
-Source: [Trending.TrendingEntryType](https://bungie-net.github.io/#/components/schemas/Trending.TrendingEntryType)
 
 - **News**: 0
 - **DestinyItem**: 1
@@ -2652,9 +2650,9 @@ Source: [Trending.TrendingEntryType](https://bungie-net.github.io/#/components/s
 - **Container**: 10
 - **Release**: 11
 
-## FireteamDateRange
+Source: [Trending.TrendingEntryType](https://bungie-net.github.io/#/components/schemas/Trending.TrendingEntryType)
 
-Source: [Fireteam.FireteamDateRange](https://bungie-net.github.io/#/components/schemas/Fireteam.FireteamDateRange)
+## `FireteamDateRange`
 
 - **All**: 0
 - **Now**: 1
@@ -2662,9 +2660,9 @@ Source: [Fireteam.FireteamDateRange](https://bungie-net.github.io/#/components/s
 - **FortyEightHours**: 3
 - **ThisWeek**: 4
 
-## FireteamPlatform
+Source: [Fireteam.FireteamDateRange](https://bungie-net.github.io/#/components/schemas/Fireteam.FireteamDateRange)
 
-Source: [Fireteam.FireteamPlatform](https://bungie-net.github.io/#/components/schemas/Fireteam.FireteamPlatform)
+## `FireteamPlatform`
 
 - **Any**: 0
 - **Playstation4**: 1
@@ -2674,25 +2672,25 @@ Source: [Fireteam.FireteamPlatform](https://bungie-net.github.io/#/components/sc
 - **Stadia**: 5
 - **Egs**: 6
 
-## FireteamPublicSearchOption
+Source: [Fireteam.FireteamPlatform](https://bungie-net.github.io/#/components/schemas/Fireteam.FireteamPlatform)
 
-Source: [Fireteam.FireteamPublicSearchOption](https://bungie-net.github.io/#/components/schemas/Fireteam.FireteamPublicSearchOption)
+## `FireteamPublicSearchOption`
 
 - **PublicAndPrivate**: 0
 - **PublicOnly**: 1
 - **PrivateOnly**: 2
 
-## FireteamSlotSearch
+Source: [Fireteam.FireteamPublicSearchOption](https://bungie-net.github.io/#/components/schemas/Fireteam.FireteamPublicSearchOption)
 
-Source: [Fireteam.FireteamSlotSearch](https://bungie-net.github.io/#/components/schemas/Fireteam.FireteamSlotSearch)
+## `FireteamSlotSearch`
 
 - **NoSlotRestriction**: 0
 - **HasOpenPlayerSlots**: 1
 - **HasOpenPlayerOrAltSlots**: 2
 
-## FireteamPlatformInviteResult
+Source: [Fireteam.FireteamSlotSearch](https://bungie-net.github.io/#/components/schemas/Fireteam.FireteamSlotSearch)
 
-Source: [Fireteam.FireteamPlatformInviteResult](https://bungie-net.github.io/#/components/schemas/Fireteam.FireteamPlatformInviteResult)
+## `FireteamPlatformInviteResult`
 
 - **None**: 0
 - **Success**: 1
@@ -2700,33 +2698,33 @@ Source: [Fireteam.FireteamPlatformInviteResult](https://bungie-net.github.io/#/c
 - **Throttled**: 3
 - **ServiceError**: 4
 
-## PresenceStatus
+Source: [Fireteam.FireteamPlatformInviteResult](https://bungie-net.github.io/#/components/schemas/Fireteam.FireteamPlatformInviteResult)
 
-Source: [Social.Friends.PresenceStatus](https://bungie-net.github.io/#/components/schemas/Social.Friends.PresenceStatus)
+## `PresenceStatus`
 
 - **OfflineOrUnknown**: 0
 - **Online**: 1
 
-## PresenceOnlineStateFlags
+Source: [Social.Friends.PresenceStatus](https://bungie-net.github.io/#/components/schemas/Social.Friends.PresenceStatus)
 
-Source: [Social.Friends.PresenceOnlineStateFlags](https://bungie-net.github.io/#/components/schemas/Social.Friends.PresenceOnlineStateFlags)
+## `PresenceOnlineStateFlags`
 
 - **None**: 0
 - **Destiny1**: 1
 - **Destiny2**: 2
 
-## FriendRelationshipState
+Source: [Social.Friends.PresenceOnlineStateFlags](https://bungie-net.github.io/#/components/schemas/Social.Friends.PresenceOnlineStateFlags)
 
-Source: [Social.Friends.FriendRelationshipState](https://bungie-net.github.io/#/components/schemas/Social.Friends.FriendRelationshipState)
+## `FriendRelationshipState`
 
 - **Unknown**: 0
 - **Friend**: 1
 - **IncomingRequest**: 2
 - **OutgoingRequest**: 3
 
-## PlatformFriendType
+Source: [Social.Friends.FriendRelationshipState](https://bungie-net.github.io/#/components/schemas/Social.Friends.FriendRelationshipState)
 
-Source: [Social.Friends.PlatformFriendType](https://bungie-net.github.io/#/components/schemas/Social.Friends.PlatformFriendType)
+## `PlatformFriendType`
 
 - **Unknown**: 0
 - **Xbox**: 1
@@ -2734,9 +2732,9 @@ Source: [Social.Friends.PlatformFriendType](https://bungie-net.github.io/#/compo
 - **Steam**: 3
 - **Egs**: 4
 
-## OptInFlags
+Source: [Social.Friends.PlatformFriendType](https://bungie-net.github.io/#/components/schemas/Social.Friends.PlatformFriendType)
 
-Source: [User.OptInFlags](https://bungie-net.github.io/#/components/schemas/User.OptInFlags)
+## `OptInFlags`
 
 - **None**: 0
 - **Newsletter**: 1
@@ -2749,18 +2747,20 @@ Source: [User.OptInFlags](https://bungie-net.github.io/#/components/schemas/User
 - **PlayTestsLocal**: 128
 - **Careers**: 256
 
-## GlobalAlertLevel
+Source: [User.OptInFlags](https://bungie-net.github.io/#/components/schemas/User.OptInFlags)
 
-Source: [GlobalAlertLevel](https://bungie-net.github.io/#/components/schemas/GlobalAlertLevel)
+## `GlobalAlertLevel`
 
 - **Unknown**: 0
 - **Blue**: 1
 - **Yellow**: 2
 - **Red**: 3
 
-## GlobalAlertType
+Source: [GlobalAlertLevel](https://bungie-net.github.io/#/components/schemas/GlobalAlertLevel)
 
-Source: [GlobalAlertType](https://bungie-net.github.io/#/components/schemas/GlobalAlertType)
+## `GlobalAlertType`
 
 - **GlobalAlert**: 0
 - **StreamingAlert**: 1
+
+Source: [GlobalAlertType](https://bungie-net.github.io/#/components/schemas/GlobalAlertType)

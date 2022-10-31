@@ -6,10 +6,12 @@ import { readFileSync, writeFileSync } from 'node:fs'
  * Reserved identifiers for supporting class exports.
  */
 const reservedIdentifiers = [
-  'BungieToken',
-  'BungieError',
-  'BungiePlatformError',
-  'BungieApi'
+  'bungietoken',
+  'bungieerror',
+  'bungieplatformerror',
+  'bungieapi',
+  'body',
+  'searchparams'
 ]
 
 /**
@@ -22,7 +24,7 @@ function check (value) {
   if (!/^[a-z][a-z0-9]*$/i.test(value)) {
     throw new TypeError(`Invalid identifier name: ${value}`)
   }
-  if (reservedIdentifiers.includes(value)) {
+  if (reservedIdentifiers.includes(value.toLowerCase())) {
     throw new Error(`Reserved identifier: ${value}`)
   }
   return value
@@ -50,6 +52,73 @@ function stripCRLF (value) {
 }
 
 /**
+ * Compile JSDoc argument identifier.
+ */
+function compileJSDocArgumentType (arg) {
+  if (arg.identifier === 'searchParams' || arg.identifier === 'body') {
+    return '{Object}'
+  } else if (arg.enum) {
+    return '{number}'
+  } else if (arg.schema.type === 'boolean') {
+    return '{boolean}'
+  } else {
+    return '{string|number}'
+  }
+}
+
+/**
+ * Compile JavaScript argument identifier with its initializer.
+ */
+function compileJavaScriptArgument (arg) {
+  if (arg.identifier === 'searchParams' || arg.identifier === 'body') {
+    return `${arg.identifier} = {}`
+  } else {
+    return arg.identifier
+  }
+}
+
+/**
+ * Compile valid Markdown docs for an argument.
+ */
+function compileJSDocArgument (arg) {
+  if (arg.identifier === 'searchParams' || arg.identifier === 'body') {
+    return `[${arg.identifier}]`
+  } else {
+    return `${arg.identifier}`
+  }
+}
+
+/**
+ * Compile valid Markdown docs for an argument's type.
+ */
+function compileMarkdownArgumentType (arg) {
+  if (arg.identifier === 'searchParams' || arg.identifier === 'body') {
+    return '`<Object>`'
+  } else if (arg.enum) {
+    return '`<number>`'
+  } else if (arg.schema.type === 'boolean') {
+    return '`<boolean>`'
+  } else {
+    return '`<string>` | `<number>`'
+  }
+}
+
+/**
+ * Compile TypeScript argument declaration.
+ */
+function compileTypeScriptArgument (arg) {
+  if (arg.identifier === 'searchParams' || arg.identifier === 'body') {
+    return `${arg.identifier}?: object`
+  } else if (arg.enum) {
+    return `${arg.identifier}: number`
+  } else if (arg.schema.type === 'boolean') {
+    return `${arg.identifier}: boolean`
+  } else {
+    return `${arg.identifier}: number | string`
+  }
+}
+
+/**
  * Read, compile, and write an EJS template.
  */
 function compile (sourceFile, targetFile, context = {}) {
@@ -57,7 +126,14 @@ function compile (sourceFile, targetFile, context = {}) {
     targetFile,
     ejs.render(
       readFileSync(sourceFile, 'utf8'),
-      context
+      {
+        ...context,
+        compileJavaScriptArgument,
+        compileJSDocArgument,
+        compileJSDocArgumentType,
+        compileMarkdownArgumentType,
+        compileTypeScriptArgument
+      }
     )
   )
 }
@@ -127,6 +203,7 @@ function pushMethod (tag, options) {
   let obj = context.components.find(item => item.tag === tag)
   if (!obj) {
     obj = {
+      key: camelCase(tag),
       tag,
       identifier: check(pascalCase(tag)),
       methods: []
@@ -136,20 +213,31 @@ function pushMethod (tag, options) {
   obj.methods.push(options)
 }
 
-function ensureEnum (identifier) {
-  if (identifier) {
-    if (!context.enums.some(item => item.identifier === identifier)) {
-      throw new Error(`Enum not found: ${identifier}`)
-    }
-  }
-  return identifier
-}
-
 /**
  * Inject string template variable inside a Swagger URL path.
  */
 function injectUrlArgument (path, identifier) {
   return path.replace(new RegExp(`\\{${identifier}\\}`), '${' + identifier + '}')
+}
+
+const validUrlTypes = ['boolean', 'integer', 'number', 'string']
+
+function parseSwaggerPathArgument (item) {
+  const enumIdentifier = extractEnumIdentifier(item.schema)
+  if (enumIdentifier) {
+    if (!context.enums.some(item => item.identifier === enumIdentifier)) {
+      throw new Error(`Enum not found: ${enumIdentifier}`)
+    }
+  }
+  if (!validUrlTypes.includes(item.schema.type)) {
+    throw new Error(`Unexpected URL parameter type for ${item.name}`)
+  }
+  return {
+    identifier: check(item.name),
+    description: stripCRLF(item.description),
+    schema: item.schema,
+    enum: enumIdentifier
+  }
 }
 
 function parseSwaggerRoute (path, method, options) {
@@ -165,15 +253,7 @@ function parseSwaggerRoute (path, method, options) {
     )
   )
 
-  const args = sortedParams.map(item => ({
-    identifier: check(item.name),
-    // type: item.schema.type,
-    enum: ensureEnum(extractEnumIdentifier(item.schema)),
-    description: stripCRLF(item.description),
-    _js: item.name,
-    _md: item.name,
-    _ts: `${item.name}: number | string`
-  }))
+  const args = sortedParams.map(parseSwaggerPathArgument)
 
   const hasSearchParams = options.parameters.some(
     item => item.in === 'query'
@@ -182,9 +262,7 @@ function parseSwaggerRoute (path, method, options) {
     args.push({
       identifier: 'searchParams',
       description: 'Request querystring parameters object.',
-      _js: 'searchParams = {}',
-      _md: '[searchParams]',
-      _ts: 'searchParams?: object'
+      schema: { type: 'object' }
     })
   }
 
@@ -193,9 +271,7 @@ function parseSwaggerRoute (path, method, options) {
     args.push({
       identifier: 'body',
       description: 'Request body object.',
-      _js: 'body = {}',
-      _md: '[body]',
-      _ts: 'body?: object'
+      schema: { type: 'object' }
     })
   }
 

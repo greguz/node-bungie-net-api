@@ -1,13 +1,11 @@
 # Enums
 <%_ for (const obj of enums) { _%>
 
-## <%- obj.identifier %>
+## `<%- obj.identifier %>`
   <%_ if (obj.description) { _%>
 
 <%- obj.description %>
   <%_ } _%>
-
-Source: [<%- obj.name %>](https://bungie-net.github.io/#/components/schemas/<%- obj.name %>)
 
   <%_ for (const item of obj.items) { _%>
 - **<%- item.key %>**: <%- item.value %>
@@ -15,4 +13,6 @@ Source: [<%- obj.name %>](https://bungie-net.github.io/#/components/schemas/<%- 
   > <%- item.description %>
     <%_ } _%>
   <%_ } _%>
+
+Source: [<%- obj.name %>](https://bungie-net.github.io/#/components/schemas/<%- obj.name %>)
 <%_ } _%>

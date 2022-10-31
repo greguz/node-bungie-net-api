@@ -1,94 +1,106 @@
 # Tokens
 
-## forceDropsRepair([body])
+These methods can be accessed from `tokens` property of a `BungieApi` instance.
+
+```javascript
+import { BungieApi } from 'bungie.net'
+
+// Create the root API instance
+const api = new BungieApi(options)
+
+// Access the method
+await api.tokens.forceDropsRepair(body)
+```
+
+## `forceDropsRepair([body])`
 
 Twitch Drops self-repair function - scans twitch for drops not marked as fulfilled and resyncs them.
 
-- `[body]` `<*>` Request body object.
+- `[body]` `<Object>` Request body object.
 - Returns: `<Promise>`
 
-URL: `POST /Tokens/Partner/ForceDropsRepair/`
+URL: `POST /Platform/Tokens/Partner/ForceDropsRepair/`
 
 Source: [Tokens.ForceDropsRepair](https://bungie-net.github.io/#Tokens.ForceDropsRepair)
 
-## claimPartnerOffer([body])
+## `claimPartnerOffer([body])`
 
 Claim a partner offer as the authenticated user.
 
-- `[body]` `<*>` Request body object.
+- `[body]` `<Object>` Request body object.
 - Returns: `<Promise>`
 
-URL: `POST /Tokens/Partner/ClaimOffer/`
+URL: `POST /Platform/Tokens/Partner/ClaimOffer/`
 
 Source: [Tokens.ClaimPartnerOffer](https://bungie-net.github.io/#Tokens.ClaimPartnerOffer)
 
-## applyMissingPartnerOffersWithoutClaim(partnerApplicationId, targetBnetMembershipId, [body])
+## `applyMissingPartnerOffersWithoutClaim(partnerApplicationId, targetBnetMembershipId, [body])`
 
 Apply a partner offer to the targeted user. This endpoint does not claim a new offer, but any already claimed offers will be applied to the game if not already.
 
-- `partnerApplicationId` `<*>` The partner application identifier.
-- `targetBnetMembershipId` `<*>` The bungie.net user to apply missing offers to. If not self, elevated permissions are required.
-- `[body]` `<*>` Request body object.
+- `partnerApplicationId` `<string>` | `<number>` The partner application identifier.
+- `targetBnetMembershipId` `<string>` | `<number>` The bungie.net user to apply missing offers to. If not self, elevated permissions are required.
+- `[body]` `<Object>` Request body object.
 - Returns: `<Promise>`
 
-URL: `POST /Tokens/Partner/ApplyMissingOffers/{partnerApplicationId}/{targetBnetMembershipId}/`
+URL: `POST /Platform/Tokens/Partner/ApplyMissingOffers/{partnerApplicationId}/{targetBnetMembershipId}/`
 
 Source: [Tokens.ApplyMissingPartnerOffersWithoutClaim](https://bungie-net.github.io/#Tokens.ApplyMissingPartnerOffersWithoutClaim)
 
-## getPartnerOfferSkuHistory(partnerApplicationId, targetBnetMembershipId)
+## `getPartnerOfferSkuHistory(partnerApplicationId, targetBnetMembershipId)`
 
 Returns the partner sku and offer history of the targeted user. Elevated permissions are required to see users that are not yourself.
 
-- `partnerApplicationId` `<*>` The partner application identifier.
-- `targetBnetMembershipId` `<*>` The bungie.net user to apply missing offers to. If not self, elevated permissions are required.
+- `partnerApplicationId` `<string>` | `<number>` The partner application identifier.
+- `targetBnetMembershipId` `<string>` | `<number>` The bungie.net user to apply missing offers to. If not self, elevated permissions are required.
 - Returns: `<Promise>`
 
-URL: `GET /Tokens/Partner/History/{partnerApplicationId}/{targetBnetMembershipId}/`
+URL: `GET /Platform/Tokens/Partner/History/{partnerApplicationId}/{targetBnetMembershipId}/`
 
 Source: [Tokens.GetPartnerOfferSkuHistory](https://bungie-net.github.io/#Tokens.GetPartnerOfferSkuHistory)
 
-## getPartnerRewardHistory(targetBnetMembershipId, partnerApplicationId)
+## `getPartnerRewardHistory(targetBnetMembershipId, partnerApplicationId)`
 
 Returns the partner rewards history of the targeted user, both partner offers and Twitch drops.
 
-- `targetBnetMembershipId` `<*>` The bungie.net user to return reward history for.
-- `partnerApplicationId` `<*>` The partner application identifier.
+- `targetBnetMembershipId` `<string>` | `<number>` The bungie.net user to return reward history for.
+- `partnerApplicationId` `<string>` | `<number>` The partner application identifier.
 - Returns: `<Promise>`
 
-URL: `GET /Tokens/Partner/History/{targetBnetMembershipId}/Application/{partnerApplicationId}/`
+URL: `GET /Platform/Tokens/Partner/History/{targetBnetMembershipId}/Application/{partnerApplicationId}/`
 
 Source: [Tokens.GetPartnerRewardHistory](https://bungie-net.github.io/#Tokens.GetPartnerRewardHistory)
 
-## getBungieRewardsForUser(membershipId)
+## `getBungieRewardsForUser(membershipId)`
 
 Returns the bungie rewards for the targeted user.
 
-- `membershipId` `<*>` bungie.net user membershipId for requested user rewards. If not self, elevated permissions are required.
+- `membershipId` `<string>` | `<number>` bungie.net user membershipId for requested user rewards. If not self, elevated permissions are required.
 - Returns: `<Promise>`
 
-URL: `GET /Tokens/Rewards/GetRewardsForUser/{membershipId}/`
+URL: `GET /Platform/Tokens/Rewards/GetRewardsForUser/{membershipId}/`
 
 Source: [Tokens.GetBungieRewardsForUser](https://bungie-net.github.io/#Tokens.GetBungieRewardsForUser)
 
-## getBungieRewardsForPlatformUser(membershipId, membershipType)
+## `getBungieRewardsForPlatformUser(membershipId, membershipType)`
 
 Returns the bungie rewards for the targeted user when a platform membership Id and Type are used.
 
-- `membershipId` `<*>` users platform membershipId for requested user rewards. If not self, elevated permissions are required.
-- `membershipType` `<*>` The target Destiny 2 membership type.
+- `membershipId` `<string>` | `<number>` users platform membershipId for requested user rewards. If not self, elevated permissions are required.
+- `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. The target Destiny 2 membership type.
 - Returns: `<Promise>`
 
-URL: `GET /Tokens/Rewards/GetRewardsForPlatformUser/{membershipId}/{membershipType}/`
+URL: `GET /Platform/Tokens/Rewards/GetRewardsForPlatformUser/{membershipId}/{membershipType}/`
 
 Source: [Tokens.GetBungieRewardsForPlatformUser](https://bungie-net.github.io/#Tokens.GetBungieRewardsForPlatformUser)
 
-## getBungieRewardsList()
+## `getBungieRewardsList()`
 
 Returns a list of the current bungie rewards
 
 - Returns: `<Promise>`
 
-URL: `GET /Tokens/Rewards/BungieRewards/`
+URL: `GET /Platform/Tokens/Rewards/BungieRewards/`
 
 Source: [Tokens.GetBungieRewardsList](https://bungie-net.github.io/#Tokens.GetBungieRewardsList)
 

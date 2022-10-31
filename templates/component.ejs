@@ -14,16 +14,26 @@ export class <%- identifier %> {
    * @see https://bungie-net.github.io/#<%- method.swagger.operationId %>
    *
   <%_ for (const arg of method.arguments) { _%>
-   * @param {*} <%- arg.identifier %> <%- arg.description %>
+   * @param <%- compileJSDocArgumentType(arg) %> <%- compileJSDocArgument(arg) %> <%- arg.description %>
   <%_ } _%>
    * @returns {Promise}
    */
-  <%- method.identifier %> (<%- method.arguments.map(item => item._js).join(', ') %>) {
+  <%- method.identifier %> (<%- method.arguments.map(compileJavaScriptArgument).join(', ') %>) {
   <%_ for (const arg of method.arguments) { _%>
-    <%_ if (arg.enum) { _%>
+    <%_ if (arg.identifier === 'searchParams' || arg.identifier === 'body') { _%>
+    if (typeof <%- arg.identifier %> !== 'object' || <%- arg.identifier %> === null) {
+      throw new TypeError('Parameter <%- arg.identifier %> must be an object')
+    }
+    <%_ } else if (arg.enum) { _%>
     validateEnum(<%- arg.identifier %>, enums.<%- arg.enum %>)
+    <%_ } else if (arg.schema.type === 'boolean') { _%>
+    if (typeof <%- arg.identifier %> !== 'boolean') {
+      throw new TypeError('Parameter <%- arg.identifier %> must be a boolean')
+    }
     <%_ } else { _%>
-    // TODO: check <%- arg.identifier %>
+    if (typeof <%- arg.identifier %> !== 'number' && typeof <%- arg.identifier %> !== 'string') {
+      throw new TypeError('Parameter <%- arg.identifier %> must be a string or a number')
+    }
     <%_ } _%>
   <%_ } _%>
     return this._api.requestPlatform({

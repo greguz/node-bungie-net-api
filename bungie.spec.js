@@ -4,7 +4,7 @@ import nock from 'nock'
 
 import { BungieApi } from './bungie.js'
 
-test('BungieApi oauth', async t => {
+test('BungieApi OAuth', async t => {
   const api = new BungieApi({
     apiKey: 'myapikey',
     clientId: 'myclientid',
@@ -67,4 +67,56 @@ test('BungieApi oauth', async t => {
   t.is(api.refreshToken.raw, 'tGzv3JOkF0XG5Qx2TlKWIA')
 
   t.true(api.authorized)
+})
+
+test('BungieApi Platform Refresh', async t => {
+  const api = new BungieApi({
+    apiKey: 'myapikey',
+    clientId: 'myclientid',
+    clientSecret: 'myclientsecret',
+    refreshToken: 'myrefreshtoken'
+  })
+
+  const scope = nock(api.url)
+
+  scope
+    .post('/platform/app/oauth/token', 'grant_type=refresh_token&refresh_token=myrefreshtoken')
+    .reply(200, {
+      token_type: 'Bearer',
+      access_token: 'myaccesstoken',
+      expires_in: 3600
+    })
+
+  scope
+    .get('/Platform/User/GetMembershipsForCurrentUser/')
+    .reply(400, {
+      ErrorCode: 15,
+      ErrorStatus: 'ValidationError',
+      Message: 'Invalid request payload'
+    })
+
+  t.falsy(api.accessToken)
+
+  const err = await t.throwsAsync(
+    () => api.user.getMembershipDataForCurrentUser(),
+    { code: 'BUNGIE_PLATFORM_ERROR' }
+  )
+  t.is(err.bungieCode, 15)
+  t.is(err.bungieStatus, 'ValidationError')
+  t.is(err.message, 'Invalid request payload')
+  t.is(err.statusCode, 400)
+
+  t.is(api.accessToken.raw, 'myaccesstoken')
+
+  scope
+    .get('/Platform/User/GetMembershipsForCurrentUser/')
+    .reply(400, {
+      ErrorCode: 1,
+      Response: {
+        hello: 'world'
+      }
+    })
+
+  const response = await api.user.getMembershipDataForCurrentUser()
+  t.deepEqual(response, { hello: 'world' })
 })
