@@ -1,122 +1,28 @@
 import camelCase from 'camelcase'
 import ejs from 'ejs'
 import { readFileSync, writeFileSync } from 'node:fs'
+import pascalCase from 'pascalcase'
 
-/**
- * Reserved identifiers for supporting class exports.
- */
-const reservedIdentifiers = [
-  'bungietoken',
-  'bungieerror',
-  'bungieplatformerror',
-  'bungieapi',
-  'body',
-  'searchparams'
-]
-
-/**
- * Check if the value is a valid (safe) identifier for raw JavaScript code (without escaping).
- */
-function check (value) {
-  if (typeof value !== 'string') {
-    throw new TypeError(`Expected a string: ${value}`)
-  }
-  if (!/^[a-z][a-z0-9]*$/i.test(value)) {
-    throw new TypeError(`Invalid identifier name: ${value}`)
-  }
-  if (reservedIdentifiers.includes(value.toLowerCase())) {
-    throw new Error(`Reserved identifier: ${value}`)
-  }
-  return value
-}
-
-/**
- * Cast in PascalCase a string.
- */
-function pascalCase (text) {
-  text = camelCase(text)
-  if (text.length <= 0) {
-    return text
-  } else {
-    return text[0].toUpperCase() + text.substring(1)
-  }
-}
-
-/**
- * Make a text single-lined.
- */
-function stripCRLF (value) {
-  return typeof value === 'string'
-    ? value.replace(/[\n\r]+/g, ' ')
-    : ''
-}
-
-/**
- * Compile JSDoc argument identifier.
- */
-function compileJSDocArgumentType (arg) {
-  if (arg.identifier === 'searchParams' || arg.identifier === 'body') {
-    return '{Object}'
-  } else if (arg.enum) {
-    return '{number}'
-  } else if (arg.schema.type === 'boolean') {
-    return '{boolean}'
-  } else {
-    return '{string|number}'
-  }
-}
-
-/**
- * Compile JavaScript argument identifier with its initializer.
- */
-function compileJavaScriptArgument (arg) {
-  if (arg.identifier === 'searchParams' || arg.identifier === 'body') {
-    return `${arg.identifier} = {}`
-  } else {
-    return arg.identifier
-  }
-}
-
-/**
- * Compile valid Markdown docs for an argument.
- */
-function compileJSDocArgument (arg) {
-  if (arg.identifier === 'searchParams' || arg.identifier === 'body') {
-    return `[${arg.identifier}]`
-  } else {
-    return `${arg.identifier}`
-  }
-}
-
-/**
- * Compile valid Markdown docs for an argument's type.
- */
-function compileMarkdownArgumentType (arg) {
-  if (arg.identifier === 'searchParams' || arg.identifier === 'body') {
-    return '`<Object>`'
-  } else if (arg.enum) {
-    return '`<number>`'
-  } else if (arg.schema.type === 'boolean') {
-    return '`<boolean>`'
-  } else {
-    return '`<string>` | `<number>`'
-  }
-}
-
-/**
- * Compile TypeScript argument declaration.
- */
-function compileTypeScriptArgument (arg) {
-  if (arg.identifier === 'searchParams' || arg.identifier === 'body') {
-    return `${arg.identifier}?: object`
-  } else if (arg.enum) {
-    return `${arg.identifier}: number`
-  } else if (arg.schema.type === 'boolean') {
-    return `${arg.identifier}: boolean`
-  } else {
-    return `${arg.identifier}: number | string`
-  }
-}
+import { compileJavaScriptArgument } from './compile/javascript.js'
+import { compileJSDocArgument } from './compile/jsdoc.js'
+import {
+  compileMarkdownArgument,
+  compileMarkdownIdentifier
+} from './compile/markdown.js'
+import {
+  compileInterfaceIdentifier,
+  compileTypeScriptArgument,
+  compileTypeScriptType
+} from './compile/typescript.js'
+import {
+  getEnumIdentifier,
+  getReferenceIdentifier,
+  isObjectLikeSchema,
+  iterateSchemaProperties,
+  resolveSchema,
+  stripCRLF,
+  validateIdentifier
+} from './compile/util.js'
 
 /**
  * Read, compile, and write an EJS template.
@@ -128,11 +34,16 @@ function compile (sourceFile, targetFile, context = {}) {
       readFileSync(sourceFile, 'utf8'),
       {
         ...context,
+        compileInterfaceIdentifier,
         compileJavaScriptArgument,
         compileJSDocArgument,
-        compileJSDocArgumentType,
-        compileMarkdownArgumentType,
-        compileTypeScriptArgument
+        compileMarkdownArgument: compileMarkdownArgument.bind(null, swagger),
+        compileMarkdownIdentifier,
+        compileTypeScriptArgument: compileTypeScriptArgument.bind(null, swagger),
+        compileTypeScriptType: compileTypeScriptType.bind(null, swagger),
+        isObjectLikeSchema,
+        iterateSchemaProperties: iterateSchemaProperties.bind(null, swagger),
+        stripCRLF
       }
     )
   )
@@ -154,17 +65,20 @@ function * getPathParameters (path) {
   const regex = /\{(\w+)\}/gi
   let matched = regex.exec(path)
   while (matched) {
-    yield check(matched[1])
+    yield validateIdentifier(matched[1])
     matched = regex.exec(path)
   }
 }
 
 /**
- * Cast enum name from Swagger operationId.
+ *
  */
-function getEnumIdentifier (operationId) {
-  // return check(operationId.replace(/\W+/g, ''))
-  return check(operationId.split('.').reverse()[0])
+function resolveEnumIdentifier (ref) {
+  const identifier = getEnumIdentifier(getReferenceIdentifier(ref))
+  if (!context.enums.some(item => item.identifier === identifier)) {
+    throw new Error(`Enum not found: ${identifier}`)
+  }
+  return identifier
 }
 
 /**
@@ -172,11 +86,8 @@ function getEnumIdentifier (operationId) {
  */
 function extractEnumIdentifier (schema) {
   const ref = Object(Object(schema)['x-enum-reference']).$ref
-  if (typeof ref === 'string') {
-    const match = ref.match(/^#\/components\/schemas\/(.+)/)
-    if (match) {
-      return getEnumIdentifier(match[1])
-    }
+  if (ref) {
+    return resolveEnumIdentifier(ref)
   }
 }
 
@@ -205,7 +116,7 @@ function pushMethod (tag, options) {
     obj = {
       key: camelCase(tag),
       tag,
-      identifier: check(pascalCase(tag)),
+      identifier: validateIdentifier(pascalCase(tag)),
       methods: []
     }
     context.components.push(obj)
@@ -224,19 +135,21 @@ const validUrlTypes = ['boolean', 'integer', 'number', 'string']
 
 function parseSwaggerPathArgument (item) {
   const enumIdentifier = extractEnumIdentifier(item.schema)
-  if (enumIdentifier) {
-    if (!context.enums.some(item => item.identifier === enumIdentifier)) {
-      throw new Error(`Enum not found: ${enumIdentifier}`)
-    }
-  }
   if (!validUrlTypes.includes(item.schema.type)) {
     throw new Error(`Unexpected URL parameter type for ${item.name}`)
   }
   return {
-    identifier: check(item.name),
     description: stripCRLF(item.description),
-    schema: item.schema,
-    enum: enumIdentifier
+    enum: enumIdentifier,
+    identifier: validateIdentifier(item.name),
+    required: true,
+    schema: item.schema
+  }
+}
+
+function getBodySchema (options) {
+  if (options.requestBody?.content?.['application/json']?.schema) {
+    return resolveSchema(swagger, options.requestBody?.content?.['application/json']?.schema)
   }
 }
 
@@ -253,36 +166,49 @@ function parseSwaggerRoute (path, method, options) {
     )
   )
 
-  const args = sortedParams.map(parseSwaggerPathArgument)
+  const urlArgs = sortedParams.map(parseSwaggerPathArgument)
 
-  const hasSearchParams = options.parameters.some(
-    item => item.in === 'query'
-  )
-  if (hasSearchParams) {
-    args.push({
-      identifier: 'searchParams',
+  const qsArgs = options.parameters.filter(item => item.in === 'query')
+  if (qsArgs.length > 0) {
+    urlArgs.push({
       description: 'Request querystring parameters object.',
-      schema: { type: 'object' }
+      identifier: 'searchParams',
+      required: false,
+      schema: {
+        type: 'object',
+        additionalProperties: false,
+        properties: qsArgs.reduce(
+          (acc, arg) => {
+            acc[arg.name] = {
+              description: arg.description,
+              ...arg.schema
+            }
+            return acc
+          },
+          {}
+        )
+      }
     })
   }
 
-  const hasBody = method === 'POST'
-  if (hasBody) {
-    args.push({
-      identifier: 'body',
+  const bodySchema = getBodySchema(options)
+  if (bodySchema) {
+    urlArgs.push({
       description: 'Request body object.',
-      schema: { type: 'object' }
+      identifier: 'body',
+      required: false,
+      schema: bodySchema
     })
   }
 
-  const url = args.reduce(
+  const url = urlArgs.reduce(
     (acc, arg) => injectUrlArgument(acc, arg.identifier),
     path
   )
 
   pushMethod(tag, {
-    identifier: check(camelCase(options.operationId.substring(tag.length))),
-    arguments: args,
+    identifier: validateIdentifier(camelCase(options.operationId.substring(tag.length))),
+    arguments: urlArgs,
     description: stripCRLF(options.description),
     request: {
       method,
@@ -292,8 +218,8 @@ function parseSwaggerRoute (path, method, options) {
       operationId: options.operationId
     },
     flags: {
-      body: hasBody,
-      searchParams: hasSearchParams
+      body: !!bodySchema,
+      searchParams: qsArgs.length > 0
     },
     _url: '`Platform' + url + '`'
   })

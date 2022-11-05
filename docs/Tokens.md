@@ -9,14 +9,13 @@ import { BungieApi } from 'bungie.net'
 const api = new BungieApi(options)
 
 // Access the method
-await api.tokens.forceDropsRepair(body)
+await api.tokens.forceDropsRepair()
 ```
 
-## `forceDropsRepair([body])`
+## `forceDropsRepair()`
 
 Twitch Drops self-repair function - scans twitch for drops not marked as fulfilled and resyncs them.
 
-- `[body]` `<Object>` Request body object.
 - Returns: `<Promise>`
 
 URL: `POST /Platform/Tokens/Partner/ForceDropsRepair/`
@@ -28,19 +27,21 @@ Source: [Tokens.ForceDropsRepair](https://bungie-net.github.io/#Tokens.ForceDrop
 Claim a partner offer as the authenticated user.
 
 - `[body]` `<Object>` Request body object.
+  - `[body.PartnerOfferId]` `<string>`
+  - `[body.BungieNetMembershipId]` `<number>`
+  - `[body.TransactionId]` `<string>`
 - Returns: `<Promise>`
 
 URL: `POST /Platform/Tokens/Partner/ClaimOffer/`
 
 Source: [Tokens.ClaimPartnerOffer](https://bungie-net.github.io/#Tokens.ClaimPartnerOffer)
 
-## `applyMissingPartnerOffersWithoutClaim(partnerApplicationId, targetBnetMembershipId, [body])`
+## `applyMissingPartnerOffersWithoutClaim(partnerApplicationId, targetBnetMembershipId)`
 
 Apply a partner offer to the targeted user. This endpoint does not claim a new offer, but any already claimed offers will be applied to the game if not already.
 
-- `partnerApplicationId` `<string>` | `<number>` The partner application identifier.
-- `targetBnetMembershipId` `<string>` | `<number>` The bungie.net user to apply missing offers to. If not self, elevated permissions are required.
-- `[body]` `<Object>` Request body object.
+- `partnerApplicationId` `<number>` The partner application identifier.
+- `targetBnetMembershipId` `<number>` The bungie.net user to apply missing offers to. If not self, elevated permissions are required.
 - Returns: `<Promise>`
 
 URL: `POST /Platform/Tokens/Partner/ApplyMissingOffers/{partnerApplicationId}/{targetBnetMembershipId}/`
@@ -51,8 +52,8 @@ Source: [Tokens.ApplyMissingPartnerOffersWithoutClaim](https://bungie-net.github
 
 Returns the partner sku and offer history of the targeted user. Elevated permissions are required to see users that are not yourself.
 
-- `partnerApplicationId` `<string>` | `<number>` The partner application identifier.
-- `targetBnetMembershipId` `<string>` | `<number>` The bungie.net user to apply missing offers to. If not self, elevated permissions are required.
+- `partnerApplicationId` `<number>` The partner application identifier.
+- `targetBnetMembershipId` `<number>` The bungie.net user to apply missing offers to. If not self, elevated permissions are required.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Tokens/Partner/History/{partnerApplicationId}/{targetBnetMembershipId}/`
@@ -63,8 +64,8 @@ Source: [Tokens.GetPartnerOfferSkuHistory](https://bungie-net.github.io/#Tokens.
 
 Returns the partner rewards history of the targeted user, both partner offers and Twitch drops.
 
-- `targetBnetMembershipId` `<string>` | `<number>` The bungie.net user to return reward history for.
-- `partnerApplicationId` `<string>` | `<number>` The partner application identifier.
+- `targetBnetMembershipId` `<number>` The bungie.net user to return reward history for.
+- `partnerApplicationId` `<number>` The partner application identifier.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Tokens/Partner/History/{targetBnetMembershipId}/Application/{partnerApplicationId}/`
@@ -75,7 +76,7 @@ Source: [Tokens.GetPartnerRewardHistory](https://bungie-net.github.io/#Tokens.Ge
 
 Returns the bungie rewards for the targeted user.
 
-- `membershipId` `<string>` | `<number>` bungie.net user membershipId for requested user rewards. If not self, elevated permissions are required.
+- `membershipId` `<number>` bungie.net user membershipId for requested user rewards. If not self, elevated permissions are required.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Tokens/Rewards/GetRewardsForUser/{membershipId}/`
@@ -86,7 +87,7 @@ Source: [Tokens.GetBungieRewardsForUser](https://bungie-net.github.io/#Tokens.Ge
 
 Returns the bungie rewards for the targeted user when a platform membership Id and Type are used.
 
-- `membershipId` `<string>` | `<number>` users platform membershipId for requested user rewards. If not self, elevated permissions are required.
+- `membershipId` `<number>` users platform membershipId for requested user rewards. If not self, elevated permissions are required.
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. The target Destiny 2 membership type.
 - Returns: `<Promise>`
 

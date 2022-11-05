@@ -16,7 +16,7 @@ await api.user.getBungieNetUserById(id)
 
 Loads a bungienet user by membership id.
 
-- `id` `<string>` | `<number>` The requested Bungie.net membership id.
+- `id` `<number>` The requested Bungie.net membership id.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/User/GetBungieNetUserById/{id}/`
@@ -27,7 +27,7 @@ Source: [User.GetBungieNetUserById](https://bungie-net.github.io/#User.GetBungie
 
 Gets a list of all display names linked to this membership id but sanitized (profanity filtered). Obeys all visibility rules of calling user and is heavily cached.
 
-- `membershipId` `<string>` | `<number>` The requested membership id to load.
+- `membershipId` `<number>` The requested membership id to load.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/User/GetSanitizedPlatformDisplayNames/{membershipId}/`
@@ -38,7 +38,7 @@ Source: [User.GetSanitizedPlatformDisplayNames](https://bungie-net.github.io/#Us
 
 Returns a list of credential types attached to the requested account
 
-- `membershipId` `<string>` | `<number>` The user's membership id
+- `membershipId` `<number>` The user's membership id
 - Returns: `<Promise>`
 
 URL: `GET /Platform/User/GetCredentialTypesForTargetAccount/{membershipId}/`
@@ -59,7 +59,7 @@ Source: [User.GetAvailableThemes](https://bungie-net.github.io/#User.GetAvailabl
 
 Returns a list of accounts associated with the supplied membership ID and membership type. This will include all linked accounts (even when hidden) if supplied credentials permit it.
 
-- `membershipId` `<string>` | `<number>` The membership ID of the target user.
+- `membershipId` `<number>` The membership ID of the target user.
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Type of the supplied membership ID.
 - Returns: `<Promise>`
 
@@ -82,7 +82,7 @@ Source: [User.GetMembershipDataForCurrentUser](https://bungie-net.github.io/#Use
 Gets any hard linked membership given a credential. Only works for credentials that are public (just SteamID64 right now). Cross Save aware.
 
 - `crType` `<number>` See [BungieCredentialType](./Enums.md#BungieCredentialType) enum. The credential type. 'SteamId' is the only valid value at present.
-- `credential` `<string>` | `<number>` The credential to look up. Must be a valid SteamID64.
+- `credential` `<string>` The credential to look up. Must be a valid SteamID64.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/User/GetMembershipFromHardLinkedCredential/{crType}/{credential}/`
@@ -93,8 +93,8 @@ Source: [User.GetMembershipFromHardLinkedCredential](https://bungie-net.github.i
 
 [OBSOLETE] Do not use this to search users, use SearchByGlobalNamePost instead.
 
-- `displayNamePrefix` `<string>` | `<number>` The display name prefix you're looking for.
-- `page` `<string>` | `<number>` The zero-based page of results you desire.
+- `displayNamePrefix` `<string>` The display name prefix you're looking for.
+- `page` `<number>` The zero-based page of results you desire.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/User/Search/Prefix/{displayNamePrefix}/{page}/`
@@ -105,8 +105,9 @@ Source: [User.SearchByGlobalNamePrefix](https://bungie-net.github.io/#User.Searc
 
 Given the prefix of a global display name, returns all users who share that name.
 
-- `page` `<string>` | `<number>` The zero-based page of results you desire.
+- `page` `<number>` The zero-based page of results you desire.
 - `[body]` `<Object>` Request body object.
+  - `[body.displayNamePrefix]` `<string>`
 - Returns: `<Promise>`
 
 URL: `POST /Platform/User/Search/GlobalName/{page}/`

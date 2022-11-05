@@ -13,14 +13,14 @@ await api.<%- key %>.<%- methods[0].identifier %>(<%- methods[0].arguments.map(a
 ```
 <%_ for (const method of methods) { _%>
 
-## `<%- method.identifier %>(<%- method.arguments.map(compileJSDocArgument).join(', ') %>)`
+## `<%- method.identifier %>(<%- method.arguments.map(compileMarkdownIdentifier).join(', ') %>)`
   <%_ if (method.description) { _%>
 
 <%- method.description %>
   <%_ } _%>
 
   <%_ for (const arg of method.arguments) { _%>
-- `<%- compileJSDocArgument(arg) %>` <%- compileMarkdownArgumentType(arg) %><% if (arg.enum) { %> See [<%- arg.enum %>](./Enums.md#<%- arg.enum %>) enum.<% } %> <%- arg.description %>
+<%- compileMarkdownArgument(arg) %>
   <%_ } _%>
 - Returns: `<Promise>`
 

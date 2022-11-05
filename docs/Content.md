@@ -16,7 +16,7 @@ await api.content.getContentType(type)
 
 Gets an object describing a particular variant of content.
 
-- `type` `<string>` | `<number>` 
+- `type` `<string>`
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Content/GetContentType/{type}/`
@@ -27,9 +27,10 @@ Source: [Content.GetContentType](https://bungie-net.github.io/#Content.GetConten
 
 Returns a content item referenced by id
 
-- `id` `<string>` | `<number>` 
-- `locale` `<string>` | `<number>` 
+- `id` `<number>`
+- `locale` `<string>`
 - `[searchParams]` `<Object>` Request querystring parameters object.
+  - `[searchParams.head]` `<boolean>` false
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Content/GetContentById/{id}/{locale}/`
@@ -40,10 +41,11 @@ Source: [Content.GetContentById](https://bungie-net.github.io/#Content.GetConten
 
 Returns the newest item that matches a given tag and Content Type.
 
-- `tag` `<string>` | `<number>` 
-- `type` `<string>` | `<number>` 
-- `locale` `<string>` | `<number>` 
+- `tag` `<string>`
+- `type` `<string>`
+- `locale` `<string>`
 - `[searchParams]` `<Object>` Request querystring parameters object.
+  - `[searchParams.head]` `<boolean>` Not used.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Content/GetContentByTagAndType/{tag}/{type}/{locale}/`
@@ -54,8 +56,14 @@ Source: [Content.GetContentByTagAndType](https://bungie-net.github.io/#Content.G
 
 Gets content based on querystring information passed in. Provides basic search and text search capabilities.
 
-- `locale` `<string>` | `<number>` 
+- `locale` `<string>`
 - `[searchParams]` `<Object>` Request querystring parameters object.
+  - `[searchParams.ctype]` `<string>` Content type tag: Help, News, etc. Supply multiple ctypes separated by space.
+  - `[searchParams.currentpage]` `<number>` Page number for the search results, starting with page 1.
+  - `[searchParams.head]` `<boolean>` Not used.
+  - `[searchParams.searchtext]` `<string>` Word or phrase for the search.
+  - `[searchParams.source]` `<string>` For analytics, hint at the part of the app that triggered the search. Optional.
+  - `[searchParams.tag]` `<string>` Tag used on the content to be searched.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Content/Search/{locale}/`
@@ -66,10 +74,13 @@ Source: [Content.SearchContentWithText](https://bungie-net.github.io/#Content.Se
 
 Searches for Content Items that match the given Tag and Content Type.
 
-- `tag` `<string>` | `<number>` 
-- `type` `<string>` | `<number>` 
-- `locale` `<string>` | `<number>` 
+- `tag` `<string>`
+- `type` `<string>`
+- `locale` `<string>`
 - `[searchParams]` `<Object>` Request querystring parameters object.
+  - `[searchParams.currentpage]` `<number>` Page number for the search results starting with page 1.
+  - `[searchParams.head]` `<boolean>` Not used.
+  - `[searchParams.itemsperpage]` `<number>` Not used.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Content/SearchContentByTagAndType/{tag}/{type}/{locale}/`
@@ -80,8 +91,8 @@ Source: [Content.SearchContentByTagAndType](https://bungie-net.github.io/#Conten
 
 Search for Help Articles.
 
-- `searchtext` `<string>` | `<number>` 
-- `size` `<string>` | `<number>` 
+- `searchtext` `<string>`
+- `size` `<string>`
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Content/SearchHelpArticles/{searchtext}/{size}/`
@@ -92,7 +103,7 @@ Source: [Content.SearchHelpArticles](https://bungie-net.github.io/#Content.Searc
 
 Returns a JSON string response that is the RSS feed for news articles.
 
-- `pageToken` `<string>` | `<number>` Zero-based pagination token for paging through result sets.
+- `pageToken` `<string>` Zero-based pagination token for paging through result sets.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Content/Rss/NewsArticles/{pageToken}/`

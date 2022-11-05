@@ -12,13 +12,20 @@ Yet another Bungie.NET API client for Node.js
 
 ## OpenAPI
 
-v2.16.0
+All API methods' are dynamically generated from the official OpenAPI specs.
+The currenctly used specs file is also included inside this repository for preservation.
+
+**Current version:**: v2.16.0
 
 ## Install
 
 ```
 npm install bungie.net
 ```
+
+## Documentation
+
+- See the [API documentation](./docs/BungieApi.md).
 
 ## Example
 

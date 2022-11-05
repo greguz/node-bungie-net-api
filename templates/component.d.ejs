@@ -1,7 +1,26 @@
+<%_ for (const method of methods) { _%>
+  <%_ for (const arg of method.arguments) { _%>
+    <%_ if (isObjectLikeSchema(arg.schema)) { _%>
+export interface <%- compileInterfaceIdentifier(arg, method) %> {
+      <%_ for (const property of iterateSchemaProperties(arg.schema)) { _%>
+        <%_ if (property.description || property.schema.description) { _%>
+  /**
+   * <%- stripCRLF(property.description || property.schema.description) %>
+   */
+        <%_ } _%>
+  <%- property.identifier %><%_ if (!property.required) { _%>?<% } %>: <%- compileTypeScriptType(property.schema) %>;
+      <%_ } _%>
+}
+
+    <%_ } _%>
+  <%_ } _%>
+<%_ } _%>
 export declare class <%- identifier %> {
+  /**
+   * @constructor
+   */
   constructor (api: any)
 <%_ for (const method of methods) { _%>
-
   /**
   <%_ if (method.description) { _%>
    * <%- method.description %>
@@ -9,10 +28,10 @@ export declare class <%- identifier %> {
    * @see https://bungie-net.github.io/#<%- method.swagger.operationId %>
    *
    <%_ for (const arg of method.arguments) { _%>
-   * @param <%- compileJSDocArgumentType(arg) %> <%- compileJSDocArgument(arg) %> <%- arg.description %>
+   * <%- compileJSDocArgument(arg) %>
    <%_ } _%>
    * @returns {Promise}
    */
-  <%- method.identifier %> (<%- method.arguments.map(compileTypeScriptArgument).join(', ') %>): Promise<any>
+  <%- method.identifier %> (<%- method.arguments.map(arg => compileTypeScriptArgument(arg, method)).join(', ') %>): Promise<any>
 <%_ } _%>
 }

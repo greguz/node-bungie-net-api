@@ -18,7 +18,7 @@ Returns community content.
 
 - `sort` `<number>` See [CommunityContentSortMode](./Enums.md#CommunityContentSortMode) enum. The sort mode.
 - `mediaFilter` `<number>` See [ForumTopicsCategoryFiltersEnum](./Enums.md#ForumTopicsCategoryFiltersEnum) enum. The type of media to get
-- `page` `<string>` | `<number>` Zero based page
+- `page` `<number>` Zero based page
 - Returns: `<Promise>`
 
 URL: `GET /Platform/CommunityContent/Get/{sort}/{mediaFilter}/{page}/`

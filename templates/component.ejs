@@ -14,7 +14,7 @@ export class <%- identifier %> {
    * @see https://bungie-net.github.io/#<%- method.swagger.operationId %>
    *
   <%_ for (const arg of method.arguments) { _%>
-   * @param <%- compileJSDocArgumentType(arg) %> <%- compileJSDocArgument(arg) %> <%- arg.description %>
+   * <%- compileJSDocArgument(arg) %>
   <%_ } _%>
    * @returns {Promise}
    */
@@ -42,6 +42,8 @@ export class <%- identifier %> {
   <%_ } _%>
   <%_ if (method.flags.body) { _%>
       json: body,
+  <%_ } else if (method.request.method === 'POST') { _%>
+      json: {},
   <%_ } _%>
       method: '<%- method.request.method %>',
       url: <%- method._url %>
