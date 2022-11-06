@@ -106,3 +106,18 @@ export function isObjectLikeSchema (schema) {
 export function getEnumIdentifier (operationId) {
   return validateIdentifier(operationId.split('.').reverse()[0])
 }
+
+/**
+ * Leave only unique values inside the array.
+ */
+export function uniq (values) {
+  return values.reduce(
+    (acc, value) => {
+      if (!acc.includes(value)) {
+        acc.push(value)
+      }
+      return acc
+    },
+    []
+  )
+}

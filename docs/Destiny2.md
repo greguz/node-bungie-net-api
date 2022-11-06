@@ -53,7 +53,7 @@ Source: [Destiny2.SearchDestinyPlayerByBungieName](https://bungie-net.github.io/
 Returns a summary information about all profiles linked to the requesting membership type/membership ID that have valid Destiny information. The passed-in Membership Type/Membership ID may be a Bungie.Net membership or a Destiny membership. It only returns the minimal amount of data to begin making more substantive requests, but will hopefully serve as a useful alternative to UserServices for people who just care about Destiny data. Note that it will only return linked accounts whose linkages you are allowed to view.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. The type for the membership whose linked Destiny accounts you want returned.
-- `membershipId` `<number>` The ID of the membership whose linked Destiny accounts you want returned. Make sure your membership ID matches its Membership Type: don't pass us a PSN membership ID and the XBox membership type, it's not going to work!
+- `membershipId` `<BigInt>` | `<number>` | `<string>` The ID of the membership whose linked Destiny accounts you want returned. Make sure your membership ID matches its Membership Type: don't pass us a PSN membership ID and the XBox membership type, it's not going to work!
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.getAllMemberships]` `<boolean>` (optional) if set to 'true', all memberships regardless of whether they're obscured by overrides will be returned. Normal privacy restrictions on account linking will still apply no matter what.
 - Returns: `<Promise>`
@@ -67,7 +67,7 @@ Source: [Destiny2.GetLinkedProfiles](https://bungie-net.github.io/#Destiny2.GetL
 Returns Destiny Profile information for the supplied membership.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. A valid non-BungieNet membership type.
-- `destinyMembershipId` `<number>` Destiny membership ID.
+- `destinyMembershipId` `<BigInt>` | `<number>` | `<string>` Destiny membership ID.
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.components]` `<number[]>` A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.
 - Returns: `<Promise>`
@@ -81,8 +81,8 @@ Source: [Destiny2.GetProfile](https://bungie-net.github.io/#Destiny2.GetProfile)
 Returns character information for the supplied character.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. A valid non-BungieNet membership type.
-- `destinyMembershipId` `<number>` Destiny membership ID.
-- `characterId` `<number>` ID of the character.
+- `destinyMembershipId` `<BigInt>` | `<number>` | `<string>` Destiny membership ID.
+- `characterId` `<BigInt>` | `<number>` | `<string>` ID of the character.
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.components]` `<number[]>` A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.
 - Returns: `<Promise>`
@@ -95,7 +95,7 @@ Source: [Destiny2.GetCharacter](https://bungie-net.github.io/#Destiny2.GetCharac
 
 Returns information on the weekly clan rewards and if the clan has earned them or not. Note that this will always report rewards as not redeemed.
 
-- `groupId` `<number>` A valid group id of clan.
+- `groupId` `<BigInt>` | `<number>` | `<string>` A valid group id of clan.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Destiny2/Clan/{groupId}/WeeklyRewardState/`
@@ -117,8 +117,8 @@ Source: [Destiny2.GetClanBannerSource](https://bungie-net.github.io/#Destiny2.Ge
 Retrieve the details of an instanced Destiny Item. An instanced Destiny item is one with an ItemInstanceId. Non-instanced items, such as materials, have no useful instance-specific details and thus are not queryable here.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. A valid non-BungieNet membership type.
-- `destinyMembershipId` `<number>` The membership ID of the destiny profile.
-- `itemInstanceId` `<number>` The Instance ID of the destiny item.
+- `destinyMembershipId` `<BigInt>` | `<number>` | `<string>` The membership ID of the destiny profile.
+- `itemInstanceId` `<BigInt>` | `<number>` | `<string>` The Instance ID of the destiny item.
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.components]` `<number[]>` A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.
 - Returns: `<Promise>`
@@ -132,8 +132,8 @@ Source: [Destiny2.GetItem](https://bungie-net.github.io/#Destiny2.GetItem)
 Get currently available vendors from the list of vendors that can possibly have rotating inventory. Note that this does not include things like preview vendors and vendors-as-kiosks, neither of whom have rotating/dynamic inventories. Use their definitions as-is for those.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. A valid non-BungieNet membership type.
-- `destinyMembershipId` `<number>` Destiny membership ID of another user. You may be denied.
-- `characterId` `<number>` The Destiny Character ID of the character for whom we're getting vendor info.
+- `destinyMembershipId` `<BigInt>` | `<number>` | `<string>` Destiny membership ID of another user. You may be denied.
+- `characterId` `<BigInt>` | `<number>` | `<string>` The Destiny Character ID of the character for whom we're getting vendor info.
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.components]` `<number[]>` A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.
   - `[searchParams.filter]` `<number>` See [DestinyVendorFilter](./Enums.md#DestinyVendorFilter) enum. Indicates the type of filter to apply to Vendor results.
@@ -148,8 +148,8 @@ Source: [Destiny2.GetVendors](https://bungie-net.github.io/#Destiny2.GetVendors)
 Get the details of a specific Vendor.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. A valid non-BungieNet membership type.
-- `destinyMembershipId` `<number>` Destiny membership ID of another user. You may be denied.
-- `characterId` `<number>` The Destiny Character ID of the character for whom we're getting vendor info.
+- `destinyMembershipId` `<BigInt>` | `<number>` | `<string>` Destiny membership ID of another user. You may be denied.
+- `characterId` `<BigInt>` | `<number>` | `<string>` The Destiny Character ID of the character for whom we're getting vendor info.
 - `vendorHash` `<number>` The Hash identifier of the Vendor to be returned.
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.components]` `<number[]>` A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.
@@ -164,8 +164,8 @@ Source: [Destiny2.GetVendor](https://bungie-net.github.io/#Destiny2.GetVendor)
 Given a Presentation Node that has Collectibles as direct descendants, this will return item details about those descendants in the context of the requesting character.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. A valid non-BungieNet membership type.
-- `destinyMembershipId` `<number>` Destiny membership ID of another user. You may be denied.
-- `characterId` `<number>` The Destiny Character ID of the character for whom we're getting collectible detail info.
+- `destinyMembershipId` `<BigInt>` | `<number>` | `<string>` Destiny membership ID of another user. You may be denied.
+- `characterId` `<BigInt>` | `<number>` | `<string>` The Destiny Character ID of the character for whom we're getting collectible detail info.
 - `collectiblePresentationNodeHash` `<number>` The hash identifier of the Presentation Node for whom we should return collectible details. Details will only be returned for collectibles that are direct descendants of this node.
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.components]` `<number[]>` A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.
@@ -270,7 +270,7 @@ Source: [Destiny2.SetQuestTrackedState](https://bungie-net.github.io/#Destiny2.S
 
 Gets the available post game carnage report for the activity ID.
 
-- `activityId` `<number>` The ID of the activity whose PGCR is requested.
+- `activityId` `<BigInt>` | `<number>` | `<string>` The ID of the activity whose PGCR is requested.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Destiny2/Stats/PostGameCarnageReport/{activityId}/`
@@ -281,7 +281,7 @@ Source: [Destiny2.GetPostGameCarnageReport](https://bungie-net.github.io/#Destin
 
 Report a player that you met in an activity that was engaging in ToS-violating activities. Both you and the offending player must have played in the activityId passed in. Please use this judiciously and only when you have strong suspicions of violation, pretty please.
 
-- `activityId` `<number>` The ID of the activity where you ran into the brigand that you're reporting.
+- `activityId` `<BigInt>` | `<number>` | `<string>` The ID of the activity where you ran into the brigand that you're reporting.
 - `[body]` `<Object>` Request body object.
   - `[body.reasonCategoryHashes]` `<number[]>` So you've decided to report someone instead of cursing them and their descendants. Well, okay then. This is the category or categorie(s) of infractions for which you are reporting the user. These are hash identifiers that map to DestinyReportReasonCategoryDefinition entries.
   - `[body.reasonHashes]` `<number[]>` If applicable, provide a more specific reason(s) within the general category of problems provided by the reasonHash. This is also an identifier for a reason. All reasonHashes provided must be children of at least one the reasonCategoryHashes provided.
@@ -321,8 +321,8 @@ Source: [Destiny2.SearchDestinyEntities](https://bungie-net.github.io/#Destiny2.
 Gets historical stats for indicated character.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. A valid non-BungieNet membership type.
-- `destinyMembershipId` `<number>` The Destiny membershipId of the user to retrieve.
-- `characterId` `<number>` The id of the character to retrieve. You can omit this character ID or set it to 0 to get aggregate stats across all characters.
+- `destinyMembershipId` `<BigInt>` | `<number>` | `<string>` The Destiny membershipId of the user to retrieve.
+- `characterId` `<BigInt>` | `<number>` | `<string>` The id of the character to retrieve. You can omit this character ID or set it to 0 to get aggregate stats across all characters.
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.dayend]` `<string>` Last day to return when daily stats are requested. Use the format YYYY-MM-DD. Currently, we cannot allow more than 31 days of daily data to be requested in a single request.
   - `[searchParams.daystart]` `<string>` First day to return when daily stats are requested. Use the format YYYY-MM-DD. Currently, we cannot allow more than 31 days of daily data to be requested in a single request.
@@ -340,7 +340,7 @@ Source: [Destiny2.GetHistoricalStats](https://bungie-net.github.io/#Destiny2.Get
 Gets aggregate historical stats organized around each character for a given account.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. A valid non-BungieNet membership type.
-- `destinyMembershipId` `<number>` The Destiny membershipId of the user to retrieve.
+- `destinyMembershipId` `<BigInt>` | `<number>` | `<string>` The Destiny membershipId of the user to retrieve.
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.groups]` `<number[]>` Groups of stats to include, otherwise only general stats are returned. Comma separated list is allowed. Values: General, Weapons, Medals.
 - Returns: `<Promise>`
@@ -354,8 +354,8 @@ Source: [Destiny2.GetHistoricalStatsForAccount](https://bungie-net.github.io/#De
 Gets activity history stats for indicated character.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. A valid non-BungieNet membership type.
-- `destinyMembershipId` `<number>` The Destiny membershipId of the user to retrieve.
-- `characterId` `<number>` The id of the character to retrieve.
+- `destinyMembershipId` `<BigInt>` | `<number>` | `<string>` The Destiny membershipId of the user to retrieve.
+- `characterId` `<BigInt>` | `<number>` | `<string>` The id of the character to retrieve.
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.count]` `<number>` Number of rows to return
   - `[searchParams.mode]` `<number>` See [DestinyActivityModeType](./Enums.md#DestinyActivityModeType) enum. For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!
@@ -371,8 +371,8 @@ Source: [Destiny2.GetActivityHistory](https://bungie-net.github.io/#Destiny2.Get
 Gets details about unique weapon usage, including all exotic weapons.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. A valid non-BungieNet membership type.
-- `destinyMembershipId` `<number>` The Destiny membershipId of the user to retrieve.
-- `characterId` `<number>` The id of the character to retrieve.
+- `destinyMembershipId` `<BigInt>` | `<number>` | `<string>` The Destiny membershipId of the user to retrieve.
+- `characterId` `<BigInt>` | `<number>` | `<string>` The id of the character to retrieve.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Destiny2/{membershipType}/Account/{destinyMembershipId}/Character/{characterId}/Stats/UniqueWeapons/`
@@ -384,8 +384,8 @@ Source: [Destiny2.GetUniqueWeaponHistory](https://bungie-net.github.io/#Destiny2
 Gets all activities the character has participated in together with aggregate statistics for those activities.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. A valid non-BungieNet membership type.
-- `destinyMembershipId` `<number>` The Destiny membershipId of the user to retrieve.
-- `characterId` `<number>` The specific character whose activities should be returned.
+- `destinyMembershipId` `<BigInt>` | `<number>` | `<string>` The Destiny membershipId of the user to retrieve.
+- `characterId` `<BigInt>` | `<number>` | `<string>` The specific character whose activities should be returned.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Destiny2/{membershipType}/Account/{destinyMembershipId}/Character/{characterId}/Stats/AggregateActivityStats/`

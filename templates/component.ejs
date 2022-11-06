@@ -30,15 +30,10 @@ export class <%- identifier %> {
     if (typeof <%- arg.identifier %> !== 'boolean') {
       throw new TypeError('Parameter <%- arg.identifier %> must be a boolean')
     }
-    <%_ } else if (arg.schema.type === 'integer') { _%>
-    if (!Number.isInteger(<%- arg.identifier %>)) {
-      throw new TypeError('Parameter <%- arg.identifier %> must be an integer')
+    <%_ } else { _%>
+    if (Number.isFinite(<%- arg.identifier %>) || typeof <%- arg.identifier %> === 'bigint') {
+      <%- arg.identifier %> = '' + <%- arg.identifier %>
     }
-    <%_ } else if (arg.schema.type === 'number') { _%>
-    if (!Number.isFinite(<%- arg.identifier %>)) {
-      throw new TypeError('Parameter <%- arg.identifier %> must be a finite number')
-    }
-    <%_ } else if (arg.schema.type === 'string') { _%>
     if (typeof <%- arg.identifier %> !== 'string') {
       throw new TypeError('Parameter <%- arg.identifier %> must be a string')
     }

@@ -27,7 +27,7 @@ Source: [Trending.GetTrendingCategories](https://bungie-net.github.io/#Trending.
 Returns paginated lists of trending items for a category.
 
 - `categoryId` `<string>` The ID of the category for whom you want additional results.
-- `pageNumber` `<number>` The page # of results to return.
+- `pageNumber` `<BigInt>` | `<number>` | `<string>` The page # of results to return.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Trending/Categories/{categoryId}/{pageNumber}/`

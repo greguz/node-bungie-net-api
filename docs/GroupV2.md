@@ -80,7 +80,7 @@ Source: [GroupV2.GroupSearch](https://bungie-net.github.io/#GroupV2.GroupSearch)
 
 Get information about a specific group of the given ID.
 
-- `groupId` `<number>` Requested group's id.
+- `groupId` `<BigInt>` | `<number>` | `<string>` Requested group's id.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/GroupV2/{groupId}/`
@@ -116,7 +116,7 @@ Source: [GroupV2.GetGroupByNameV2](https://bungie-net.github.io/#GroupV2.GetGrou
 
 Gets a list of available optional conversation channels and their settings.
 
-- `groupId` `<number>` Requested group's id.
+- `groupId` `<BigInt>` | `<number>` | `<string>` Requested group's id.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/GroupV2/{groupId}/OptionalConversations/`
@@ -127,7 +127,7 @@ Source: [GroupV2.GetGroupOptionalConversations](https://bungie-net.github.io/#Gr
 
 Edit an existing group. You must have suitable permissions in the group to perform this operation. This latest revision will only edit the fields you pass in - pass null for properties you want to leave unaltered.
 
-- `groupId` `<number>` Group ID of the group to edit.
+- `groupId` `<BigInt>` | `<number>` | `<string>` Group ID of the group to edit.
 - `[body]` `<Object>` Request body object.
   - `[body.name]` `<string>`
   - `[body.about]` `<string>`
@@ -155,7 +155,7 @@ Source: [GroupV2.EditGroup](https://bungie-net.github.io/#GroupV2.EditGroup)
 
 Edit an existing group's clan banner. You must have suitable permissions in the group to perform this operation. All fields are required.
 
-- `groupId` `<number>` Group ID of the group to edit.
+- `groupId` `<BigInt>` | `<number>` | `<string>` Group ID of the group to edit.
 - `[body]` `<Object>` Request body object.
   - `[body.decalId]` `<number>`
   - `[body.decalColorId]` `<number>`
@@ -174,7 +174,7 @@ Source: [GroupV2.EditClanBanner](https://bungie-net.github.io/#GroupV2.EditClanB
 
 Edit group options only available to a founder. You must have suitable permissions in the group to perform this operation.
 
-- `groupId` `<number>` Group ID of the group to edit.
+- `groupId` `<BigInt>` | `<number>` | `<string>` Group ID of the group to edit.
 - `[body]` `<Object>` Request body object.
   - `[body.InvitePermissionOverride]` `<boolean>` Minimum Member Level allowed to invite new members to group Always Allowed: Founder, Acting Founder True means admins have this power, false means they don't Default is false for clans, true for groups.
   - `[body.UpdateCulturePermissionOverride]` `<boolean>` Minimum Member Level allowed to update group culture Always Allowed: Founder, Acting Founder True means admins have this power, false means they don't Default is false for clans, true for groups.
@@ -191,7 +191,7 @@ Source: [GroupV2.EditFounderOptions](https://bungie-net.github.io/#GroupV2.EditF
 
 Add a new optional conversation/chat channel. Requires admin permissions to the group.
 
-- `groupId` `<number>` Group ID of the group to edit.
+- `groupId` `<BigInt>` | `<number>` | `<string>` Group ID of the group to edit.
 - `[body]` `<Object>` Request body object.
   - `[body.chatName]` `<string>`
   - `[body.chatSecurity]` `<number>` See [ChatSecuritySetting](./Enums.md#ChatSecuritySetting) enum.
@@ -205,8 +205,8 @@ Source: [GroupV2.AddOptionalConversation](https://bungie-net.github.io/#GroupV2.
 
 Edit the settings of an optional conversation/chat channel. Requires admin permissions to the group.
 
-- `groupId` `<number>` Group ID of the group to edit.
-- `conversationId` `<number>` Conversation Id of the channel being edited.
+- `groupId` `<BigInt>` | `<number>` | `<string>` Group ID of the group to edit.
+- `conversationId` `<BigInt>` | `<number>` | `<string>` Conversation Id of the channel being edited.
 - `[body]` `<Object>` Request body object.
   - `[body.chatEnabled]` `<boolean>`
   - `[body.chatName]` `<string>`
@@ -221,7 +221,7 @@ Source: [GroupV2.EditOptionalConversation](https://bungie-net.github.io/#GroupV2
 
 Get the list of members in a given group.
 
-- `groupId` `<number>` The ID of the group.
+- `groupId` `<BigInt>` | `<number>` | `<string>` The ID of the group.
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.memberType]` `<number>` See [RuntimeGroupMemberType](./Enums.md#RuntimeGroupMemberType) enum. The member levels used by all V2 Groups API. Individual group types use their own mappings in their native storage (general uses BnetDbGroupMemberType and D2 clans use ClanMemberLevel), but they are all translated to this in the runtime api. These runtime values should NEVER be stored anywhere, so the values can be changed as necessary.
   - `[searchParams.nameSearch]` `<string>` The name fragment upon which a search should be executed for members with matching display or unique names.
@@ -235,7 +235,7 @@ Source: [GroupV2.GetMembersOfGroup](https://bungie-net.github.io/#GroupV2.GetMem
 
 Get the list of members in a given group who are of admin level or higher.
 
-- `groupId` `<number>` The ID of the group.
+- `groupId` `<BigInt>` | `<number>` | `<string>` The ID of the group.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/GroupV2/{groupId}/AdminsAndFounder/`
@@ -246,9 +246,9 @@ Source: [GroupV2.GetAdminsAndFounderOfGroup](https://bungie-net.github.io/#Group
 
 Edit the membership type of a given member. You must have suitable permissions in the group to perform this operation.
 
-- `groupId` `<number>` ID of the group to which the member belongs.
+- `groupId` `<BigInt>` | `<number>` | `<string>` ID of the group to which the member belongs.
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Membership type of the provide membership ID.
-- `membershipId` `<number>` Membership ID to modify.
+- `membershipId` `<BigInt>` | `<number>` | `<string>` Membership ID to modify.
 - `memberType` `<number>` See [RuntimeGroupMemberType](./Enums.md#RuntimeGroupMemberType) enum. New membertype for the specified member.
 - Returns: `<Promise>`
 
@@ -260,9 +260,9 @@ Source: [GroupV2.EditGroupMembership](https://bungie-net.github.io/#GroupV2.Edit
 
 Kick a member from the given group, forcing them to reapply if they wish to re-join the group. You must have suitable permissions in the group to perform this operation.
 
-- `groupId` `<number>` Group ID to kick the user from.
+- `groupId` `<BigInt>` | `<number>` | `<string>` Group ID to kick the user from.
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Membership type of the provided membership ID.
-- `membershipId` `<number>` Membership ID to kick.
+- `membershipId` `<BigInt>` | `<number>` | `<string>` Membership ID to kick.
 - Returns: `<Promise>`
 
 URL: `POST /Platform/GroupV2/{groupId}/Members/{membershipType}/{membershipId}/Kick/`
@@ -273,9 +273,9 @@ Source: [GroupV2.KickMember](https://bungie-net.github.io/#GroupV2.KickMember)
 
 Bans the requested member from the requested group for the specified period of time.
 
-- `groupId` `<number>` Group ID that has the member to ban.
+- `groupId` `<BigInt>` | `<number>` | `<string>` Group ID that has the member to ban.
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Membership type of the provided membership ID.
-- `membershipId` `<number>` Membership ID of the member to ban from the group.
+- `membershipId` `<BigInt>` | `<number>` | `<string>` Membership ID of the member to ban from the group.
 - `[body]` `<Object>` Request body object.
   - `[body.comment]` `<string>`
   - `[body.length]` `<number>` See [IgnoreLength](./Enums.md#IgnoreLength) enum.
@@ -289,9 +289,9 @@ Source: [GroupV2.BanMember](https://bungie-net.github.io/#GroupV2.BanMember)
 
 Unbans the requested member, allowing them to re-apply for membership.
 
-- `groupId` `<number>`
+- `groupId` `<BigInt>` | `<number>` | `<string>`
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Membership type of the provided membership ID.
-- `membershipId` `<number>` Membership ID of the member to unban from the group
+- `membershipId` `<BigInt>` | `<number>` | `<string>` Membership ID of the member to unban from the group
 - Returns: `<Promise>`
 
 URL: `POST /Platform/GroupV2/{groupId}/Members/{membershipType}/{membershipId}/Unban/`
@@ -302,7 +302,7 @@ Source: [GroupV2.UnbanMember](https://bungie-net.github.io/#GroupV2.UnbanMember)
 
 Get the list of banned members in a given group. Only accessible to group Admins and above. Not applicable to all groups. Check group features.
 
-- `groupId` `<number>` Group ID whose banned members you are fetching
+- `groupId` `<BigInt>` | `<number>` | `<string>` Group ID whose banned members you are fetching
 - Returns: `<Promise>`
 
 URL: `GET /Platform/GroupV2/{groupId}/Banned/`
@@ -313,9 +313,9 @@ Source: [GroupV2.GetBannedMembersOfGroup](https://bungie-net.github.io/#GroupV2.
 
 An administrative method to allow the founder of a group or clan to give up their position to another admin permanently.
 
-- `groupId` `<number>` The target group id.
+- `groupId` `<BigInt>` | `<number>` | `<string>` The target group id.
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Membership type of the provided founderIdNew.
-- `founderIdNew` `<number>` The new founder for this group. Must already be a group admin.
+- `founderIdNew` `<BigInt>` | `<number>` | `<string>` The new founder for this group. Must already be a group admin.
 - Returns: `<Promise>`
 
 URL: `POST /Platform/GroupV2/{groupId}/Admin/AbdicateFoundership/{membershipType}/{founderIdNew}/`
@@ -326,7 +326,7 @@ Source: [GroupV2.AbdicateFoundership](https://bungie-net.github.io/#GroupV2.Abdi
 
 Get the list of users who are awaiting a decision on their application to join a given group. Modified to include application info.
 
-- `groupId` `<number>` ID of the group.
+- `groupId` `<BigInt>` | `<number>` | `<string>` ID of the group.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/GroupV2/{groupId}/Members/Pending/`
@@ -337,7 +337,7 @@ Source: [GroupV2.GetPendingMemberships](https://bungie-net.github.io/#GroupV2.Ge
 
 Get the list of users who have been invited into the group.
 
-- `groupId` `<number>` ID of the group.
+- `groupId` `<BigInt>` | `<number>` | `<string>` ID of the group.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/GroupV2/{groupId}/Members/InvitedIndividuals/`
@@ -348,7 +348,7 @@ Source: [GroupV2.GetInvitedIndividuals](https://bungie-net.github.io/#GroupV2.Ge
 
 Approve all of the pending users for the given group.
 
-- `groupId` `<number>` ID of the group.
+- `groupId` `<BigInt>` | `<number>` | `<string>` ID of the group.
 - `[body]` `<Object>` Request body object.
   - `[body.message]` `<string>`
 - Returns: `<Promise>`
@@ -361,7 +361,7 @@ Source: [GroupV2.ApproveAllPending](https://bungie-net.github.io/#GroupV2.Approv
 
 Deny all of the pending users for the given group.
 
-- `groupId` `<number>` ID of the group.
+- `groupId` `<BigInt>` | `<number>` | `<string>` ID of the group.
 - `[body]` `<Object>` Request body object.
   - `[body.message]` `<string>`
 - Returns: `<Promise>`
@@ -374,7 +374,7 @@ Source: [GroupV2.DenyAllPending](https://bungie-net.github.io/#GroupV2.DenyAllPe
 
 Approve all of the pending users for the given group.
 
-- `groupId` `<number>` ID of the group.
+- `groupId` `<BigInt>` | `<number>` | `<string>` ID of the group.
 - `[body]` `<Object>` Request body object.
   - `[body.memberships]` `<Object[]>`
     - `[body.memberships[].membershipType]` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Type of the membership. Not necessarily the native type.
@@ -393,9 +393,9 @@ Source: [GroupV2.ApprovePendingForList](https://bungie-net.github.io/#GroupV2.Ap
 
 Approve the given membershipId to join the group/clan as long as they have applied.
 
-- `groupId` `<number>` ID of the group.
+- `groupId` `<BigInt>` | `<number>` | `<string>` ID of the group.
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Membership type of the supplied membership ID.
-- `membershipId` `<number>` The membership id being approved.
+- `membershipId` `<BigInt>` | `<number>` | `<string>` The membership id being approved.
 - `[body]` `<Object>` Request body object.
   - `[body.message]` `<string>`
 - Returns: `<Promise>`
@@ -408,7 +408,7 @@ Source: [GroupV2.ApprovePending](https://bungie-net.github.io/#GroupV2.ApprovePe
 
 Deny all of the pending users for the given group that match the passed-in .
 
-- `groupId` `<number>` ID of the group.
+- `groupId` `<BigInt>` | `<number>` | `<string>` ID of the group.
 - `[body]` `<Object>` Request body object.
   - `[body.memberships]` `<Object[]>`
     - `[body.memberships[].membershipType]` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Type of the membership. Not necessarily the native type.
@@ -428,7 +428,7 @@ Source: [GroupV2.DenyPendingForList](https://bungie-net.github.io/#GroupV2.DenyP
 Get information about the groups that a given member has joined.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Membership type of the supplied membership ID.
-- `membershipId` `<number>` Membership ID to for which to find founded groups.
+- `membershipId` `<BigInt>` | `<number>` | `<string>` Membership ID to for which to find founded groups.
 - `filter` `<number>` See [GroupsForMemberFilter](./Enums.md#GroupsForMemberFilter) enum. Filter apply to list of joined groups.
 - `groupType` `<number>` See [GroupType](./Enums.md#GroupType) enum. Type of group the supplied member founded.
 - Returns: `<Promise>`
@@ -442,7 +442,7 @@ Source: [GroupV2.GetGroupsForMember](https://bungie-net.github.io/#GroupV2.GetGr
 Allows a founder to manually recover a group they can see in game but not on bungie.net
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Membership type of the supplied membership ID.
-- `membershipId` `<number>` Membership ID to for which to find founded groups.
+- `membershipId` `<BigInt>` | `<number>` | `<string>` Membership ID to for which to find founded groups.
 - `groupType` `<number>` See [GroupType](./Enums.md#GroupType) enum. Type of group the supplied member founded.
 - Returns: `<Promise>`
 
@@ -455,7 +455,7 @@ Source: [GroupV2.RecoverGroupForFounder](https://bungie-net.github.io/#GroupV2.R
 Get information about the groups that a given member has applied to or been invited to.
 
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. Membership type of the supplied membership ID.
-- `membershipId` `<number>` Membership ID to for which to find applied groups.
+- `membershipId` `<BigInt>` | `<number>` | `<string>` Membership ID to for which to find applied groups.
 - `filter` `<number>` See [GroupPotentialMemberStatus](./Enums.md#GroupPotentialMemberStatus) enum. Filter apply to list of potential joined groups.
 - `groupType` `<number>` See [GroupType](./Enums.md#GroupType) enum. Type of group the supplied member applied.
 - Returns: `<Promise>`
@@ -468,9 +468,9 @@ Source: [GroupV2.GetPotentialGroupsForMember](https://bungie-net.github.io/#Grou
 
 Invite a user to join this group.
 
-- `groupId` `<number>` ID of the group you would like to join.
+- `groupId` `<BigInt>` | `<number>` | `<string>` ID of the group you would like to join.
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. MembershipType of the account being invited.
-- `membershipId` `<number>` Membership id of the account being invited.
+- `membershipId` `<BigInt>` | `<number>` | `<string>` Membership id of the account being invited.
 - `[body]` `<Object>` Request body object.
   - `[body.message]` `<string>`
 - Returns: `<Promise>`
@@ -483,9 +483,9 @@ Source: [GroupV2.IndividualGroupInvite](https://bungie-net.github.io/#GroupV2.In
 
 Cancels a pending invitation to join a group.
 
-- `groupId` `<number>` ID of the group you would like to join.
+- `groupId` `<BigInt>` | `<number>` | `<string>` ID of the group you would like to join.
 - `membershipType` `<number>` See [BungieMembershipType](./Enums.md#BungieMembershipType) enum. MembershipType of the account being cancelled.
-- `membershipId` `<number>` Membership id of the account being cancelled.
+- `membershipId` `<BigInt>` | `<number>` | `<string>` Membership id of the account being cancelled.
 - Returns: `<Promise>`
 
 URL: `POST /Platform/GroupV2/{groupId}/Members/IndividualInviteCancel/{membershipType}/{membershipId}/`

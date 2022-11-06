@@ -3,6 +3,7 @@ import pascalCase from 'pascalcase'
 import {
   isObjectLikeSchema,
   resolveSchema,
+  uniq,
   validateIdentifier
 } from './util.js'
 
@@ -32,8 +33,12 @@ export function compileInterfaceIdentifier (arg, method) {
 export function compileTypeScriptType (swagger, schema = {}) {
   schema = resolveSchema(swagger, schema)
 
-  if (schema.type === 'array') {
+  if (Array.isArray(schema.type)) {
+    return uniq(schema.type.map(type => compileTypeScriptType(swagger, { type }))).join(' | ')
+  } else if (schema.type === 'array') {
     return `${compileTypeScriptType(swagger, schema.items)}[]`
+  } else if (schema.type === 'bigint') {
+    return 'BigInt'
   } else if (schema.type === 'boolean') {
     return 'boolean'
   } else if (schema.type === 'integer' || schema.type === 'number') {

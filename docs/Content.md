@@ -27,7 +27,7 @@ Source: [Content.GetContentType](https://bungie-net.github.io/#Content.GetConten
 
 Returns a content item referenced by id
 
-- `id` `<number>`
+- `id` `<BigInt>` | `<number>` | `<string>`
 - `locale` `<string>`
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.head]` `<boolean>` false

@@ -36,7 +36,7 @@ function compile (sourceFile, targetFile, context = {}) {
         ...context,
         compileInterfaceIdentifier,
         compileJavaScriptArgument,
-        compileJSDocArgument,
+        compileJSDocArgument: compileJSDocArgument.bind(null, swagger),
         compileMarkdownArgument: compileMarkdownArgument.bind(null, swagger),
         compileMarkdownIdentifier,
         compileTypeScriptArgument: compileTypeScriptArgument.bind(null, swagger),
@@ -134,22 +134,34 @@ function injectUrlArgument (path, identifier) {
 const validUrlTypes = ['boolean', 'integer', 'number', 'string']
 
 function parseSwaggerPathArgument (item) {
-  const enumIdentifier = extractEnumIdentifier(item.schema)
-  if (!validUrlTypes.includes(item.schema.type)) {
+  const schema = resolveSchema(swagger, item.schema)
+  if (!validUrlTypes.includes(schema.type)) {
     throw new Error(`Unexpected URL parameter type for ${item.name}`)
   }
+
+  const enumIdentifier = extractEnumIdentifier(schema)
+
+  // This is necessary because of int32/int64 presence
+  const schemaType = !enumIdentifier && (schema.format === 'int32' || schema.format === 'int64')
+    ? ['bigint', 'integer', 'string']
+    : schema.type
+
   return {
     description: stripCRLF(item.description),
     enum: enumIdentifier,
     identifier: validateIdentifier(item.name),
     required: true,
-    schema: item.schema
+    schema: {
+      ...schema,
+      type: schemaType
+    }
   }
 }
 
 function getBodySchema (options) {
-  if (options.requestBody?.content?.['application/json']?.schema) {
-    return resolveSchema(swagger, options.requestBody?.content?.['application/json']?.schema)
+  const schema = options.requestBody?.content?.['application/json']?.schema
+  if (schema) {
+    return resolveSchema(swagger, schema)
   }
 }
 
@@ -181,7 +193,7 @@ function parseSwaggerRoute (path, method, options) {
           (acc, arg) => {
             acc[arg.name] = {
               description: arg.description,
-              ...arg.schema
+              ...resolveSchema(swagger, arg.schema)
             }
             return acc
           },

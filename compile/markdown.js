@@ -3,7 +3,8 @@ import {
   getReferenceIdentifier,
   iterateSchemaProperties,
   resolveSchema,
-  stripCRLF
+  stripCRLF,
+  uniq
 } from './util.js'
 
 export function compileMarkdownIdentifier (arg) {
@@ -25,31 +26,7 @@ export function compileMarkdownArgument (swagger, arg, prefix = '', tabs = 0) {
   }
   code += '` '
   const schema = resolveSchema(swagger, arg.schema)
-  if (schema.type === 'array') {
-    const itemsSchema = resolveSchema(swagger, schema.items)
-
-    if (itemsSchema.type === 'integer' || itemsSchema.type === 'number') {
-      code += '`<number[]>`'
-    } else if (itemsSchema.type === 'object') {
-      code += '`<Object[]>`'
-    } else if (itemsSchema.type === 'string') {
-      code += '`<string[]>`'
-    } else {
-      console.warn({ schema: itemsSchema }, 'unsupported markdown array schema type')
-      code += '`<Array>`'
-    }
-  } else if (schema.type === 'boolean') {
-    code += '`<boolean>`'
-  } else if (schema.type === 'integer' || schema.type === 'number') {
-    code += '`<number>`'
-  } else if (schema.type === 'object') {
-    code += '`<Object>`'
-  } else if (schema.type === 'string') {
-    code += '`<string>`'
-  } else {
-    console.warn({ schema }, 'unsupported markdown schema type')
-    code += '`<*>`'
-  }
+  code += compileMarkdownType(swagger, schema)
   if (schema['x-enum-reference']) {
     const enumIdentifier = getEnumIdentifier(getReferenceIdentifier(schema['x-enum-reference'].$ref))
     code += ` See [${enumIdentifier}](./Enums.md#${enumIdentifier}) enum.`
@@ -75,4 +52,36 @@ function twoSpaces (n) {
     text += '  '
   }
   return text
+}
+
+function compileMarkdownType (swagger, schema) {
+  if (Array.isArray(schema.type)) {
+    return uniq(schema.type.map(type => compileMarkdownType(swagger, { type }))).join(' | ')
+  } else if (schema.type === 'array') {
+    const itemsSchema = resolveSchema(swagger, schema.items)
+
+    if (itemsSchema.type === 'integer' || itemsSchema.type === 'number') {
+      return '`<number[]>`'
+    } else if (itemsSchema.type === 'object') {
+      return '`<Object[]>`'
+    } else if (itemsSchema.type === 'string') {
+      return '`<string[]>`'
+    } else {
+      console.warn({ schema: itemsSchema }, 'unsupported markdown items schema type')
+      return '`<Array>`'
+    }
+  } else if (schema.type === 'bigint') {
+    return '`<BigInt>`'
+  } else if (schema.type === 'boolean') {
+    return '`<boolean>`'
+  } else if (schema.type === 'integer' || schema.type === 'number') {
+    return '`<number>`'
+  } else if (schema.type === 'object') {
+    return '`<Object>`'
+  } else if (schema.type === 'string') {
+    return '`<string>`'
+  } else {
+    console.warn({ schema }, 'unsupported markdown schema type')
+    return '`<*>`'
+  }
 }

@@ -16,9 +16,9 @@ await api.forum.getTopicsPaged(page, pageSize, group, sort, quickDate, categoryF
 
 Get topics from any forum.
 
-- `page` `<number>` Zero paged page number
-- `pageSize` `<number>` Unused
-- `group` `<number>` The group, if any.
+- `page` `<BigInt>` | `<number>` | `<string>` Zero paged page number
+- `pageSize` `<BigInt>` | `<number>` | `<string>` Unused
+- `group` `<BigInt>` | `<number>` | `<string>` The group, if any.
 - `sort` `<number>` See [ForumTopicsSortEnum](./Enums.md#ForumTopicsSortEnum) enum. The sort mode.
 - `quickDate` `<number>` See [ForumTopicsQuickDateEnum](./Enums.md#ForumTopicsQuickDateEnum) enum. A date filter.
 - `categoryFilter` `<number>` See [ForumTopicsCategoryFiltersEnum](./Enums.md#ForumTopicsCategoryFiltersEnum) enum. A category filter
@@ -35,7 +35,7 @@ Source: [Forum.GetTopicsPaged](https://bungie-net.github.io/#Forum.GetTopicsPage
 
 Gets a listing of all topics marked as part of the core group.
 
-- `page` `<number>` Zero base page
+- `page` `<BigInt>` | `<number>` | `<string>` Zero base page
 - `sort` `<number>` See [ForumTopicsSortEnum](./Enums.md#ForumTopicsSortEnum) enum. The sort mode.
 - `quickDate` `<number>` See [ForumTopicsQuickDateEnum](./Enums.md#ForumTopicsQuickDateEnum) enum. The date filter.
 - `categoryFilter` `<number>` See [ForumTopicsCategoryFiltersEnum](./Enums.md#ForumTopicsCategoryFiltersEnum) enum. The category filter.
@@ -51,10 +51,10 @@ Source: [Forum.GetCoreTopicsPaged](https://bungie-net.github.io/#Forum.GetCoreTo
 
 Returns a thread of posts at the given parent, optionally returning replies to those posts as well as the original parent.
 
-- `parentPostId` `<number>`
-- `page` `<number>`
-- `pageSize` `<number>`
-- `replySize` `<number>`
+- `parentPostId` `<BigInt>` | `<number>` | `<string>`
+- `page` `<BigInt>` | `<number>` | `<string>`
+- `pageSize` `<BigInt>` | `<number>` | `<string>`
+- `replySize` `<BigInt>` | `<number>` | `<string>`
 - `getParentPost` `<boolean>`
 - `rootThreadMode` `<boolean>`
 - `sortMode` `<number>` See [ForumPostSortEnum](./Enums.md#ForumPostSortEnum) enum.
@@ -70,10 +70,10 @@ Source: [Forum.GetPostsThreadedPaged](https://bungie-net.github.io/#Forum.GetPos
 
 Returns a thread of posts starting at the topicId of the input childPostId, optionally returning replies to those posts as well as the original parent.
 
-- `childPostId` `<number>`
-- `page` `<number>`
-- `pageSize` `<number>`
-- `replySize` `<number>`
+- `childPostId` `<BigInt>` | `<number>` | `<string>`
+- `page` `<BigInt>` | `<number>` | `<string>`
+- `pageSize` `<BigInt>` | `<number>` | `<string>`
+- `replySize` `<BigInt>` | `<number>` | `<string>`
 - `rootThreadMode` `<boolean>`
 - `sortMode` `<number>` See [ForumPostSortEnum](./Enums.md#ForumPostSortEnum) enum.
 - `[searchParams]` `<Object>` Request querystring parameters object.
@@ -88,7 +88,7 @@ Source: [Forum.GetPostsThreadedPagedFromChild](https://bungie-net.github.io/#For
 
 Returns the post specified and its immediate parent.
 
-- `childPostId` `<number>`
+- `childPostId` `<BigInt>` | `<number>` | `<string>`
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.showbanned]` `<string>` If this value is not null or empty, banned posts are requested to be returned
 - Returns: `<Promise>`
@@ -101,7 +101,7 @@ Source: [Forum.GetPostAndParent](https://bungie-net.github.io/#Forum.GetPostAndP
 
 Returns the post specified and its immediate parent of posts that are awaiting approval.
 
-- `childPostId` `<number>`
+- `childPostId` `<BigInt>` | `<number>` | `<string>`
 - `[searchParams]` `<Object>` Request querystring parameters object.
   - `[searchParams.showbanned]` `<string>` If this value is not null or empty, banned posts are requested to be returned
 - Returns: `<Promise>`
@@ -114,7 +114,7 @@ Source: [Forum.GetPostAndParentAwaitingApproval](https://bungie-net.github.io/#F
 
 Gets the post Id for the given content item's comments, if it exists.
 
-- `contentId` `<number>`
+- `contentId` `<BigInt>` | `<number>` | `<string>`
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Forum/GetTopicForContent/{contentId}/`
@@ -137,7 +137,7 @@ Source: [Forum.GetForumTagSuggestions](https://bungie-net.github.io/#Forum.GetFo
 
 Gets the specified forum poll.
 
-- `topicId` `<number>` The post id of the topic that has the poll.
+- `topicId` `<BigInt>` | `<number>` | `<string>` The post id of the topic that has the poll.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Forum/Poll/{topicId}/`
