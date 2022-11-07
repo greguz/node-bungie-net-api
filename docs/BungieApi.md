@@ -63,15 +63,15 @@ Remove all saved authorization info.
 
 Set a new access token. This operation will reset the refresh token.
 
-- `accessToken` `<string>` | [`<BungieToken>`](./BungieToken.md) todo
+- `accessToken` `<string>` | [`<BungieToken>`](./BungieToken.md) The raw token string value or a `BungieToken` instance.
 - Returns: `<undefined>`
 
 ### `BungieApi::setRefreshToken(refreshToken, [accessToken])`
 
 Set a new refresh token. An access token could be provided as inizialization, otherwise It will be created during the first request.
 
-- `accessToken` `<string>` | [`<BungieToken>`](./BungieToken.md) todo
-- `[refreshToken]` `<string>` | [`<BungieToken>`](./BungieToken.md) todo
+- `accessToken` `<string>` | [`<BungieToken>`](./BungieToken.md) The raw token string value or a `BungieToken` instance.
+- `[refreshToken]` `<string>` | [`<BungieToken>`](./BungieToken.md) The raw token string value or a `BungieToken` instance.
 - Returns: `<undefined>`
 
 ### [`BungieApi::app`](./App.md)
