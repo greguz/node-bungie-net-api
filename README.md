@@ -1,5 +1,9 @@
 # node-bungie-net-api
 
+[![npm](https://img.shields.io/npm/v/bungie.net)](https://www.npmjs.com/package/bungie.net)
+![NPM](https://img.shields.io/npm/l/bungie.net)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
 Yet another Bungie.NET API client for Node.js
 
 ## Features

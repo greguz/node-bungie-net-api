@@ -17,6 +17,7 @@
     }
   },
   "files": [
+    "docs",
     "!**/*.spec.js",
     "lib",
     "bungie.cjs",
@@ -54,5 +55,12 @@
     "pascalcase": "^2.0.0",
     "rollup": "^3.2.3",
     "standard": "^17.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/greguz/node-bungie-net-api"
+  },
+  "bugs": {
+    "url": "https://github.com/greguz/node-bungie-net-api/issues"
   }
 }
