@@ -18,7 +18,7 @@ export class <%- identifier %> {
   <%_ } _%>
    * @returns {Promise}
    */
-  <%- method.identifier %> (<%- method.arguments.map(compileJavaScriptArgument).join(', ') %>) {
+  async <%- method.identifier %> (<%- method.arguments.map(compileJavaScriptArgument).join(', ') %>) {
   <%_ for (const arg of method.arguments) { _%>
     <%_ if (arg.identifier === 'searchParams' || arg.identifier === 'body') { _%>
     if (typeof <%- arg.identifier %> !== 'object' || <%- arg.identifier %> === null) {

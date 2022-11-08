@@ -2,7 +2,7 @@ import test from 'ava'
 import got from 'got'
 import nock from 'nock'
 
-import { BungieApi } from './bungie.js'
+import { BungieApi, BungieMembershipType, DestinyComponentType } from './bungie.js'
 
 test('BungieApi OAuth', async t => {
   const api = new BungieApi({
@@ -119,4 +119,73 @@ test('BungieApi Platform Refresh', async t => {
 
   const response = await api.user.getMembershipDataForCurrentUser()
   t.deepEqual(response, { hello: 'world' })
+})
+
+test('BungieApi int64 integration', async t => {
+  const api = new BungieApi({
+    apiKey: 'myapikey',
+    clientId: 'myclientid',
+    clientSecret: 'myclientsecret',
+    accessToken: 'myaccesstoken'
+  })
+
+  const scope = nock(api.url)
+
+  scope
+    .get('/Platform/Destiny2/2/Profile/4611586128519451450/?components=200')
+    .reply(200, {
+      ErrorCode: 1,
+      Response: {
+        hello: 'bigint'
+      }
+    })
+  const resBigInt = await api.destiny2.getProfile(
+    BungieMembershipType.TigerPsn,
+    4611586128519451450n,
+    {
+      components: [
+        DestinyComponentType.Characters
+      ]
+    }
+  )
+  t.deepEqual(resBigInt, { hello: 'bigint' })
+
+  scope
+    .get('/Platform/Destiny2/1/Profile/2611385128781951151/?components=100,302')
+    .reply(200, {
+      ErrorCode: 1,
+      Response: {
+        hello: 'string'
+      }
+    })
+  const resString = await api.destiny2.getProfile(
+    BungieMembershipType.TigerXbox,
+    '2611385128781951151',
+    {
+      components: [
+        DestinyComponentType.Profiles,
+        DestinyComponentType.ItemPerks
+      ]
+    }
+  )
+  t.deepEqual(resString, { hello: 'string' })
+
+  scope
+    .get('/Platform/Destiny2/5/Profile/42/')
+    .reply(200, {
+      ErrorCode: 1,
+      Response: {
+        hello: 'number'
+      }
+    })
+  const resNumber = await api.destiny2.getProfile(
+    BungieMembershipType.TigerStadia,
+    42
+  )
+  t.deepEqual(resNumber, { hello: 'number' })
+
+  await t.throwsAsync(api.destiny2.getProfile())
+  await t.throwsAsync(api.destiny2.getProfile(99999999999, '42'))
+  await t.throwsAsync(api.destiny2.getProfile(BungieMembershipType.TigerStadia))
+  await t.throwsAsync(api.destiny2.getProfile(BungieMembershipType.TigerStadia, null))
 })
