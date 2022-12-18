@@ -99,11 +99,14 @@ URL: `GET /Platform/Content/SearchHelpArticles/{searchtext}/{size}/`
 
 Source: [Content.SearchHelpArticles](https://bungie-net.github.io/#Content.SearchHelpArticles)
 
-## `rssNewsArticles(pageToken)`
+## `rssNewsArticles(pageToken, [searchParams])`
 
 Returns a JSON string response that is the RSS feed for news articles.
 
 - `pageToken` `<string>` Zero-based pagination token for paging through result sets.
+- `[searchParams]` `<Object>` Request querystring parameters object.
+  - `[searchParams.categoryfilter]` `<string>` Optionally filter response to only include news items in a certain category.
+  - `[searchParams.includebody]` `<boolean>` Optionally include full content body for each news item.
 - Returns: `<Promise>`
 
 URL: `GET /Platform/Content/Rss/NewsArticles/{pageToken}/`

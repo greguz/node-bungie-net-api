@@ -833,6 +833,7 @@ For historical reasons, this list will have both D1 and D2-relevant Activity Mod
 - **Rift**: 88
 - **ZoneControl**: 89
 - **IronBannerRift**: 90
+- **IronBannerZoneControl**: 91
 
 Source: [Destiny.HistoricalStats.Definitions.DestinyActivityModeType](https://bungie-net.github.io/#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType)
 
@@ -1231,7 +1232,6 @@ Source: [GroupsV2.GroupApplicationResolveState](https://bungie-net.github.io/#/c
 - **InsufficientPrivileges**: 12
 - **Duplicate**: 13
 - **UnknownSqlResult**: 14
-  > Deprecated, please do not check for this value anywhere.
 - **ValidationError**: 15
 - **ValidationMissingFieldError**: 16
 - **ValidationInvalidInputError**: 17
@@ -1411,6 +1411,9 @@ Source: [GroupsV2.GroupApplicationResolveState](https://bungie-net.github.io/#/c
 - **ErrorDatabaseGlobalName**: 239
 - **ErrorNoAvailableNameChanges**: 240
 - **ErrorNameAlreadySetToInput**: 241
+- **UserDisplayNameLessThanMinLength**: 242
+- **UserDisplayNameGreaterThanMaxLength**: 243
+- **UserDisplayNameContainsUnacceptableOrInvalidContent**: 244
 - **MessagingUnknownError**: 300
 - **MessagingSelfError**: 301
 - **MessagingSendThrottle**: 302
@@ -1621,6 +1624,8 @@ Source: [GroupsV2.GroupApplicationResolveState](https://bungie-net.github.io/#/c
 - **ClanNameRestricted**: 751
 - **ClanCreationBan**: 752
 - **ClanCreationTenureRequirementsNotMet**: 753
+- **ClanFieldContainsReservedTerms**: 754
+- **ClanFieldContainsInappropriateContent**: 755
 - **ItemAlreadyFollowed**: 801
 - **ItemNotFollowed**: 802
 - **CannotFollowSelf**: 803
@@ -1922,6 +1927,8 @@ Source: [GroupsV2.GroupApplicationResolveState](https://bungie-net.github.io/#/c
 - **TwitchNoPlatformChosen**: 2506
 - **TwitchDropHistoryPermissionFailure**: 2507
 - **TwitchDropsRepairPartialFailure**: 2508
+- **TwitchNotAuthorized**: 2509
+- **TwitchUnknownAuthorizationFailure**: 2510
 - **TrendingCategoryNotFound**: 2600
 - **TrendingEntryTypeNotSupported**: 2601
 - **ReportOffenderNotInPgcr**: 2700
@@ -2130,6 +2137,7 @@ A flags enumeration/bitmask indicating the versions of the game that a given use
 - **BeyondLight**: 64
 - **Anniversary30th**: 128
 - **TheWitchQueen**: 256
+- **Lightfall**: 512
 
 Source: [Destiny.DestinyGameVersions](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyGameVersions)
 
@@ -2395,8 +2403,14 @@ The reasons why an item cannot be equipped, if any. Many flags can be set, or "N
   > This item has state-based gating that prevents it from being equipped in certain circumstances. For instance, an item might be for Warlocks only and you're a Titan, or it might require you to have beaten some special quest that you haven't beaten yet. Use the additional failure data passed on the item itself to get more information about what the specific failure case was (See DestinyInventoryItemDefinition and DestinyItemInstanceComponent)
 - **ItemFailedLevelCheck**: 8
   > This item requires you to have reached a specific character level in order to equip it, and you haven't reached that level yet.
-- **ItemNotOnCharacter**: 16
-  > This item can't be equipped on the character requested, because it must be in that character's inventory first. Transfer the item to the character you want to equip it before you attempt to equip it.
+- **ItemWrapped**: 16
+  > This item is 'wrapped' and must be unwrapped before being equipped. NOTE: This value used to be called ItemNotOnCharacter but that is no longer accurate.
+- **ItemNotLoaded**: 32
+  > This item is not yet loaded and cannot be equipped yet.
+- **ItemEquipBlocklisted**: 64
+  > This item is block-listed and cannot be equipped.
+- **ItemLoadoutRequirementNotMet**: 128
+  > This item does not meet the loadout requirements for the current activity
 
 Source: [Destiny.EquipFailureReason](https://bungie-net.github.io/#/components/schemas/Destiny.EquipFailureReason)
 
@@ -2492,6 +2506,9 @@ The possible states of Destiny Profile Records. IMPORTANT: Any given item can th
   > This indicates that the sale item is free.
 - **Locked**: 262144
   > This indicates that the sale item is locked.
+- **Paracausal**: 524288
+  > This indicates that the sale item is paracausal.
+- **Cryptarch**: 1048576
 
 Source: [Destiny.DestinyVendorItemState](https://bungie-net.github.io/#/components/schemas/Destiny.DestinyVendorItemState)
 
